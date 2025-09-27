@@ -1,28 +1,17 @@
-import React from "react";
-import logo from "./assets/logo.svg";
+import { BrowserRouter } from "react-router-dom";
+import Router from "./router/router";
+import Modal from "./components/modal/ModalContainer";
+
 import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <h1 className="text-3xl font-bold underline text-red-500">
-          Hello world!
-        </h1>
-      </header>
-    </div>
+    <BrowserRouter>
+      <section className="relative flex h-svh w-full min-w-[330px] flex-col items-center">
+        <Router />
+      </section>
+      <Modal />
+    </BrowserRouter>
   );
 }
 
