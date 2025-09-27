@@ -1,0 +1,14 @@
+{
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.wordWrap": "on",
+  "files.autoSave": "onFocusChange",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "terminal.integrated.fontSize": 13,
+  "workbench.startupEditor": "none",
+  "breadcrumbs.enabled": true,
+  "editor.minimap.enabled": false
+}
