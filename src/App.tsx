@@ -7,7 +7,7 @@ import "./App.css";
 function App() {
   return (
     <BrowserRouter>
-      <section className="relative flex h-svh w-full min-w-[330px] flex-col items-center">
+      <section className="relative flex h-svh w-full min-w-[330px] flex-col items-center justify-between">
         <Router />
       </section>
       <Modal />
