@@ -1,7 +1,7 @@
 import { BrowserRouter } from "react-router-dom";
 import Router from "./router/router";
 import Modal from "./components/modal/ModalContainer";
-import Header from "./components/layout/Header";
+import Nav from "./components/layout/Nav";
 import Footer from "./components/layout/Footer";
 
 import "./App.css";
@@ -9,8 +9,8 @@ import "./App.css";
 function App() {
   return (
     <BrowserRouter>
-      <section className="relative flex h-svh w-full min-w-[330px] flex-col items-center justify-between text-black-000">
-        <Header />
+      <section className="flex w-full min-w-[330px] flex-col justify-between text-black-000">
+        <Nav />
         <Router />
         <Footer />
       </section>
