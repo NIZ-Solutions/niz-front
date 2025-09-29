@@ -1,13 +1,15 @@
-import Header from "../components/layout/Header";
-import Contents from "./Contents";
-import Footer from "../components/layout/Footer";
+import Intro from "./Intro";
+import Plan from "./Plan";
+import Submit from "./Submit";
 
 export default function Main() {
   return (
     <>
-      <Header />
-      <Contents />
-      <Footer />
+      <div className="flex w-full min-w-[330px] flex-col items-center">
+        <Submit />
+        <Intro />
+        <Plan />
+      </div>
     </>
   );
 }
