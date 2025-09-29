@@ -9,7 +9,7 @@ export default function Header() {
   const loggedIn = false;
 
   return (
-    <header className="fixed left-0 right-0 top-0 flex min-h-[60px] flex-row justify-center bg-white px-5 shadow-lg">
+    <nav className="fixed left-0 right-0 top-0 z-50 flex min-h-[60px] flex-row justify-center bg-white px-5 shadow-lg">
       <div className="flex w-full max-w-screen-xl items-center justify-between">
         {/* 로고 */}
         <Link to="/" className="flex gap-[10px]">
@@ -30,6 +30,6 @@ export default function Header() {
           )}
         </div>
       </div>
-    </header>
+    </nav>
   );
 }

@@ -1,6 +1,6 @@
 export default function Intro() {
   return (
-    <div className="intro-gradient flex w-full flex-col items-center gap-10 px-8 py-[300px] text-center">
+    <div className="intro-gradient flex w-full flex-col items-center gap-10 px-8 py-[350px] text-center">
       <ul className="flex w-full max-w-screen-lg flex-col gap-60 text-xl font-medium leading-7 text-white-000">
         <li className="flex flex-col gap-10 text-left">
           <h2 className="text-3xl font-bold">어쩌구 저쩌구 1</h2>
