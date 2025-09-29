@@ -28,6 +28,10 @@ module.exports = {
         ".main-gradient": {
           "@apply bg-gradient-to-r from-[#126DD7] to-[#0F9AFB]": "",
         },
+        ".intro-gradient": {
+          "@apply bg-gradient-to-b from-[#ffffff]/0 from-0% via-[#126DD7] via-50% to-[#ffffff]/0 to-100%":
+            "",
+        },
       });
     },
   ],
