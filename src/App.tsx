@@ -9,7 +9,7 @@ import "./App.css";
 function App() {
   return (
     <BrowserRouter>
-      <section className="relative flex h-svh w-full min-w-[330px] flex-col items-center justify-between">
+      <section className="relative flex h-svh w-full min-w-[330px] flex-col items-center justify-between text-black-000">
         <Header />
         <Router />
         <Footer />
