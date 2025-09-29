@@ -16,7 +16,6 @@ export default function Footer() {
         <div className="agent-container flex flex-col gap-[10px]">
           <p className="font-semibold text-gray-003">고객센터</p>
           <div className="flex flex-col gap-2 text-sm font-medium text-gray-002">
-            <p>전화 : 010 - 4104 - 3853</p>
             <p>이메일 : nizkrhelp@gmail.com</p>
           </div>
         </div>
