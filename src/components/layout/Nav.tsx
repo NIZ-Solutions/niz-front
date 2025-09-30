@@ -16,7 +16,6 @@ export default function Header() {
           <img className="w-[30px]" src={HeaderLogo} alt="logo" />
           <div className="text-blue-001 text-logo">NIZ</div>
         </Link>
-
         {/* 로그인 or 마이 페이지 or 로그아웃 텍스트 */}
         <div className="text-base font-semibold text-blue-001">
           {loggedIn ? (
@@ -25,6 +24,8 @@ export default function Header() {
             ) : (
               <Link to="/mypage"> 마이페이지 </Link>
             )
+          ) : location.pathname.includes("/login") ? (
+            <></>
           ) : (
             <Link to="/login"> 로그인 </Link>
           )}
