@@ -33,6 +33,10 @@ module.exports = {
           "@apply bg-gradient-to-b from-[#ffffff]/0 from-0% via-[#126DD7] via-50% to-[#ffffff]/0 to-100%":
             "",
         },
+        ".sign-input": {
+          "@apply border-b-[1.5px] border-gray-001 py-[6px] text-xl focus:border-blue-001":
+            "",
+        },
       });
     },
   ],

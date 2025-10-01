@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { ReactComponent as KakaoLogo } from "../assets/kakao-logo.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,7 +7,7 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 export default function Login() {
   const [id, setId] = useState<string>("");
-
+  const [password, setPassword] = useState<string>("");
   const [passwordVisible, setPasswordVisible] = useState({
     type: "password",
     visible: false,
@@ -29,10 +30,19 @@ export default function Login() {
     }
   };
 
+  const navigate = useNavigate();
+  const callLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("로그인 요청:", { id, password });
+    ////////// 로그인 API 연동
+    ////////// 로그인 상태 변경
+    navigate("/");
+  };
+
   return (
     <>
-      <div className="flex w-full flex-col items-center px-5">
-        <div className="flex h-screen w-full min-w-[280px] max-w-screen-lg flex-col items-center justify-center gap-12 self-center pt-[60px] md:flex-row md:justify-between lg:px-0">
+      <div className="flex w-full flex-col items-center px-7">
+        <div className="flex h-screen min-h-fit w-full min-w-[280px] max-w-screen-lg flex-col items-center justify-center gap-12 self-center pt-[60px] md:flex-row md:justify-between lg:px-0">
           {/* 로그인 타이틀 */}
           <h1 className="mr-auto text-4xl font-extrabold leading-[50px] md:min-w-[50%]">
             로그인
@@ -40,7 +50,10 @@ export default function Login() {
           {/* 로그인 & 회원가입 컨테이너 */}
           <div className="flex w-full flex-col items-center gap-12 md:max-w-[40%]">
             {/* 로그인 컨테이너 */}
-            <form className="flex h-fit w-full min-w-[280px] flex-col gap-12">
+            <form
+              className="flex h-fit w-full min-w-[280px] flex-col gap-12"
+              onSubmit={callLogin}
+            >
               <div className="flex flex-col gap-6">
                 <input
                   id="id_Input"
@@ -50,6 +63,7 @@ export default function Login() {
                   onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
                     handleOnInput(e.target.value, 10)
                   }
+                  onChange={(e) => setId(e.target.value)}
                   placeholder="아이디"
                   required
                 />
@@ -57,6 +71,7 @@ export default function Login() {
                   <input
                     className="w-full py-[6px] text-xl"
                     type={passwordVisible.type}
+                    onChange={(e) => setPassword(e.target.value)}
                     placeholder="패스워드"
                     required
                   />
@@ -87,7 +102,7 @@ export default function Login() {
                 </button>
               </div>
             </form>
-            {/* 회원가입 버튼 */}
+            {/* 회원가입 */}
             <Link to="/signup" className="text-gray-002">
               회원가입
             </Link>
