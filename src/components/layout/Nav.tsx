@@ -6,7 +6,7 @@ import HeaderLogo from "../../assets/logo.png";
 export default function Header() {
   const location = useLocation();
 
-  const loggedIn = false;
+  const loggedIn = true;
 
   return (
     <nav className="fixed left-0 right-0 top-0 z-50 flex min-h-[60px] flex-row justify-center bg-white px-7 shadow-lg">
