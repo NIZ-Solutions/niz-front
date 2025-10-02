@@ -5,6 +5,8 @@ import { ReactComponent as KakaoLogo } from "../assets/kakao-logo.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
+import BalloonLogo from "../assets/logo-balloon.png";
+
 export default function Login() {
   const [id, setId] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -44,9 +46,16 @@ export default function Login() {
       <div className="flex w-full flex-col items-center px-7">
         <div className="flex h-screen min-h-fit w-full min-w-[280px] max-w-screen-lg flex-col items-center justify-center gap-12 self-center pt-[60px] md:flex-row md:justify-between md:text-center">
           {/* 로그인 타이틀 */}
-          <h1 className="mr-auto text-4xl font-extrabold leading-[50px] md:min-w-[50%]">
-            로그인
-          </h1>
+          <div className="flex w-full flex-col items-center gap-12">
+            <h1 className="mr-auto text-4xl font-extrabold leading-[50px] md:mr-0 md:hidden">
+              로그인
+            </h1>
+            <img
+              alt="로고"
+              src={BalloonLogo}
+              className="hidden w-[50%] md:block"
+            />
+          </div>
           {/* 로그인 & 회원가입 컨테이너 */}
           <div className="flex w-full flex-col items-center gap-12 md:max-w-[40%]">
             {/* 로그인 컨테이너 */}
@@ -57,7 +66,7 @@ export default function Login() {
               <div className="flex flex-col gap-6">
                 <input
                   id="id_Input"
-                  className="border-b-[1.5px] border-gray-001 py-[6px] text-xl"
+                  className="sign-input"
                   type="text"
                   defaultValue={id}
                   onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -67,9 +76,9 @@ export default function Login() {
                   placeholder="아이디"
                   required
                 />
-                <div className="relative border-b-[1.5px] border-gray-001">
+                <div className="sign-input relative focus-within:border-blue-001">
                   <input
-                    className="w-full py-[6px] text-xl"
+                    className="w-full"
                     type={passwordVisible.type}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="패스워드"
