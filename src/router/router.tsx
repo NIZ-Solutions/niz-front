@@ -4,6 +4,7 @@ import Main from "../main/Main";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import Mypage from "../pages/Mypage";
+import Subscription from "../pages/Subscription";
 
 export default function router() {
   return (
@@ -13,6 +14,7 @@ export default function router() {
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/mypage" element={<Mypage />} />
+      <Route path="/subscription" element={<Subscription />} />
     </Routes>
   );
 }
