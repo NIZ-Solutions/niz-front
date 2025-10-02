@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
+import BalloonLogo from "../assets/logo-balloon.png";
+
 export default function Signup() {
   const [name, setName] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
@@ -71,9 +73,16 @@ export default function Signup() {
     <div className="flex w-full flex-col items-center px-7">
       <div className="flex h-screen min-h-fit w-full min-w-[280px] max-w-screen-lg flex-col items-center justify-center gap-12 self-center pt-[60px] md:flex-row md:justify-between md:text-center lg:px-0">
         {/* 회원가입 타이틀 */}
-        <h1 className="mr-auto text-4xl font-extrabold leading-[50px] md:min-w-[50%]">
-          회원가입
-        </h1>
+        <div className="flex w-full flex-col items-center gap-12">
+          <h1 className="mr-auto text-4xl font-extrabold leading-[50px] md:mr-0 md:hidden">
+            회원가입
+          </h1>
+          <img
+            alt="로고"
+            src={BalloonLogo}
+            className="hidden w-[50%] md:block"
+          />
+        </div>
         <div className="flex w-full flex-col items-center gap-4 md:max-w-[40%]">
           <form
             className="flex h-fit w-full min-w-[280px] flex-col gap-12"
