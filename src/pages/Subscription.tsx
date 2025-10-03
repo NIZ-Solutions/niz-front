@@ -23,9 +23,9 @@ export default function Submit() {
           {/* 상담 희망일 */}
           <div className="flex w-full flex-col gap-1 text-left font-medium">
             <h2 className="">상담 희망일</h2>
-            <div className="relative rounded-md p-[1px] main-gradient">
+            <div className="relative rounded-md p-[1px] pb-[0.7px] main-gradient">
               <input
-                className="w-full min-w-[280px] rounded-md px-2 py-1"
+                className="w-full min-w-[280px] rounded-[5px] px-2 py-1"
                 value={"2025 - 10 - 02"}
                 readOnly
               />
@@ -37,9 +37,9 @@ export default function Submit() {
           {/* 상담 희망 시간 */}
           <div className="flex w-full flex-col gap-1 text-left font-medium">
             <h2 className="">상담 희망 시간</h2>
-            <div className="relative rounded-md p-[1px] main-gradient">
+            <div className="relative rounded-md p-[1px] pb-[0.7px] main-gradient">
               <input
-                className="w-full min-w-[280px] rounded-md px-2 py-1"
+                className="w-full min-w-[280px] rounded-[5px] px-2 py-1"
                 value={"11 : 00"}
                 readOnly
               />
@@ -51,9 +51,9 @@ export default function Submit() {
           {/* 이름 */}
           <div className="flex w-full flex-col gap-1 text-left font-medium">
             <h2 className="">이름</h2>
-            <div className="relative rounded-md p-[1px] main-gradient">
+            <div className="relative rounded-md p-[1px] pt-[0.7px] main-gradient">
               <input
-                className="w-full min-w-[280px] rounded-md px-2 py-1"
+                className="w-full min-w-[280px] rounded-[5px] px-2 py-1"
                 placeholder="ex. 박니즈"
               />
             </div>
@@ -61,19 +61,19 @@ export default function Submit() {
           {/* 전화번호 */}
           <div className="flex w-full flex-col gap-1 text-left font-medium">
             <h2 className="">전화번호</h2>
-            <div className="relative rounded-md p-[1px] main-gradient">
+            <div className="relative rounded-md p-[1px] pb-[0.9px] pt-[0.7px] main-gradient">
               <input
-                className="w-full min-w-[280px] rounded-md px-2 py-1"
-                placeholder="ex. 010-1234-5678"
+                className="w-full min-w-[280px] rounded-[5px] px-2 py-1"
+                placeholder="ex. 010 - 1234 - 5678"
               />
             </div>
           </div>
           {/* 아이디어 분류 */}
           <div className="flex w-full flex-col gap-1 text-left font-medium">
             <h2 className="">아이디어 분류</h2>
-            <div className="relative rounded-md p-[1px] main-gradient">
+            <div className="relative rounded-md p-[1px] pb-[0.9px] pt-[0.7px] main-gradient">
               <input
-                className="w-full min-w-[280px] rounded-md px-2 py-1"
+                className="w-full min-w-[280px] rounded-[5px] px-2 py-1"
                 value={"패션 / 뷰티"}
                 readOnly
               />
@@ -85,7 +85,7 @@ export default function Submit() {
           {/* 기타 요청사항 및 전달사항 */}
           <div className="flex w-full flex-col gap-1 text-left font-medium">
             <h2 className="">기타 요청사항 및 전달사항</h2>
-            <div className="min-h-[18svh] content-center rounded-md p-[1px] main-gradient">
+            <div className="min-h-[18svh] content-center rounded-md p-[1px] pb-[0.9px] pt-[0.7px] main-gradient">
               <div className="rounded-md bg-white-000 p-2">
                 <textarea
                   className="min-h-[18svh] w-full resize-none bg-transparent"
