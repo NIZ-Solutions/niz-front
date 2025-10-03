@@ -1,7 +1,8 @@
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 import BalloonLogo from "../assets/logo-balloon.png";
@@ -71,7 +72,7 @@ export default function Signup() {
 
   return (
     <div className="flex w-full flex-col items-center px-7">
-      <div className="flex h-screen min-h-fit w-full min-w-[280px] max-w-screen-lg flex-col items-center justify-center gap-12 self-center pt-[60px] md:flex-row md:justify-between md:text-center lg:px-0">
+      <div className="flex h-screen min-h-fit w-full min-w-[280px] max-w-screen-lg flex-col items-center justify-center gap-12 self-center pb-[120px] pt-[120px] md:flex-row md:justify-between md:text-center lg:px-0">
         {/* 회원가입 타이틀 */}
         <div className="flex w-full flex-col items-center gap-12">
           <h1 className="mr-auto text-4xl font-extrabold leading-[50px] md:mr-0 md:hidden">
@@ -85,7 +86,7 @@ export default function Signup() {
         </div>
         <div className="flex w-full flex-col items-center gap-4 md:max-w-[40%]">
           <form
-            className="flex h-fit w-full min-w-[280px] flex-col gap-12"
+            className="flex h-fit w-full min-w-[280px] flex-col gap-8"
             onSubmit={callSignup}
           >
             <div className="flex flex-col gap-6">
@@ -165,8 +166,27 @@ export default function Signup() {
                 </span>
               </div>
             </div>
-            {/* 버튼 - 회원가입 */}
-            <div className="flex flex-col gap-3">
+            {/* 버튼 - 계정만들기 & 약관 */}
+            <div className="flex flex-col gap-3 text-gray-002">
+              <button className="flex flex-row items-center gap-2">
+                <FontAwesomeIcon icon={faCheck} color="#A0A0A0" />
+                <p>[필수] 이용약관 동의</p>
+              </button>
+              <button className="flex flex-row items-center gap-2">
+                <FontAwesomeIcon icon={faCheck} color="#A0A0A0" />
+                <p>[필수] 개인정보 수집 및 이용 동의</p>
+              </button>
+              <button className="flex flex-row items-center gap-2">
+                <FontAwesomeIcon icon={faCheck} color="#A0A0A0" />
+                <p>[필수] 결제 및 환불 약관 동의</p>
+              </button>
+              <button className="flex flex-row items-center gap-2">
+                <FontAwesomeIcon icon={faCheck} color="#A0A0A0" />
+                <p>[선택] 마케팅 정보 수신 동의</p>
+              </button>
+            </div>
+
+            <div className="flex flex-col gap-3 pt-6">
               <input
                 className="w-full rounded-xl bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#126DD7] to-[#0F9AFB] py-3 text-xl font-extrabold text-white-000"
                 type="submit"
