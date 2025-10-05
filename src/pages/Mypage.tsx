@@ -8,7 +8,7 @@ export default function Mypage() {
   const textMoney = money.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 
   return (
-    <div className="flex min-h-screen w-full flex-col md:flex-row md:justify-between md:pb-[120px]">
+    <div className="flex min-h-screen w-full flex-col text-black-000 md:flex-row md:justify-between md:pb-[120px]">
       {/* 내 정보 컨테이너 */}
       <div className="flex min-h-fit w-full min-w-[280px] max-w-screen-lg flex-col justify-center gap-3 self-center px-7 pt-[120px] md:mb-auto md:h-fit md:justify-start md:text-center">
         <h1 className="text-4xl font-extrabold leading-[50px] md:mr-0 md:min-w-[50%]">

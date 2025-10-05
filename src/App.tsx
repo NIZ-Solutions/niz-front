@@ -5,15 +5,15 @@ import Nav from "./components/layout/Nav";
 import Footer from "./components/layout/Footer";
 
 import "./App.css";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <BrowserRouter>
-      <section className="flex w-full min-w-[280px] flex-col justify-between text-black-000">
-        <Nav />
-        <Router />
-        <Footer />
-      </section>
+      <ScrollToTop />
+      <Nav />
+      <Router />
+      <Footer />
       <Modal />
     </BrowserRouter>
   );

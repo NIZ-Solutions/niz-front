@@ -1,7 +1,7 @@
 export default function Submit() {
   return (
     <div className="flex h-screen w-full max-w-screen-lg flex-col items-center justify-center gap-8 px-7 pt-[60px] text-center md:flex-row md:justify-between lg:px-0">
-      <div className="flex flex-col gap-8 md:min-w-[40%]">
+      <div className="flex flex-col gap-6 md:min-w-[40%]">
         <h1 className="text-4xl font-extrabold leading-[50px]">
           감이 아닌,
           <br />
@@ -15,7 +15,7 @@ export default function Submit() {
         </h2>
       </div>
       <form className="submit flex h-fit w-full min-w-[280px] flex-col gap-4 md:max-w-[50%]">
-        <div className="min-h-[15svh] content-center rounded-xl p-[2px] main-gradient">
+        <div className="animate-border min-h-[15svh] w-full content-center rounded-xl border-2 border-transparent [background:linear-gradient(45deg,#F5F5F5)_padding-box,conic-gradient(from_var(--border-angle),#D0D0D0_50%,_#126DD7_86%,_#0F9AFB_90%,_#126DD7_94%,_#D0D0D0_100%)_border-box]">
           <div className="rounded-[9px] bg-white-000 p-4">
             <textarea
               className="min-h-[15svh] w-full resize-none bg-transparent placeholder:text-sm placeholder:text-gray-001"
@@ -23,10 +23,10 @@ export default function Submit() {
             ></textarea>
           </div>
         </div>
-        <button className="w-full rounded-lg bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#126DD7] to-[#0F9AFB] py-3 text-xl font-extrabold text-white-000">
-          신청하기
-        </button>
       </form>
+      <button className="w-full rounded-lg bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#126DD7] to-[#0F9AFB] py-3 text-xl font-extrabold text-white-000">
+        신청하기
+      </button>
     </div>
   );
 }

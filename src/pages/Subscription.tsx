@@ -10,9 +10,9 @@ export default function Submit() {
   const [visibleDatePicker, setVisibleDatePicker] = useState<Boolean>(false);
 
   return (
-    <div className="flex w-full flex-col items-center pb-[120px] pl-4 pr-5 min-[340px]:px-7 md:pb-0">
+    <div className="flex w-full flex-col items-center justify-between pb-[120px] pl-4 pr-5 text-black-000 min-[340px]:px-7 md:pb-0">
       <div className="flex min-h-screen w-full min-w-[280px] max-w-screen-lg flex-col items-center justify-center gap-8 pt-[120px] text-center md:flex-row md:justify-between md:pb-[120px] lg:px-0">
-        <div className="flex flex-col gap-8 md:min-w-[50%]">
+        <div className="flex flex-col gap-8 md:min-w-[50%] md:text-left">
           <p className="text-xl font-medium text-blue-001">
             금액 : {textPrice}원
           </p>
