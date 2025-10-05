@@ -5,7 +5,7 @@ import { ReactComponent as KakaoLogo } from "../assets/kakao-logo.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
-import BalloonLogo from "../assets/logo-balloon.png";
+import BalloonLogo from "../assets/logo-balloon-x1.png";
 
 export default function Login() {
   const [id, setId] = useState<string>("");
@@ -43,7 +43,7 @@ export default function Login() {
 
   return (
     <>
-      <div className="flex w-full flex-col items-center px-7">
+      <div className="flex w-full flex-col items-center px-7 text-black-000">
         <div className="flex h-screen min-h-fit w-full min-w-[280px] max-w-screen-lg flex-col items-center justify-center gap-12 self-center pb-[120px] pt-[120px] md:flex-row md:justify-between md:text-center lg:px-0">
           {/* 로그인 타이틀 */}
           <div className="flex w-full flex-col items-center gap-12">
