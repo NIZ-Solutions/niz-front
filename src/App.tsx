@@ -1,21 +1,25 @@
 import { BrowserRouter } from "react-router-dom";
 import Router from "./router/router";
+import { Provider } from "react-redux";
 import Modal from "./components/modal/ModalContainer";
 import Nav from "./components/layout/Nav";
 import Footer from "./components/layout/Footer";
+import store from "./store";
 
 import "./App.css";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
-    <BrowserRouter>
-      <section className="flex w-full min-w-[280px] flex-col justify-between text-black-000">
+    <Provider store={store}>
+      <BrowserRouter>
+        <ScrollToTop />
         <Nav />
         <Router />
         <Footer />
-      </section>
-      <Modal />
-    </BrowserRouter>
+        <Modal />
+      </BrowserRouter>
+    </Provider>
   );
 }
 

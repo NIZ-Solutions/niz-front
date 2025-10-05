@@ -3,6 +3,14 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      animation: {
+        border: "border 4s linear infinite",
+      },
+      keyframes: {
+        border: {
+          to: { "--border-angle": "360deg" },
+        },
+      },
       fontFamily: {
         sans: ["Pretendard"],
       },
@@ -27,7 +35,8 @@ module.exports = {
           "@apply text-[20px] font-black": "",
         },
         ".main-gradient": {
-          "@apply bg-gradient-to-r from-[#126DD7] to-[#0F9AFB]": "",
+          "@apply bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#126DD7] to-[#0F9AFB]":
+            "",
         },
         ".intro-gradient": {
           "@apply bg-gradient-to-b from-[#ffffff]/0 from-0% via-[#126DD7] via-50% to-[#ffffff]/0 to-100%":
