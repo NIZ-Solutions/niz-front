@@ -72,7 +72,7 @@ export default function Signup() {
 
   return (
     <div className="flex w-full flex-col items-center px-7 text-black-000">
-      <div className="flex h-screen min-h-fit w-full min-w-[280px] max-w-screen-lg flex-col items-center justify-center gap-12 self-center pb-[120px] pt-[120px] md:flex-row md:justify-between md:text-center lg:px-0">
+      <div className="flex h-screen min-h-fit w-full min-w-[280px] max-w-screen-lg flex-col items-center justify-center gap-12 self-center pb-[100px] pt-[140px] md:flex-row md:justify-between md:text-center lg:px-0">
         {/* 회원가입 타이틀 */}
         <div className="flex w-full flex-col items-center gap-12">
           <h1 className="mr-auto text-4xl font-extrabold leading-[50px] md:mr-0 md:hidden">

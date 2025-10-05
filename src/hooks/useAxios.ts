@@ -5,7 +5,6 @@ interface UseAxiosReturn<T> {
   axiosData: () => void;
   responseData: T | null;
   status: Status;
-  sendData: any;
 }
 
 const useAxios = <T = any>(
@@ -33,11 +32,7 @@ const useAxios = <T = any>(
     axiosData();
   }, deps);
 
-  const sendData = () => {
-    axiosData();
-  };
-
-  return { axiosData, responseData, status, sendData };
+  return { axiosData, responseData, status };
 };
 
 export default useAxios;
