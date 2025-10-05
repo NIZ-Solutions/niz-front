@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import useAxios from "../hooks/useAxios";
+import { postLogin } from "../api/user/userAxios";
 import { ReactComponent as KakaoLogo } from "../assets/kakao-logo.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-
 import BalloonLogo from "../assets/logo-balloon-x1.png";
 
 export default function Login() {
@@ -33,12 +34,21 @@ export default function Login() {
   };
 
   const navigate = useNavigate();
-  const callLogin = (e: React.FormEvent) => {
+  const { responseData, sendData } = useAxios(
+    () => postLogin(id, password),
+    [id, password],
+    true,
+  );
+
+  const handleLogin = (e: any) => {
     e.preventDefault();
     console.log("로그인 요청:", { id, password });
-    ////////// 로그인 API 연동
-    ////////// 로그인 상태 변경
-    navigate("/");
+    const ID = document.getElementById("id_Input") as HTMLInputElement;
+    const PW = document.getElementById("pw_Input") as HTMLInputElement;
+    setId(ID.value);
+    setPassword(PW.value);
+    sendData();
+    responseData.length !== 0 ? navigate("/") : alert("실패");
   };
 
   return (
@@ -59,10 +69,7 @@ export default function Login() {
           {/* 로그인 & 회원가입 컨테이너 */}
           <div className="flex w-full flex-col items-center gap-12 md:max-w-[40%]">
             {/* 로그인 컨테이너 */}
-            <form
-              className="flex h-fit w-full min-w-[280px] flex-col gap-12"
-              onSubmit={callLogin}
-            >
+            <form className="flex h-fit w-full min-w-[280px] flex-col gap-12">
               <div className="flex flex-col gap-6">
                 <input
                   id="id_Input"
@@ -72,15 +79,14 @@ export default function Login() {
                   onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
                     handleOnInput(e.target.value, 10)
                   }
-                  onChange={(e) => setId(e.target.value)}
                   placeholder="아이디"
                   required
                 />
                 <div className="sign-input relative focus-within:border-blue-001">
                   <input
+                    id="pw_Input"
                     className="w-full"
                     type={passwordVisible.type}
-                    onChange={(e) => setPassword(e.target.value)}
                     placeholder="패스워드"
                     required
                   />
@@ -98,11 +104,12 @@ export default function Login() {
               </div>
               {/* 버튼 컨테이너 - 로그인, 카카오로그인 */}
               <div className="flex flex-col gap-3">
-                <input
+                <button
                   className="w-full rounded-xl bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#126DD7] to-[#0F9AFB] py-3 text-xl font-extrabold text-white-000"
-                  type="submit"
-                  value="로그인"
-                />
+                  onClick={handleLogin}
+                >
+                  로그인
+                </button>
                 <button className="flex flex-row items-center justify-center gap-2 rounded-xl bg-kakao-yellow">
                   <KakaoLogo height={20} width={20} />
                   <p className="py-3 text-xl text-black text-opacity-85">
