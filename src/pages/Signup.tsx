@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import BalloonLogo from "../assets/logo-balloon-padding.png";
+import useModal from "../hooks/useModal";
 
 export default function Signup() {
   const [name, setName] = useState<string>("");
@@ -25,6 +26,7 @@ export default function Signup() {
   const [passPwCheck, setPassPwCheck] = useState<Boolean>(false);
   const [termsCheck, setTermsCheck] = useState([false, false, false]);
   const [adCheck, setAdCheck] = useState<Boolean>(false);
+  const { openModal, closeModal } = useModal();
 
   // 전화번호 하이픈 생성
   const handlePhoneHyphen = (v: string) => {
@@ -383,6 +385,10 @@ export default function Signup() {
               <button
                 type="button"
                 className="text-left text-gray-001 underline"
+                onClick={() => {
+                  console.log("[click] open terms");
+                  openModal({ type: "terms" }); // 커스텀 훅이면 그대로 호출
+                }}
               >
                 약관 전체보기
               </button>
