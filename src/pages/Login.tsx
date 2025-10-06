@@ -106,7 +106,7 @@ export default function Login() {
       <div className="flex w-full flex-col items-center px-7 text-black-000">
         <div className="flex min-h-screen w-full min-w-[280px] max-w-screen-lg flex-col items-center justify-center gap-12 self-center pb-[100px] pt-[140px] md:flex-row md:items-center md:justify-between md:text-center lg:px-0">
           {/* 로그인 타이틀 */}
-          <div className="flex max-h-screen w-fit flex-col items-center justify-start gap-12 md:max-w-[45%] md:items-start">
+          <div className="flex max-h-screen w-fit flex-col items-center justify-start gap-12 md:max-w-[45%] md:items-center">
             <h1 className="mr-auto text-4xl font-extrabold leading-[50px] md:mr-0 md:hidden">
               로그인
             </h1>
