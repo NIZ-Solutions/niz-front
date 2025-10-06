@@ -21,9 +21,10 @@ const useAxios = <T = any>(
       const data = await callback();
       setResponseData(data);
       setStatus("Success");
-    } catch (error) {
+    } catch (e) {
       setStatus("Error");
-      throw error;
+      console.log(e);
+      throw e;
     }
   }, deps);
 
