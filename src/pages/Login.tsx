@@ -6,7 +6,7 @@ import { postLogin } from "../api/user/userAxios";
 import { ReactComponent as KakaoLogo } from "../assets/kakao-logo.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import BalloonLogo from "../assets/logo-balloon-x1.png";
+import BalloonLogo from "../assets/logo-balloon-padding.png";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -104,20 +104,20 @@ export default function Login() {
   return (
     <>
       <div className="flex w-full flex-col items-center px-7 text-black-000">
-        <div className="flex h-screen min-h-fit w-full min-w-[280px] max-w-screen-lg flex-col items-center justify-center gap-12 self-center pb-[100px] pt-[140px] md:flex-row md:justify-between md:text-center lg:px-0">
+        <div className="flex min-h-screen w-full min-w-[280px] max-w-screen-lg flex-col items-center justify-center gap-12 self-center pb-[100px] pt-[140px] md:flex-row md:items-center md:justify-between md:text-center lg:px-0">
           {/* 로그인 타이틀 */}
-          <div className="flex w-full flex-col items-center gap-12">
+          <div className="flex max-h-screen w-fit flex-col items-center justify-start gap-12 md:max-w-[45%] md:items-start">
             <h1 className="mr-auto text-4xl font-extrabold leading-[50px] md:mr-0 md:hidden">
               로그인
             </h1>
             <img
               alt="로고"
               src={BalloonLogo}
-              className="hidden w-[50%] md:block"
+              className="hidden w-[80%] md:mb-auto md:block"
             />
           </div>
           {/* 로그인 & 회원가입 컨테이너 */}
-          <div className="flex w-full flex-col items-center gap-12 md:max-w-[40%]">
+          <div className="flex w-full flex-col items-center gap-12 md:max-w-[45%]">
             {/* 로그인 컨테이너 */}
             <form className="flex h-fit w-full min-w-[280px] flex-col gap-12">
               <div className="flex flex-col gap-6">
