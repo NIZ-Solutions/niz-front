@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useAxios from "../hooks/useAxios";
-import { postSignup } from "../api/user/userAxios";
+import { postSignup, postIdCheck } from "../api/user/userAxios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
@@ -183,6 +183,7 @@ export default function Signup() {
   }, [name, phone, id, password, passPw, passPwCheck, termsCheck]);
 
   // 계정만들기
+  const resPostIdCheck = useAxios(() => postIdCheck(id), [id], true);
   const resPostSignup = useAxios(
     () => postSignup(id, password, name, phone),
     [id, password, name, phone],
@@ -192,8 +193,16 @@ export default function Signup() {
     console.log("클릭");
     e.preventDefault();
     console.log("회원가입 요청:", { name, phone, id, password });
-    resPostSignup.axiosData();
-    console.log(resPostSignup.responseData);
+    resPostIdCheck.axiosData();
+    // 아이디 중복체크 통과 시 회원가입 요청
+    if (resPostIdCheck.responseData === true) {
+      resPostSignup.axiosData();
+      console.log(resPostSignup.responseData);
+    } else {
+      const ID = document.getElementById("id_Input") as HTMLInputElement;
+      ID.focus();
+      alert("이미 존재하는 아이디입니다 !");
+    }
   };
 
   type TermType = {
@@ -244,7 +253,7 @@ export default function Signup() {
     <div className="flex min-h-screen w-full flex-col items-center px-7 text-black-000">
       <div className="flex max-h-fit w-full min-w-[280px] max-w-screen-lg flex-col items-center justify-center gap-12 self-center pb-[100px] pt-[140px] md:flex-row md:items-start md:justify-between md:text-center lg:px-0">
         {/* 회원가입 타이틀 */}
-        <div className="flex max-h-screen w-fit flex-col items-center justify-start gap-12 md:max-w-[45%] md:items-start">
+        <div className="flex max-h-screen w-fit flex-col items-center justify-start gap-12 md:max-w-[45%] md:items-center">
           <h1 className="mr-auto text-4xl font-extrabold leading-[50px] md:mr-0 md:hidden">
             회원가입
           </h1>
@@ -277,7 +286,7 @@ export default function Signup() {
               />
               <input
                 id="id_Input"
-                className="sign-input"
+                className="sign-input w-full"
                 type="text"
                 defaultValue={id}
                 onInput={(e: React.ChangeEvent<HTMLInputElement>) =>

@@ -8,15 +8,23 @@ export const postSignup = async (
 ) => {
   const response = await axios.post(
     `${process.env.REACT_APP_API_BASE_URL}/auth/signup`,
+    { email, password, name, phone },
     {
       headers: {
         "Content-Type": "application/json",
       },
-      params: {
-        eamil: email,
-        password: password,
-        name: name,
-        phone: phone,
+    },
+  );
+  return response.data;
+};
+
+export const postIdCheck = async (email: String) => {
+  const response = await axios.post(
+    `${process.env.REACT_APP_API_BASE_URL}/auth/idcheck`,
+    { email },
+    {
+      headers: {
+        "Content-Type": "application/json",
       },
     },
   );
@@ -26,13 +34,10 @@ export const postSignup = async (
 export const postLogin = async (email: String, password: String) => {
   const response = await axios.post(
     `${process.env.REACT_APP_API_BASE_URL}/auth/login`,
+    { email, password },
     {
       headers: {
         "Content-Type": "application/json",
-      },
-      params: {
-        eamil: email,
-        password: password,
       },
     },
   );
