@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useAppDispatch } from "../hooks/useDispatch";
+import { login } from "../store/userSlice";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import useAxios from "../hooks/useAxios";
@@ -9,7 +11,6 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import BalloonLogo from "../assets/logo-balloon-padding.png";
 
 export default function Login() {
-  const navigate = useNavigate();
   const [id, setId] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [passwordVisible, setPasswordVisible] = useState({
@@ -73,6 +74,8 @@ export default function Login() {
     [id, password],
     true,
   );
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const handleLogin = (e: any) => {
     e.preventDefault();
     const ID = document.getElementById("id_Input") as HTMLInputElement;
@@ -83,6 +86,10 @@ export default function Login() {
       setPassword(PW.value);
       resPostLogin.axiosData();
       console.log(resPostLogin.responseData);
+      if (resPostLogin.responseData.status === 200) {
+        dispatch(login(resPostLogin.responseData.data));
+        navigate("/home");
+      }
     } else if (id === "") {
       alert("아이디를 입력해주세요");
       ID.focus();
@@ -95,9 +102,6 @@ export default function Login() {
   // 카카오 로그인 인가코드 받아와 메인페이지로 보내기
   const handleKakaoLogin = (e: any) => {
     e.preventDefault();
-    console.log(
-      `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URL}&response_type=code`,
-    );
     window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URL}&response_type=code`;
   };
 
