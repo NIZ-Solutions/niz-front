@@ -1,12 +1,24 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../hooks/useSelector";
 import HeaderLogo from "../../assets/logo.png";
-
-// import { useEffect } from "react";
+import { useAppDispatch } from "../../hooks/useDispatch";
+import { logout } from "../../store/userSlice";
+import useAxios from "../../hooks/useAxios";
+import { postLogout } from "../../api/user/userAxios";
 
 export default function Header() {
+  const navigate = useNavigate();
   const location = useLocation();
+  const user = useAppSelector((state) => state.user);
+  const loggedIn = user.data !== null ? true : false;
+  const dispatch = useAppDispatch();
 
-  const loggedIn = false;
+  const resPostLogout = useAxios(() => postLogout("token"), [], true);
+  const handleLogout = () => {
+    resPostLogout.axiosData();
+    dispatch(logout());
+    navigate("/");
+  };
 
   return (
     <nav className="fixed left-0 right-0 top-0 z-50 flex min-h-[60px] flex-row justify-center bg-white px-7 shadow-lg">
@@ -20,7 +32,7 @@ export default function Header() {
         <div className="text-base font-semibold text-blue-001">
           {loggedIn ? (
             location.pathname.includes("/mypage") ? (
-              <button> 로그아웃 </button>
+              <button onClick={handleLogout}> 로그아웃 </button>
             ) : (
               <Link to="/mypage"> 마이페이지 </Link>
             )
