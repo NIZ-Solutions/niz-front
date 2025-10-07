@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
 
 export default function Submit() {
-  const price = "3800";
-  const orderNum = "EsTMGzIeLH";
+  const urlSearch = new URLSearchParams(window.location.search);
+  const paymentId = urlSearch.get("paymentId");
+  const errorMessage = urlSearch.get("message");
+
+  const price = "49900";
+  const orderNum = paymentId;
   const infoDate = "2025-10-26 , 11 : 00";
   const textPrice = price.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 
