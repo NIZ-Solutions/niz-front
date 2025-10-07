@@ -46,7 +46,7 @@ export const postLogin = async (email: String, password: String) => {
 
 export const postLogout = async (refreshToken: String) => {
   const response = await axios.post(
-    `${process.env.REACT_APP_API_BASE_URL}/auth/login`,
+    `${process.env.REACT_APP_API_BASE_URL}/auth/logout`,
     {
       headers: {
         "Content-Type": "application/json",
