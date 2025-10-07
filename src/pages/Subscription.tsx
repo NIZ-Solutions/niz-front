@@ -8,23 +8,75 @@ import * as PortOne from "@portone/browser-sdk/v2";
 import { nanoid } from "nanoid";
 
 export default function Submit() {
+  const nanoId = nanoid();
+
   const price = "49900";
   const textPrice = price.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 
+  const [visibleDatePicker, setVisibleDatePicker] = useState<Boolean>(false);
+  const [visibleTimePicker, setVisibleTimePicker] = useState<Boolean>(false);
+  const [promiseTime, setPromiseTime] = useState<string>("09:00");
   let nowDate = new Date();
   const year = nowDate.getFullYear(); // 년도
   const month = nowDate.getMonth() + 1; // 월
   const day = nowDate.getDate(); // 날짜
-
-  const [visibleDatePicker, setVisibleDatePicker] = useState<Boolean>(false);
-  const [visibleTimePicker, setVisibleTimePicker] = useState<Boolean>(false);
   const [date, setDate] = useState({
     year: year,
     month: month,
     day: day,
   });
-  const [promiseTime, setPromiseTime] = useState<string>("09:00");
 
+  // 이름 입력 수정
+  const handleName = (v: string) => {
+    const nameInput = document.getElementById("name-input") as HTMLInputElement;
+    let pattern = /[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g;
+    if (pattern.test(v)) alert("공백 없이 한글만 입력 가능합니다.");
+    nameInput.value = v.replace(pattern, "");
+  };
+
+  // 전화번호 유효성 검증
+  const [passPhone, setPhone] = useState<Boolean>(false);
+  const handlePhone = (v: string) => {
+    const phoneInput = document.getElementById(
+      "phone-input",
+    ) as HTMLInputElement;
+    let numbers = phoneInput.value.replace(/[^0-9]/g, "");
+    phoneInput.value = numbers;
+    let phoneReg = /^0([0-9]{1,2})([0-9]{3,4})([0-9]{4})$/;
+    const phoneDiv = document.getElementById("phone-div") as HTMLElement;
+
+    if (!phoneReg.test(v)) {
+      setPhone(false);
+      phoneDiv.classList.remove("border-blue-001");
+      phoneDiv.classList.add("border-red-000");
+      setPhone(false);
+    } else {
+      phoneDiv.classList.add("border-blue-001");
+      phoneDiv.classList.remove("border-red-000");
+      setPhone(true);
+    }
+  };
+
+  // 이메일 유효성 검증
+  const [passEmail, setEmail] = useState<Boolean>(false);
+  const handleEmail = (v: string) => {
+    let emailReg =
+      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    const emailDiv = document.getElementById("email-div") as HTMLElement;
+
+    if (!emailReg.test(v)) {
+      setEmail(false);
+      emailDiv.classList.remove("border-blue-001");
+      emailDiv.classList.add("border-red-000");
+      setEmail(false);
+    } else {
+      emailDiv.classList.add("border-blue-001");
+      emailDiv.classList.remove("border-red-000");
+      setEmail(true);
+    }
+  };
+
+  // Dropdown Date Click 함수
   const handleClickDate = (el: number, type: string) => {
     if (type === "year") {
       setDate((prev) => {
@@ -43,12 +95,14 @@ export default function Submit() {
     }
   };
 
+  // Dropdown Time Click 함수
   const handleClickTime = (el: string) => {
     setPromiseTime(el);
     setVisibleTimePicker(false);
     return;
   };
 
+  // Dropdown 외부 클릭시 닫기
   const dateRef = useRef<HTMLDivElement | null>(null);
   const timeRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
@@ -71,13 +125,29 @@ export default function Submit() {
     };
   }, [visibleDatePicker, visibleTimePicker]);
 
-  const nanoId = nanoid();
-  const nameInput = document.getElementById("name-input") as HTMLInputElement;
-  const phoneInput = document.getElementById("phone-input") as HTMLInputElement;
-  const emailInput = document.getElementById("email-input") as HTMLInputElement;
+  // 모든 input 정상 입력 확인
+  const [name, setName] = useState<string>("");
+  useEffect(() => {
+    const payBtn = document.getElementById("pay-Btn") as HTMLButtonElement;
+    if (name !== "" && passPhone && passEmail) {
+      payBtn.classList.add("main-gradient");
+      payBtn.disabled = false;
+    } else {
+      payBtn.classList.remove("main-gradient");
+      payBtn.classList.add("bg-gray-001");
+      payBtn.disabled = true;
+    }
+  }, [name, passPhone, passEmail]);
 
+  // 결제
   async function requestPayment() {
-    console.log(nameInput.value);
+    const nameInput = document.getElementById("name-input") as HTMLInputElement;
+    const phoneInput = document.getElementById(
+      "phone-input",
+    ) as HTMLInputElement;
+    const emailInput = document.getElementById(
+      "email-input",
+    ) as HTMLInputElement;
     const resPayment = await PortOne.requestPayment({
       // Store ID 설정
       storeId: process.env.REACT_APP_KG_STORE_ID
@@ -97,7 +167,7 @@ export default function Submit() {
         phoneNumber: phoneInput.value,
         email: emailInput.value,
       },
-      redirectUrl: `/subscription/complete`,
+      redirectUrl: `${process.env.REACT_APP_BASE}/subscription/complete`,
     });
   }
 
@@ -170,28 +240,44 @@ export default function Submit() {
                 id="name-input"
                 className="w-full min-w-[280px] rounded-[5px] px-2 py-1"
                 placeholder="ex. 박니즈"
+                onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleName(e.target.value)
+                }
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
           </div>
           {/* 전화번호 */}
           <div className="flex w-full flex-col gap-1 text-left font-medium">
             <h2 className="">전화번호</h2>
-            <div className="relative rounded-md border-[1px] border-blue-001">
+            <div
+              id="phone-div"
+              className="relative rounded-md border-[1px] border-blue-001"
+            >
               <input
                 id="phone-input"
                 className="w-full min-w-[280px] rounded-[5px] px-2 py-1"
                 placeholder="ex. 01012345678"
+                onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handlePhone(e.target.value)
+                }
               />
             </div>
           </div>
-          {/* 전화번호 */}
+          {/* 이메일 */}
           <div className="flex w-full flex-col gap-1 text-left font-medium">
             <h2 className="">이메일</h2>
-            <div className="relative rounded-md border-[1px] border-blue-001">
+            <div
+              id="email-div"
+              className="relative rounded-md border-[1px] border-blue-001"
+            >
               <input
                 id="email-input"
                 className="w-full min-w-[280px] rounded-[5px] px-2 py-1"
                 placeholder="ex. nizhelp@gmail.com"
+                onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleEmail(e.target.value)
+                }
               />
             </div>
           </div>
@@ -209,6 +295,7 @@ export default function Submit() {
                               아이디어에 대한 구체적인 내용&#13;&#10;
                               받고싶은 설문조사 종류 및 내용&#13;&#10;
                               디자인 수정 요청"
+                  value=""
                 ></textarea>
               </div>
             </div>
@@ -216,9 +303,10 @@ export default function Submit() {
           {/* 버튼 - 결제하기 */}
           <div className="flex flex-col gap-3 pt-9">
             <button
+              id="pay-Btn"
               type="button"
               onClick={() => requestPayment()}
-              className="w-full rounded-xl bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#126DD7] to-[#0F9AFB] py-3 text-xl font-extrabold text-white-000"
+              className="w-full rounded-xl bg-gray-001 py-3 text-xl font-extrabold text-white-000"
             >
               결제하기
             </button>
