@@ -1,10 +1,11 @@
 import { useState, useRef, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { faCalendarDays } from "@fortawesome/free-regular-svg-icons";
 import DateDropdown from "../components/DateDropdown";
 import TimeDropdown from "../components/TimeDropdown";
+import * as PortOne from "@portone/browser-sdk/v2";
+import { nanoid } from "nanoid";
 
 export default function Submit() {
   const price = "49900";
@@ -69,6 +70,36 @@ export default function Submit() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [visibleDatePicker, visibleTimePicker]);
+
+  const nanoId = nanoid();
+  const nameInput = document.getElementById("name-input") as HTMLInputElement;
+  const phoneInput = document.getElementById("phone-input") as HTMLInputElement;
+  const emailInput = document.getElementById("email-input") as HTMLInputElement;
+
+  async function requestPayment() {
+    console.log(nameInput.value);
+    const resPayment = await PortOne.requestPayment({
+      // Store ID 설정
+      storeId: process.env.REACT_APP_KG_STORE_ID
+        ? process.env.REACT_APP_KG_STORE_ID
+        : "123",
+      // 채널 키 설정
+      channelKey: "channel-key-893597d6-e62d-410f-83f9-119f530b4b11",
+      paymentId: nanoId,
+      orderName: `${nanoId}-${nameInput.value}`,
+      totalAmount: Number(price),
+      currency: "CURRENCY_KRW",
+      payMethod: "CARD",
+      customer: {
+        fullName: nameInput.value,
+        firstName: nameInput.value.slice(0, 1),
+        lastName: nameInput.value.slice(1),
+        phoneNumber: phoneInput.value,
+        email: emailInput.value,
+      },
+      redirectUrl: `/subscription/complete`,
+    });
+  }
 
   return (
     <div className="flex w-full flex-col items-center justify-between pb-[120px] pl-4 pr-5 text-black-000 min-[340px]:px-7 md:pb-0">
@@ -153,6 +184,17 @@ export default function Submit() {
               />
             </div>
           </div>
+          {/* 전화번호 */}
+          <div className="flex w-full flex-col gap-1 text-left font-medium">
+            <h2 className="">이메일</h2>
+            <div className="relative rounded-md border-[1px] border-blue-001">
+              <input
+                id="email-input"
+                className="w-full min-w-[280px] rounded-[5px] px-2 py-1"
+                placeholder="ex. nizhelp@gmail.com"
+              />
+            </div>
+          </div>
           {/* 아이디어 설명 */}
           <div className="flex w-full flex-col gap-1 text-left font-medium">
             <h2 className="">아이디어 설명</h2>
@@ -173,12 +215,13 @@ export default function Submit() {
           </div>
           {/* 버튼 - 결제하기 */}
           <div className="flex flex-col gap-3 pt-9">
-            <Link
-              to="/payment"
+            <button
+              type="button"
+              onClick={() => requestPayment()}
               className="w-full rounded-xl bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#126DD7] to-[#0F9AFB] py-3 text-xl font-extrabold text-white-000"
             >
               결제하기
-            </Link>
+            </button>
           </div>
         </div>
       </div>

@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 export default function Submit() {
   const price = "49900";
   const textPrice = price.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
@@ -13,17 +11,6 @@ export default function Submit() {
           </div>
         </div>
         <div>이곳에 결제모듈이 위치하게됩니다.</div>
-        <div className="flex w-full flex-col gap-4">
-          <div className="flex flex-col gap-3 pt-9">
-            <Link
-              to="/mypage"
-              className="w-full rounded-xl bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#126DD7] to-[#0F9AFB] py-3 text-xl font-extrabold text-white-000"
-              type="submit"
-            >
-              마이페이지
-            </Link>
-          </div>
-        </div>
       </div>
     </div>
   );
