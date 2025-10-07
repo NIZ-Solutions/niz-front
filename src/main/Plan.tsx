@@ -1,4 +1,13 @@
+import useModal from "../hooks/useModal";
+import { useAppSelector } from "../hooks/useSelector";
+
 export default function Plan() {
+  const user = useAppSelector((state) => state.user);
+  const { openModal } = useModal();
+  const handleSubscription = () => {
+    if (user.data === null) openModal({ type: "LOGIN" });
+  };
+
   return (
     <div className="flex w-full flex-col items-center gap-12 px-8 pb-[150px] text-center">
       <h1 className="text-4xl font-extrabold">이용요금 안내</h1>
@@ -22,7 +31,11 @@ export default function Plan() {
             <br />
             저런플랜.
           </p>
-          <button className="absolute bottom-[25px] right-[25px] h-fit max-w-fit rounded-lg bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#126DD7] to-[#0F9AFB] px-7 py-2 font-bold text-white-000">
+          <button
+            type="button"
+            onClick={handleSubscription}
+            className="absolute bottom-[25px] right-[25px] h-fit max-w-fit rounded-lg bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#126DD7] to-[#0F9AFB] px-7 py-2 font-bold text-white-000"
+          >
             선택
           </button>
         </li>
@@ -42,7 +55,11 @@ export default function Plan() {
             이런플랜입니ㅏㄷ
             <br /> 저런플랜입니다.
           </p>
-          <button className="absolute bottom-[25px] right-[25px] h-fit max-w-fit rounded-lg bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#126DD7] to-[#0F9AFB] px-7 py-2 font-bold text-white-000">
+          <button
+            type="button"
+            onClick={handleSubscription}
+            className="absolute bottom-[25px] right-[25px] h-fit max-w-fit rounded-lg bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#126DD7] to-[#0F9AFB] px-7 py-2 font-bold text-white-000"
+          >
             선택
           </button>
         </li>
