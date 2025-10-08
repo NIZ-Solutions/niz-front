@@ -5,7 +5,6 @@ import Modal from "./components/modal/ModalContainer";
 import Nav from "./components/layout/Nav";
 import Footer from "./components/layout/Footer";
 import store from "./store/index";
-
 import "./App.css";
 import ScrollToTop from "./components/ScrollToTop";
 

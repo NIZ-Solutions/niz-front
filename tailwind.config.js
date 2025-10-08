@@ -5,10 +5,37 @@ module.exports = {
     extend: {
       animation: {
         border: "border 4s linear infinite",
+        loading: "loading 5s infinite",
+        typing: "typing 3s steps(20) infinite alternate, blink .7s infinite",
       },
       keyframes: {
         border: {
           to: { "--border-angle": "360deg" },
+        },
+        loading: {
+          "0%": {
+            width: "0%",
+          },
+          "100%": {
+            width: "100%",
+          },
+        },
+        typing: {
+          "0%": {
+            width: "0%",
+            visibility: "hidden",
+          },
+          "100%": {
+            width: "100%",
+          },
+        },
+        blink: {
+          "50%": {
+            borderColor: "transparent",
+          },
+          "100%": {
+            borderColor: "white",
+          },
         },
       },
       fontFamily: {

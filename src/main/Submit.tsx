@@ -1,4 +1,13 @@
+import useModal from "../hooks/useModal";
+import { useAppSelector } from "../hooks/useSelector";
+
 export default function Submit() {
+  const user = useAppSelector((state) => state.user);
+  const { openModal } = useModal();
+  const handleSubscription = () => {
+    if (user.data === null) openModal({ type: "LOGIN" });
+  };
+
   return (
     <div className="flex h-screen w-full max-w-screen-lg flex-col items-center justify-center gap-8 px-7 pt-[60px] text-center md:flex-row md:justify-between lg:px-0">
       <div className="flex flex-col gap-6 md:min-w-[40%]">
@@ -23,7 +32,11 @@ export default function Submit() {
             ></textarea>
           </div>
         </div>
-        <button className="w-full rounded-lg bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#126DD7] to-[#0F9AFB] py-3 text-xl font-extrabold text-white-000">
+        <button
+          type="button"
+          onClick={handleSubscription}
+          className="w-full rounded-lg bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#126DD7] to-[#0F9AFB] py-3 text-xl font-extrabold text-white-000"
+        >
           신청하기
         </button>
       </form>

@@ -6,7 +6,7 @@ import Signup from "../pages/Signup";
 import Mypage from "../pages/Mypage";
 import Subscription from "../pages/Subscription";
 import Complete from "../pages/Complete";
-// import Payment from "../pages/Payment";
+import Niz from "../landingpages/Niz";
 
 export default function router() {
   return (
@@ -18,7 +18,7 @@ export default function router() {
       <Route path="/mypage" element={<Mypage />} />
       <Route path="/subscription" element={<Subscription />} />
       <Route path="/subscription/complete" element={<Complete />} />
-      {/* <Route path="/payment" element={<Payment />} /> */}
+      <Route path="/landingpages/niz" element={<Niz />} />
     </Routes>
   );
 }
