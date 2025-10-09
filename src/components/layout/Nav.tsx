@@ -6,10 +6,12 @@ import { logout } from "../../store/userSlice";
 import useAxios from "../../hooks/useAxios";
 import { postLogout } from "../../api/user/userAxios";
 
-export default function Header() {
+export default function Nav() {
+  console.log("ddd");
   const navigate = useNavigate();
   const location = useLocation();
   const user = useAppSelector((state) => state.user);
+  console.log(user);
   const loggedIn = user.data !== null ? true : false;
   const isLanding = location.pathname.includes("landingpages");
   const dispatch = useAppDispatch();
