@@ -148,6 +148,7 @@ export default function Submit() {
     const emailInput = document.getElementById(
       "email-input",
     ) as HTMLInputElement;
+    /////////////////////////////
     const resPayment = await PortOne.requestPayment({
       // Store ID 설정
       storeId: process.env.REACT_APP_KG_STORE_ID
@@ -167,7 +168,7 @@ export default function Submit() {
         phoneNumber: phoneInput.value,
         email: emailInput.value,
       },
-      redirectUrl: `${process.env.REACT_APP_BASE}/subscription/complete`,
+      redirectUrl: `${process.env.REACT_APP_BASE}/subscription/loading`,
     });
   }
 

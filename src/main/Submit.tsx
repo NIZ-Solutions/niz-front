@@ -1,11 +1,17 @@
 import useModal from "../hooks/useModal";
+import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../hooks/useSelector";
 
 export default function Submit() {
+  const navigate = useNavigate();
   const user = useAppSelector((state) => state.user);
   const { openModal } = useModal();
   const handleSubscription = () => {
     if (user.data === null) openModal({ type: "LOGIN" });
+    else {
+      // textarea 저장 후
+      navigate("/subscription");
+    }
   };
 
   return (
@@ -24,7 +30,7 @@ export default function Submit() {
         </h2>
       </div>
       <form className="submit flex h-fit w-full min-w-[280px] flex-col gap-6 md:max-w-[50%]">
-        <div className="animate-border min-h-[15svh] w-full content-center rounded-xl border-2 border-transparent [background:linear-gradient(45deg,#F5F5F5)_padding-box,conic-gradient(from_var(--border-angle),#D0D0D0_50%,_#126DD7_86%,_#0F9AFB_90%,_#126DD7_94%,_#D0D0D0_100%)_border-box]">
+        <div className="min-h-[15svh] w-full animate-border content-center rounded-xl border-2 border-transparent [background:linear-gradient(45deg,#F5F5F5)_padding-box,conic-gradient(from_var(--border-angle),#D0D0D0_50%,_#126DD7_86%,_#0F9AFB_90%,_#126DD7_94%,_#D0D0D0_100%)_border-box]">
           <div className="rounded-[9px] bg-white-000 p-4">
             <textarea
               className="min-h-[15svh] w-full resize-none bg-transparent placeholder:text-sm placeholder:text-gray-001"

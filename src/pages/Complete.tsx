@@ -1,12 +1,8 @@
 import { Link } from "react-router-dom";
 
 export default function Submit() {
-  const urlSearch = new URLSearchParams(window.location.search);
-  const paymentId = urlSearch.get("paymentId");
-  const errorMessage = urlSearch.get("message");
-
   const price = "49900";
-  const orderNum = paymentId;
+  // const orderNum = paymentId;
   const infoDate = "2025-10-26 , 11 : 00";
   const textPrice = price.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 
@@ -18,9 +14,7 @@ export default function Submit() {
             <h1>결제완료</h1>
             <p>금액 : {textPrice}원</p>
           </div>
-          <p className="text-base font-normal text-black-000">
-            주문번호 : {orderNum}
-          </p>
+          <p className="text-base font-normal text-black-000">주문번호 : {}</p>
         </div>
         <div className="flex min-w-full flex-col gap-5 text-xl md:min-w-[40%]">
           <p className="font-extrabold text-blue-001">{infoDate}</p>

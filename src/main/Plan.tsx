@@ -1,11 +1,20 @@
 import useModal from "../hooks/useModal";
+import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../hooks/useSelector";
 
 export default function Plan() {
+  const navigate = useNavigate();
   const user = useAppSelector((state) => state.user);
   const { openModal } = useModal();
-  const handleSubscription = () => {
+  const handleSubscription = (type: string) => {
     if (user.data === null) openModal({ type: "LOGIN" });
+    else {
+      if (type === "PLAN1") {
+      }
+      if (type === "PLAN2") {
+      }
+      navigate("/subscription");
+    }
   };
 
   return (
@@ -33,7 +42,7 @@ export default function Plan() {
           </p>
           <button
             type="button"
-            onClick={handleSubscription}
+            onClick={() => handleSubscription("PLAN1")}
             className="absolute bottom-[25px] right-[25px] h-fit max-w-fit rounded-lg bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#126DD7] to-[#0F9AFB] px-7 py-2 font-bold text-white-000"
           >
             선택
@@ -57,7 +66,7 @@ export default function Plan() {
           </p>
           <button
             type="button"
-            onClick={handleSubscription}
+            onClick={() => handleSubscription("PLAN2")}
             className="absolute bottom-[25px] right-[25px] h-fit max-w-fit rounded-lg bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#126DD7] to-[#0F9AFB] px-7 py-2 font-bold text-white-000"
           >
             선택
