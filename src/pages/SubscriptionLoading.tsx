@@ -3,28 +3,14 @@ import { useAppDispatch } from "../hooks/useDispatch";
 import { login } from "../store/userSlice";
 import { useEffect } from "react";
 
-export default function Loading() {
+export default function SubscriptionLoading() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const urlSearch = new URLSearchParams(window.location.search);
+  const paymentId = urlSearch.get("paymentId");
+  const errorMessage = urlSearch.get("message");
   useEffect(() => {
-    const code = new URL(window.location.href).searchParams.get("code");
-    console.log(code);
-    if (code !== null) {
-      // 카카오 인가코드 백엔드로 전송
-      console.log(code);
-      const resData = {
-        data: {
-          name: "",
-          accessToken: "",
-          accessTokenExpiresIn: 0,
-          refreshToken: "",
-          refreshTokenExpiresIn: 0,
-        },
-      };
-      dispatch(login(resData.data));
-      // 성공시 main으로 redirect
-      navigate("/");
-    }
+    navigate("/subscription/complete");
   }, []);
 
   return (
