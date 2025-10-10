@@ -152,25 +152,25 @@ export default function TermModal() {
       className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/40"
     >
       <div
-        className="relative flex max-h-[60vh] min-h-[60vh] w-[min(80vw,600px)] flex-col justify-end rounded-xl bg-white text-black-000 shadow-xl"
+        className="relative flex h-[min(80vh,800px)] w-[min(80vw,400px)] flex-col justify-end rounded-xl bg-white text-black-000 shadow-xl"
         // 내부 클릭은 닫히지 않게
         onClick={(e) => e.stopPropagation()}
       >
-        <header className="absolute top-0 flex h-[40%] w-full flex-col items-center justify-center gap-3 overflow-auto rounded-t-xl text-white-000 main-gradient">
+        <header className="absolute top-0 flex h-[min(35vh,350px)] w-full flex-col items-center justify-center gap-3 overflow-auto rounded-t-xl text-white-000 main-gradient">
           <img alt="로고" src={WhiteLogo} className="w-fit" />
           <div className="text-center text-3xl font-black">NIZ</div>
           <div className="text-center text-xl font-medium">
             당신의 아이디어를 <br />단 3일만에, 현실로
           </div>
         </header>
-        <header className="absolute bottom-0 flex h-[60%] w-full flex-col items-center justify-between overflow-auto rounded-t-xl py-5">
-          <div className="flex h-full flex-col justify-center">
-            <form className="flex h-fit w-full min-w-[280px] flex-col gap-12">
+        <div className="absolute bottom-0 flex h-[min(45vh,450px)] w-full flex-col items-center justify-between overflow-auto rounded-t-xl py-5">
+          <div className="flex h-full w-full max-w-[90%] flex-col justify-center">
+            <form className="flex h-fit flex-col gap-10">
               <div className="flex flex-col gap-6">
                 <input
                   autoFocus
                   id="id_Input"
-                  className="first border-b-[1.5px] border-gray-001 py-[6px] text-xl focus:border-blue-001"
+                  className="first border-b-[1.5px] border-gray-001 py-[6px] text-lg focus:border-blue-001"
                   type="text"
                   defaultValue={id}
                   onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -179,7 +179,7 @@ export default function TermModal() {
                   placeholder="아이디"
                 />
                 <div
-                  className="first relative border-b-[1.5px] border-gray-001 py-[6px] text-xl focus-within:border-blue-001 focus:border-blue-001"
+                  className="first relative border-b-[1.5px] border-gray-001 py-[6px] text-lg focus-within:border-blue-001 focus:border-blue-001"
                   id="pw_Div"
                 >
                   <input
@@ -207,7 +207,7 @@ export default function TermModal() {
               <div className="flex flex-col gap-3">
                 <button
                   id="login_Btn"
-                  className="w-full rounded-xl bg-gray-001 py-3 text-xl font-extrabold text-white-000"
+                  className="w-full rounded-xl bg-gray-001 py-3 text-lg font-extrabold text-white-000"
                   onClick={handleLogin}
                 >
                   로그인
@@ -217,14 +217,14 @@ export default function TermModal() {
                   onClick={handleKakaoLogin}
                 >
                   <KakaoLogo height={20} width={20} />
-                  <p className="py-3 text-xl text-black text-opacity-85">
+                  <p className="py-3 text-lg text-black text-opacity-85">
                     카카오 로그인
                   </p>
                 </button>
               </div>
             </form>
           </div>
-        </header>
+        </div>
       </div>
     </div>
   );

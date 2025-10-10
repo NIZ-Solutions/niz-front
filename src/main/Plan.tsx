@@ -20,13 +20,15 @@ export default function Plan() {
   return (
     <div className="flex w-full flex-col items-center gap-12 px-8 pb-[150px] text-center">
       <h1 className="text-4xl font-extrabold">이용요금 안내</h1>
-      <ul className="flex w-full max-w-screen-lg flex-col gap-6 text-[15px] text-gray-002">
+      <ul className="flex w-full max-w-screen-lg flex-col gap-6 text-[15px] text-gray-002 dark:text-gray-002">
         <li className="relative flex flex-col gap-3 rounded-lg border border-gray-001 p-[25px] pt-[20px] text-left">
           <h2 className="text-xl font-bold text-blue-001">
             기존 디자인&nbsp;
-            <p className="inline text-gray-003">사용</p>
+            <p className="inline text-gray-003 dark:text-gray-001">사용</p>
           </h2>
-          <h2 className="text-2xl font-bold text-gray-003">4,900 원</h2>
+          <h2 className="text-2xl font-bold text-gray-003 dark:text-gray-001">
+            4,900 원
+          </h2>
           <p className="leading-[25px]">
             NIZ가 보유한 디자인 중 하나를 선택합니다.
             <br />
@@ -51,9 +53,11 @@ export default function Plan() {
         <li className="relative flex flex-col gap-3 rounded-lg border border-gray-001 p-[25px] pt-[20px] text-left">
           <h2 className="text-xl font-bold text-blue-001">
             맞춤형 디자인&nbsp;
-            <p className="inline text-gray-003">사용</p>
+            <p className="inline text-gray-003 dark:text-gray-001">사용</p>
           </h2>
-          <h2 className="text-2xl font-bold text-gray-003">49,900 원</h2>
+          <h2 className="text-2xl font-bold text-gray-003 dark:text-gray-001">
+            49,900 원
+          </h2>
           <p className="leading-[25px]">
             아이디어에 맞춰 상담 진행 후 <br />
             커스텀 랜딩페이지를 만들어 제공합니다.

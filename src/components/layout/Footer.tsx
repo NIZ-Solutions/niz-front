@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <footer className="flex w-full flex-col items-start justify-between bg-gray-000 px-10 pb-24 pt-16 shadow-lg">
+    <footer className="flex w-full flex-col items-start justify-between bg-gray-000 px-10 pb-24 pt-16 shadow-lg dark:bg-[#1a1919]">
       <div className="flex max-w-screen-lg flex-col justify-between gap-10">
         {/* 팀 */}
         <div className="team-container flex flex-col gap-[10px]">
