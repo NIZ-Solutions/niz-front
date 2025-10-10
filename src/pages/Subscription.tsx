@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { faCalendarDays } from "@fortawesome/free-regular-svg-icons";
@@ -8,6 +9,9 @@ import * as PortOne from "@portone/browser-sdk/v2";
 import { nanoid } from "nanoid";
 
 export default function Submit() {
+  const location = useLocation();
+
+  const explanationText = location.state?.explanationText;
   const nanoId = nanoid();
 
   const price = "49900";
@@ -175,7 +179,7 @@ export default function Submit() {
   return (
     <div className="flex w-full flex-col items-center justify-between pb-[120px] pl-4 pr-5 text-black-000 min-[340px]:px-7 md:pb-0">
       <div className="flex min-h-screen w-full min-w-[280px] max-w-screen-lg flex-col items-center justify-center gap-8 pt-[120px] text-center md:flex-row md:justify-between md:pb-[120px] lg:px-0">
-        <div className="flex flex-col gap-8 md:min-w-[50%] md:text-left">
+        <div className="flex flex-col gap-8 md:min-w-[50%]">
           <p className="text-xl font-medium text-blue-001">
             금액 : {textPrice}원
           </p>
@@ -296,8 +300,9 @@ export default function Submit() {
                               아이디어에 대한 구체적인 내용&#13;&#10;
                               받고싶은 설문조사 종류 및 내용&#13;&#10;
                               디자인 수정 요청"
-                  value=""
-                ></textarea>
+                >
+                  {explanationText}
+                </textarea>
               </div>
             </div>
           </div>

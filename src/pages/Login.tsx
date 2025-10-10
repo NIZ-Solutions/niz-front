@@ -107,7 +107,7 @@ export default function Login() {
 
   return (
     <>
-      <div className="flex w-full flex-col items-center px-7 text-black-000">
+      <div className="flex w-full flex-col items-center px-7 text-black-000 dark:text-white">
         <div className="flex min-h-screen w-full min-w-[280px] max-w-screen-lg flex-col items-center justify-center gap-12 self-center pb-[100px] pt-[140px] md:flex-row md:items-center md:justify-between md:text-center lg:px-0">
           {/* 로그인 타이틀 */}
           <div className="flex max-h-screen w-fit flex-col items-center justify-start gap-12 md:max-w-[45%] md:items-center">
@@ -128,7 +128,7 @@ export default function Login() {
                 <input
                   autoFocus
                   id="id_Input"
-                  className="first border-b-[1.5px] border-gray-001 py-[6px] text-xl focus:border-blue-001"
+                  className="first border-b-[1.5px] border-gray-001 bg-transparent py-[6px] text-xl focus:border-blue-001"
                   type="text"
                   defaultValue={id}
                   onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -137,12 +137,12 @@ export default function Login() {
                   placeholder="아이디"
                 />
                 <div
-                  className="first relative border-b-[1.5px] border-gray-001 py-[6px] text-xl focus-within:border-blue-001 focus:border-blue-001"
+                  className="first relative border-b-[1.5px] border-gray-001 bg-transparent py-[6px] text-xl focus-within:border-blue-001 focus:border-blue-001"
                   id="pw_Div"
                 >
                   <input
                     id="pw_Input"
-                    className="w-full"
+                    className="w-full bg-transparent"
                     type={passwordVisible.type}
                     placeholder="패스워드"
                     onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -165,7 +165,7 @@ export default function Login() {
               <div className="flex flex-col gap-3">
                 <button
                   id="login_Btn"
-                  className="w-full rounded-xl bg-gray-001 py-3 text-xl font-extrabold text-white-000"
+                  className="w-full rounded-xl bg-gray-001 py-3 text-xl font-extrabold text-white-000 dark:bg-gray-003"
                   onClick={handleLogin}
                 >
                   로그인

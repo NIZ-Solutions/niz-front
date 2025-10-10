@@ -8,9 +8,9 @@ export default function Mypage() {
   const textMoney = money.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 
   return (
-    <div className="flex min-h-screen w-full flex-col text-black-000 md:flex-row md:justify-between md:pb-[120px]">
+    <div className="flex min-h-screen w-full flex-col overflow-auto text-black-000">
       {/* 내 정보 컨테이너 */}
-      <div className="flex min-h-fit w-full min-w-[280px] max-w-screen-lg flex-col justify-center gap-3 self-center px-7 pt-[120px] md:mb-auto md:h-fit md:justify-start md:text-center">
+      {/* <div className="flex min-h-fit w-full min-w-[280px] max-w-screen-lg flex-col justify-center gap-3 self-center px-7 pt-[120px] md:mb-auto md:h-fit md:justify-start md:text-center">
         <h1 className="text-4xl font-extrabold leading-[50px] md:mr-0 md:min-w-[50%]">
           내 정보
         </h1>
@@ -19,8 +19,8 @@ export default function Mypage() {
           <p className="inline text-blue-001">{textMoney}</p>
           <p className="inline text-blue-001">&nbsp;원</p>
         </p>
-        {/* 계좌 정보 컨테이너 */}
-        <div className="relative flex flex-col gap-5 rounded-lg bg-gray-000 p-5 text-gray-003 md:text-left">
+        // {/* 계좌 정보 컨테이너 */}
+      {/* <div className="relative flex flex-col gap-5 rounded-lg bg-gray-000 p-5 text-gray-003 md:text-left">
           <h1 className="">{name}님 충전 가상계좌 안내</h1>
           <p className="text-xl font-medium">
             하나은행 <br />
@@ -33,10 +33,9 @@ export default function Mypage() {
             color="#126DD7"
           />
         </div>
-      </div>
-
+      </div>  */}
       {/* 신청내역 컨테이너 */}
-      <div className="flex min-h-fit w-full min-w-[280px] max-w-screen-lg flex-col justify-center gap-3 self-center px-7 pb-[120px] pt-[120px] md:min-h-screen md:justify-start md:overflow-scroll md:overflow-x-hidden md:pb-0 md:text-center">
+      <div className="flex min-h-fit w-full min-w-[280px] max-w-screen-lg flex-col justify-center gap-3 self-center px-7 pb-[120px] pt-[120px] md:min-h-screen md:justify-start md:overflow-scroll md:overflow-x-hidden md:text-center">
         <h1 className="mr-auto text-4xl font-extrabold leading-[50px] md:mr-0 md:min-w-[50%]">
           신청내역
         </h1>

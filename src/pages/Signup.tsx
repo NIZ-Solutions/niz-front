@@ -142,7 +142,7 @@ export default function Signup() {
       checkDocument?.setAttribute("color", "#126DD7");
       listDocument?.classList.remove("hidden");
       if (number === 4) {
-        setAdCheck(!adCheck);
+        // setAdCheck(!adCheck);
       } else {
         let temp = [...termsCheck];
         temp[number - 1] = true;
@@ -152,7 +152,7 @@ export default function Signup() {
       checkDocument?.setAttribute("color", "#A0A0A0");
       listDocument?.classList.add("hidden");
       if (number === 4) {
-        setAdCheck(!adCheck);
+        // setAdCheck(!adCheck);
       } else {
         let temp = [...termsCheck];
         temp[number - 1] = false;
@@ -239,18 +239,10 @@ export default function Signup() {
         "서비스 이용 시작 후 원칙적으로 환불 불가",
       ],
     },
-    {
-      key: 4,
-      title: "[선택] 마케팅 정보 수신 동의",
-      subs: [
-        "이메일, 문자 등으로 서비스 관련 소식, 이벤트 안내 수신",
-        "동의하지 않아도 기본 서비스 이용 가능",
-      ],
-    },
   ];
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center px-7 text-black-000">
+    <div className="flex min-h-screen w-full flex-col items-center px-7 text-black-000 dark:text-white-000">
       <div className="flex max-h-fit w-full min-w-[280px] max-w-screen-lg flex-col items-center justify-center gap-12 self-center pb-[100px] pt-[140px] md:flex-row md:items-start md:justify-between md:text-center lg:px-0">
         {/* 회원가입 타이틀 */}
         <div className="flex max-h-screen w-fit flex-col items-center justify-start gap-12 md:max-w-[45%] md:items-center">
@@ -268,7 +260,7 @@ export default function Signup() {
             <div className="flex flex-col gap-6">
               <input
                 id="name_Input"
-                className="sign-input"
+                className="bg-transparent sign-input"
                 type="text"
                 onChange={(e) => setName(e.target.value)}
                 placeholder="이름"
@@ -276,7 +268,7 @@ export default function Signup() {
               />
               <input
                 id="phone_Input"
-                className="sign-input"
+                className="bg-transparent sign-input"
                 type="text"
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="연락처"
@@ -286,7 +278,7 @@ export default function Signup() {
               />
               <input
                 id="id_Input"
-                className="sign-input w-full"
+                className="w-full bg-transparent sign-input"
                 type="text"
                 defaultValue={id}
                 onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -302,7 +294,7 @@ export default function Signup() {
                 >
                   <input
                     id="pw_Input"
-                    className="w-full"
+                    className="w-full bg-transparent"
                     type={passwordVisible.type}
                     onChange={(e) => {
                       setPassword(e.target.value);
@@ -338,7 +330,7 @@ export default function Signup() {
                 >
                   <input
                     id="check-password-Input"
-                    className="w-full"
+                    className="w-full bg-transparent"
                     type={passwordCheckVisible.type}
                     onChange={(e) => {
                       setPasswordCheck(e.target.value);
@@ -407,7 +399,7 @@ export default function Signup() {
               <button
                 type="button"
                 id="login_Btn"
-                className="w-full rounded-xl bg-gray-001 py-3 text-xl font-extrabold text-white-000"
+                className="w-full rounded-xl bg-gray-001 py-3 text-xl font-extrabold text-white-000 dark:bg-gray-003"
                 onClick={handleSignup}
               >
                 계정 만들기

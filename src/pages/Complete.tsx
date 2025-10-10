@@ -8,7 +8,7 @@ export default function Submit() {
 
   return (
     <div className="flex w-full flex-col items-center justify-between pl-4 pr-5 text-black-000 min-[340px]:px-7 md:pb-0">
-      <div className="flex min-h-screen w-full min-w-[280px] max-w-screen-lg flex-col items-center justify-center gap-20 pb-[180px] pt-[180px] text-center md:flex-row md:justify-between md:pb-[120px] lg:px-0">
+      <div className="flex min-h-screen w-full min-w-[280px] max-w-screen-lg flex-col items-center justify-center gap-20 pb-[180px] pt-[180px] text-center lg:px-0">
         <div className="flex flex-col gap-8 text-3xl font-bold text-blue-001 md:min-w-[50%]">
           <div className="flex flex-col gap-2">
             <h1>결제완료</h1>

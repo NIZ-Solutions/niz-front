@@ -7,7 +7,6 @@ import useAxios from "../../hooks/useAxios";
 import { postLogout } from "../../api/user/userAxios";
 
 export default function Nav() {
-  console.log("ddd");
   const navigate = useNavigate();
   const location = useLocation();
   const user = useAppSelector((state) => state.user);
@@ -28,7 +27,7 @@ export default function Nav() {
       {isLanding ? (
         <></>
       ) : (
-        <nav className="fixed left-0 right-0 top-0 z-50 flex min-h-[60px] flex-row justify-center bg-white px-7 shadow-lg">
+        <nav className="dark:bg-black-001 fixed left-0 right-0 top-0 z-50 flex min-h-[60px] flex-row justify-center bg-white px-7 shadow-lg">
           <div className="flex w-full max-w-screen-xl items-center justify-between">
             {/* 로고 */}
             <Link to="/" className="flex gap-[10px]">
