@@ -1,14 +1,25 @@
 import axios from "axios";
 
 export const postSignup = async (
-  email: String,
+  userId: String,
   password: String,
   name: String,
   phone: String,
+  termsOfService: Boolean,
+  privacyPolicy: Boolean,
+  paymentPolicy: Boolean,
 ) => {
   const response = await axios.post(
     `${process.env.REACT_APP_API_BASE_URL}/auth/signup`,
-    { email, password, name, phone },
+    {
+      userId,
+      password,
+      name,
+      phone,
+      termsOfService,
+      privacyPolicy,
+      paymentPolicy,
+    },
     {
       headers: {
         "Content-Type": "application/json",
@@ -18,23 +29,23 @@ export const postSignup = async (
   return response.data;
 };
 
-export const postIdCheck = async (email: String) => {
-  const response = await axios.post(
-    `${process.env.REACT_APP_API_BASE_URL}/auth/idcheck`,
-    { email },
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    },
-  );
-  return response.data;
-};
-
-export const postLogin = async (email: String, password: String) => {
+export const postLogin = async (userId: String, password: String) => {
   const response = await axios.post(
     `${process.env.REACT_APP_API_BASE_URL}/auth/login`,
-    { email, password },
+    { userId, password },
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    },
+  );
+  return response.data;
+};
+
+export const postRefresh = async (refreshToken: String) => {
+  const response = await axios.post(
+    `${process.env.REACT_APP_API_BASE_URL}/auth/refresh`,
+    { refreshToken },
     {
       headers: {
         "Content-Type": "application/json",
