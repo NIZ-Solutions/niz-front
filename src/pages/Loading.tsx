@@ -29,8 +29,8 @@ export default function Loading() {
 
   return (
     <>
-      <div className="flex min-h-screen flex-col items-center justify-center gap-20 rounded-xl bg-white p-8 shadow-lg dark:bg-gray-800">
-        <h2 className="text-lg font-semibold text-black-000">
+      <div className="flex min-h-screen flex-col items-center justify-center gap-20 rounded-xl bg-white p-8 shadow-lg dark:bg-black-001">
+        <h2 className="text-lg font-semibold text-black-000 dark:text-gray-000">
           잠시만 기다려주세요
         </h2>
         <div className="dots-container">
@@ -38,7 +38,7 @@ export default function Loading() {
           <div className="dot main-gradient"></div>
           <div className="dot main-gradient"></div>
         </div>
-        <button className="rounded-lg px-4 py-2 text-white transition main-gradient">
+        <button className="rounded-lg px-4 py-2 text-white transition main-gradient dark:text-black-000">
           Processing...
         </button>
       </div>

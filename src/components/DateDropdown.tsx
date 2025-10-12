@@ -13,34 +13,37 @@ export default function DateDropdown(handleClickDate: DateDropdownProps) {
 
   return (
     <>
-      <ul className="flex w-1/3 flex-col justify-start gap-2 bg-white-000 py-2 drop-shadow-lg">
+      <ul className="dark:bg-gray-004 justify-startrounded-l-md flex w-1/3 flex-col bg-white-000 py-2 drop-shadow-lg">
         {yearArr.map((el) => (
           <li
             key={`${el}-year`}
             id={`${el}-year`}
             onClick={() => handleClickDate?.handleClickDate(el, "year")}
+            className="py-1 hover:bg-gray-001 dark:hover:bg-gray-002"
           >
             {el} 년
           </li>
         ))}
       </ul>
-      <ul className="flex w-1/3 flex-col justify-start gap-2 overflow-y-scroll bg-white-000 py-2 drop-shadow-lg">
+      <ul className="dark:bg-gray-004 flex w-1/3 flex-col justify-start overflow-y-scroll bg-white-000 py-2 drop-shadow-lg">
         {monthArr.map((el) => (
           <li
             key={`${el}-month`}
             id={`${el}-month`}
             onClick={() => handleClickDate?.handleClickDate(el, "month")}
+            className="py-1 hover:bg-gray-001 dark:hover:bg-gray-002"
           >
             {el} 월
           </li>
         ))}
       </ul>
-      <ul className="flex w-1/3 flex-col justify-start gap-2 overflow-y-scroll bg-white-000 py-2 drop-shadow-lg">
+      <ul className="dark:bg-gray-004 flex w-1/3 flex-col justify-start overflow-y-scroll rounded-r-md bg-white-000 py-2 drop-shadow-lg">
         {dayArr.map((el) => (
           <li
             key={`${el}-day`}
             id={`${el}-day`}
             onClick={() => handleClickDate?.handleClickDate(el, "day")}
+            className="py-1 hover:bg-gray-001 dark:hover:bg-gray-002"
           >
             {el} 일
           </li>
