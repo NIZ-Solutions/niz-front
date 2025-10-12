@@ -8,6 +8,7 @@ import Subscription from "../pages/Subscription";
 import Complete from "../pages/Complete";
 import Niz from "../landingpages/Niz";
 import Loading from "../pages/Loading";
+import SubscriptionLoading from "../pages/SubscriptionLoading";
 
 export default function router() {
   return (
@@ -19,6 +20,7 @@ export default function router() {
       <Route path="/signup" element={<Signup />} />
       <Route path="/mypage" element={<Mypage />} />
       <Route path="/subscription" element={<Subscription />} />
+      <Route path="/subscription/loading" element={<SubscriptionLoading />} />
       <Route path="/subscription/complete" element={<Complete />} />
       <Route path="/landingpages/niz" element={<Niz />} />
     </Routes>

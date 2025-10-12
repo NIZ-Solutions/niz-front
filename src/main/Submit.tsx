@@ -1,11 +1,27 @@
 import useModal from "../hooks/useModal";
+import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../hooks/useSelector";
 
 export default function Submit() {
+  const navigate = useNavigate();
   const user = useAppSelector((state) => state.user);
   const { openModal } = useModal();
   const handleSubscription = () => {
     if (user.data === null) openModal({ type: "LOGIN" });
+    else {
+      const textArea = document.getElementById(
+        "submit-textarea",
+      ) as HTMLTextAreaElement;
+      const explanationText = textArea.value.trim();
+      if (explanationText === "") {
+        alert("아이디어에 대해 구체적인 설명을 적어주세요 :)");
+      } else {
+        // textarea 저장 후
+        navigate("/subscription", {
+          state: { explanationText: explanationText },
+        });
+      }
+    }
   };
 
   return (
@@ -24,9 +40,10 @@ export default function Submit() {
         </h2>
       </div>
       <form className="submit flex h-fit w-full min-w-[280px] flex-col gap-6 md:max-w-[50%]">
-        <div className="animate-border min-h-[15svh] w-full content-center rounded-xl border-2 border-transparent [background:linear-gradient(45deg,#F5F5F5)_padding-box,conic-gradient(from_var(--border-angle),#D0D0D0_50%,_#126DD7_86%,_#0F9AFB_90%,_#126DD7_94%,_#D0D0D0_100%)_border-box]">
-          <div className="rounded-[9px] bg-white-000 p-4">
+        <div className="min-h-[15svh] w-full animate-border content-center rounded-xl border-2 border-transparent [background:linear-gradient(45deg,#F5F5F5)_padding-box,conic-gradient(from_var(--border-angle),#D0D0D0_50%,_#126DD7_86%,_#0F9AFB_90%,_#126DD7_94%,_#D0D0D0_100%)_border-box]">
+          <div className="rounded-[9px] bg-white-000 p-4 dark:bg-black-000">
             <textarea
+              id="submit-textarea"
               className="min-h-[15svh] w-full resize-none bg-transparent placeholder:text-sm placeholder:text-gray-001"
               placeholder="시장 반응을 확인하고 싶은 아이디어가 있다면 입력해주세요. 아이디어에 대해 구체적으로 설명해 주시면 보다 정확하게 제안 받으실 수 있어요."
             ></textarea>
