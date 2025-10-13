@@ -8,20 +8,24 @@ import Footer from "./components/layout/Footer";
 import { store, persistor } from "./store/index";
 import "./App.css";
 import ScrollToTop from "./components/ScrollToTop";
+import { ErrorBoundary } from "react-error-boundary";
+import Error from "./pages/Error";
 
 function App() {
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <Modal />
-        <BrowserRouter>
-          <ScrollToTop />
-          <Nav />
-          <Router />
-          <Footer />
-        </BrowserRouter>
-      </PersistGate>
-    </Provider>
+    <ErrorBoundary fallback={<Error />}>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <BrowserRouter>
+            <Modal />
+            <ScrollToTop />
+            <Nav />
+            <Router />
+            <Footer />
+          </BrowserRouter>
+        </PersistGate>
+      </Provider>
+    </ErrorBoundary>
   );
 }
 

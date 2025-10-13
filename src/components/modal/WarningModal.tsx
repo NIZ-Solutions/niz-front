@@ -91,7 +91,7 @@ export default function TermModal() {
     const ID = document.getElementById("id_Input") as HTMLInputElement;
     const PW = document.getElementById("pw_Div") as HTMLElement;
 
-    const loginBtn = document.getElementById("login_Btn") as HTMLElement;
+    const loginBtn = document.getElementById("login_Btn") as HTMLButtonElement;
     if (id !== "") ID.classList.remove("border-red-000");
     if (password !== "") PW.classList.remove("border-red-000");
     if (id !== "" && password !== "") {
@@ -115,6 +115,7 @@ export default function TermModal() {
     [id, password],
     true,
   );
+  const navigate = useNavigate();
   const handleLogin = (e: any) => {
     e.preventDefault();
     const ID = document.getElementById("id_Input") as HTMLInputElement;
@@ -124,11 +125,6 @@ export default function TermModal() {
       setId(ID.value);
       setPassword(PW.value);
       resPostLogin.axiosData();
-      console.log(resPostLogin.responseData);
-      if (resPostLogin.responseData.status === 200) {
-        dispatch(login(resPostLogin.responseData.data));
-        dispatch(closeModal());
-      }
     } else if (id === "") {
       alert("아이디를 입력해주세요");
       ID.focus();
@@ -138,9 +134,17 @@ export default function TermModal() {
     }
   };
 
+  useEffect(() => {
+    if (resPostLogin.status === "Success" && resPostLogin.responseData) {
+      dispatch(login(resPostLogin.responseData.data));
+      dispatch(closeModal());
+    }
+  }, [resPostLogin.status, resPostLogin.responseData, dispatch, navigate]);
+
   // 카카오 로그인 인가코드 받아와 메인페이지로 보내기
   const handleKakaoLogin = (e: any) => {
     e.preventDefault();
+    dispatch(closeModal());
     window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URL}&response_type=code`;
   };
 

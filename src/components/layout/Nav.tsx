@@ -5,22 +5,33 @@ import { useAppDispatch } from "../../hooks/useDispatch";
 import { logout } from "../../store/userSlice";
 import useAxios from "../../hooks/useAxios";
 import { postLogout } from "../../api/user/userAxios";
+import { useEffect } from "react";
 
 export default function Nav() {
   const navigate = useNavigate();
   const location = useLocation();
-  const user = useAppSelector((state) => state.user);
+  const user = useAppSelector((state) => state.user).data;
   console.log(user);
-  const loggedIn = user.data !== null ? true : false;
+  const loggedIn = user !== null ? true : false;
   const isLanding = location.pathname.includes("landingpages");
-  const dispatch = useAppDispatch();
 
-  const resPostLogout = useAxios(() => postLogout("token"), [], true);
+  // 로그아웃
+  const resPostLogout = useAxios(
+    () => postLogout(user?.accessToken!, user?.refreshToken!),
+    [user?.refreshToken],
+    true,
+  );
   const handleLogout = () => {
     resPostLogout.axiosData();
-    dispatch(logout());
-    navigate("/");
   };
+
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (resPostLogout.status === "Success" && resPostLogout.responseData) {
+      dispatch(logout());
+      navigate("/");
+    }
+  }, [resPostLogout.status, resPostLogout.responseData, dispatch, navigate]);
 
   return (
     <>
