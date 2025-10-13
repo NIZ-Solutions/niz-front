@@ -25,7 +25,7 @@ export default function Submit() {
   };
 
   return (
-    <div className="flex h-screen w-full max-w-screen-lg flex-col items-center justify-center gap-8 px-7 pt-[60px] text-center md:flex-row md:justify-between lg:px-0">
+    <div className="flex min-h-screen w-full max-w-screen-lg snap-center snap-always flex-col items-center justify-center gap-8 px-7 pt-[60px] text-center md:flex-row md:justify-between lg:px-0">
       <div className="flex flex-col gap-6 md:min-w-[40%]">
         <h1 className="text-4xl font-extrabold leading-[50px]">
           감이 아닌,

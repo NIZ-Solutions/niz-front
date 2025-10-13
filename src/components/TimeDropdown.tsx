@@ -26,12 +26,13 @@ export default function DateDropdown(handleClickTime: TimeDropdownProps) {
 
   return (
     <>
-      <ul className="flex w-full flex-col justify-start gap-2 overflow-y-scroll bg-white-000 py-2 drop-shadow-lg">
+      <ul className="dark:bg-gray-004 flex w-full flex-col justify-start overflow-y-scroll rounded-md bg-white-000 py-2 drop-shadow-lg">
         {timeArr.map((el) => (
           <li
             key={`${el}-time`}
             id={`${el}-time`}
             onClick={() => handleClickTime?.handleClickTime(el)}
+            className="py-1 hover:bg-gray-001 dark:hover:bg-gray-002"
           >
             {el}
           </li>

@@ -1,61 +1,92 @@
+// userAxios.ts
 import axios from "axios";
 
-export const postSignup = async (
-  email: String,
-  password: String,
-  name: String,
-  phone: String,
-) => {
-  const response = await axios.post(
-    `${process.env.REACT_APP_API_BASE_URL}/auth/signup`,
-    { email, password, name, phone },
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    },
-  );
-  return response.data;
-};
+const BASE = process.env.REACT_APP_API_BASE_URL as string;
 
-export const postIdCheck = async (email: String) => {
-  const response = await axios.post(
-    `${process.env.REACT_APP_API_BASE_URL}/auth/idcheck`,
-    { email },
+export async function postSignup(
+  userId: string,
+  password: string,
+  name: string,
+  phone: string,
+  termsOfService: boolean,
+  privacyPolicy: boolean,
+  paymentPolicy: boolean,
+  // marketingOptIn: boolean,
+) {
+  const res = await axios.post(
+    `${BASE}/auth/signup`,
     {
-      headers: {
-        "Content-Type": "application/json",
-      },
+      userId,
+      password,
+      name,
+      phone,
+      termsOfService,
+      privacyPolicy,
+      paymentPolicy,
+      // marketingOptIn,
     },
+    { headers: { "Content-Type": "application/json" } },
   );
-  return response.data;
-};
+  return res.data;
+}
 
-export const postLogin = async (email: String, password: String) => {
-  const response = await axios.post(
-    `${process.env.REACT_APP_API_BASE_URL}/auth/login`,
-    { email, password },
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    },
+export async function postLogin(userId: string, password: string) {
+  const res = await axios.post(
+    `${BASE}/auth/login`,
+    { userId, password },
+    { headers: { "Content-Type": "application/json" } },
   );
-  return response.data;
-};
+  return res.data;
+}
 
-export const postLogout = async (refreshToken: String) => {
-  const response = await axios.post(
-    `${process.env.REACT_APP_API_BASE_URL}/auth/logout`,
+export async function postLoginWithHandledError(
+  userId: string,
+  password: string,
+) {
+  try {
+    const res = await axios.post(
+      `${BASE}/auth/login`,
+      { userId, password },
+      { headers: { "Content-Type": "application/json" } },
+    );
+    return res.data;
+  } catch (e: unknown) {
+    if (axios.isAxiosError(e)) {
+      const msg = e.response?.data?.error?.message ?? e.message;
+      throw new Error(msg);
+    }
+    throw e;
+  }
+}
+
+export async function postRefresh(refreshToken: string) {
+  const res = await axios.post(
+    `${BASE}/auth/refresh`,
+    { refreshToken },
+    { headers: { "Content-Type": "application/json" } },
+  );
+  return res.data;
+}
+
+export async function postKakaoLogin(code: string) {
+  const res = await axios.post(
+    `${BASE}/auth/kakao`,
+    { code },
+    { headers: { "Content-Type": "application/json" } },
+  );
+  return res.data;
+}
+
+export async function postLogout(accessToken: string, refreshToken: string) {
+  const res = await axios.post(
+    `${BASE}/auth/logout`,
+    { refreshToken },
     {
       headers: {
+        Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`,
-      },
-      params: {
-        refreshToken: refreshToken,
       },
     },
   );
-  return response.data;
-};
+  return res.data;
+}

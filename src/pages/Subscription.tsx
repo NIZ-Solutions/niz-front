@@ -1,12 +1,14 @@
 import { useState, useRef, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { faCalendarDays } from "@fortawesome/free-regular-svg-icons";
 import DateDropdown from "../components/DateDropdown";
 import TimeDropdown from "../components/TimeDropdown";
-import * as PortOne from "@portone/browser-sdk/v2";
 import { nanoid } from "nanoid";
+import { useAppDispatch } from "../hooks/useDispatch";
+import { subscription } from "../store/orderSlice";
+import * as PortOne from "@portone/browser-sdk/v2";
 
 export default function Submit() {
   const location = useLocation();
@@ -144,6 +146,8 @@ export default function Submit() {
   }, [name, passPhone, passEmail]);
 
   // 결제
+  const [paymentsComplement, setPaymentsComplement] = useState<Boolean>(false);
+  const dispatch = useAppDispatch();
   async function requestPayment() {
     const nameInput = document.getElementById("name-input") as HTMLInputElement;
     const phoneInput = document.getElementById(
@@ -152,32 +156,73 @@ export default function Submit() {
     const emailInput = document.getElementById(
       "email-input",
     ) as HTMLInputElement;
-    /////////////////////////////
-    const resPayment = await PortOne.requestPayment({
-      // Store ID 설정
-      storeId: process.env.REACT_APP_KG_STORE_ID
-        ? process.env.REACT_APP_KG_STORE_ID
-        : "123",
-      // 채널 키 설정
-      channelKey: "channel-key-893597d6-e62d-410f-83f9-119f530b4b11",
-      paymentId: nanoId,
-      orderName: `${nanoId}-${nameInput.value}`,
-      totalAmount: Number(price),
-      currency: "CURRENCY_KRW",
-      payMethod: "CARD",
-      customer: {
-        fullName: nameInput.value,
-        firstName: nameInput.value.slice(0, 1),
-        lastName: nameInput.value.slice(1),
-        phoneNumber: phoneInput.value,
-        email: emailInput.value,
-      },
-      redirectUrl: `${process.env.REACT_APP_BASE}/subscription/loading`,
-    });
+    const textareaInput = document.getElementById(
+      "sub-textarea",
+    ) as HTMLTextAreaElement;
+    const advicedAt = `${date.year}-${
+      String(date.month).length === 1 ? `0${date.month}` : date.month
+    }-${
+      String(date.day).length === 1 ? `0${date.day}` : date.day
+    }T${promiseTime}:00Z`;
+
+    try {
+      const res = await PortOne.requestPayment({
+        storeId: process.env.REACT_APP_KG_STORE_ID as string,
+        channelKey: process.env.REACT_APP_KG_CHANNEL_KEY,
+        paymentId: nanoId,
+        orderName: `${nameInput.value} 랜딩페이지 제작`,
+        totalAmount: 2,
+        currency: "CURRENCY_KRW",
+        windowType: {
+          pc: "IFRAME",
+          mobile: "REDIRECTION",
+        },
+        payMethod: "CARD",
+        customer: {
+          fullName: nameInput.value,
+          firstName: nameInput.value.slice(0, 1),
+          lastName: nameInput.value.slice(1),
+          phoneNumber: phoneInput.value,
+          email: emailInput.value,
+        },
+        bypass: {
+          inicis_v2: {
+            logo_url: "",
+            logo_2nd: "",
+            Ini_SSGPAY_MDN: `${phoneInput.value}`,
+            acceptmethod: ["SKIN(#126DD7)", "below1000", "paypopup"],
+            P_CARD_OPTION: "selcode=14",
+            P_MNAME: "NIZ",
+            P_RESERVED: ["below1000=Y"],
+          },
+        },
+        redirectUrl: `${process.env.REACT_APP_BASE}/subscription/loading`,
+      });
+      if (res?.paymentId) {
+        dispatch(
+          subscription({
+            email: emailInput.value,
+            paymentId: nanoId,
+            advicedAt: advicedAt,
+            otherText: textareaInput.value,
+          }),
+        );
+        setPaymentsComplement(true);
+      }
+    } catch (e) {
+      console.error(e);
+    }
   }
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (paymentsComplement) {
+      navigate("/subscription/loading", { replace: true });
+    }
+  }, [paymentsComplement, navigate]);
 
   return (
-    <div className="flex w-full flex-col items-center justify-between pb-[120px] pl-4 pr-5 text-black-000 min-[340px]:px-7 md:pb-0">
+    <div className="flex w-full flex-col items-center justify-between pb-[120px] pl-4 pr-5 text-black-000 min-[340px]:px-7 md:pb-0 dark:text-gray-000">
       <div className="flex min-h-screen w-full min-w-[280px] max-w-screen-lg flex-col items-center justify-center gap-8 pt-[120px] text-center md:flex-row md:justify-between md:pb-[120px] lg:px-0">
         <div className="flex flex-col gap-8 md:min-w-[50%]">
           <p className="text-xl font-medium text-blue-001">
@@ -195,7 +240,7 @@ export default function Submit() {
             <h2 className="">상담 희망일</h2>
             <div className="relative rounded-md border-[1px] border-blue-001">
               <input
-                className="w-full min-w-[280px] rounded-[5px] px-2 py-1"
+                className="w-full min-w-[280px] rounded-[5px] bg-transparent px-2 py-1"
                 value={`${date.year}년 ${date.month}월 ${date.day}일`}
                 readOnly
               />
@@ -219,7 +264,7 @@ export default function Submit() {
             <h2 className="">상담 희망 시간</h2>
             <div className="relative rounded-md border-[1px] border-blue-001">
               <input
-                className="w-full min-w-[280px] rounded-[5px] px-2 py-1"
+                className="w-full min-w-[280px] rounded-[5px] bg-transparent px-2 py-1"
                 value={promiseTime}
                 readOnly
               />
@@ -243,7 +288,7 @@ export default function Submit() {
             <div className="relative rounded-md border-[1px] border-blue-001">
               <input
                 id="name-input"
-                className="w-full min-w-[280px] rounded-[5px] px-2 py-1"
+                className="w-full min-w-[280px] rounded-[5px] bg-transparent px-2 py-1"
                 placeholder="ex. 박니즈"
                 onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
                   handleName(e.target.value)
@@ -261,7 +306,7 @@ export default function Submit() {
             >
               <input
                 id="phone-input"
-                className="w-full min-w-[280px] rounded-[5px] px-2 py-1"
+                className="w-full min-w-[280px] rounded-[5px] bg-transparent px-2 py-1"
                 placeholder="ex. 01012345678"
                 onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
                   handlePhone(e.target.value)
@@ -278,7 +323,7 @@ export default function Submit() {
             >
               <input
                 id="email-input"
-                className="w-full min-w-[280px] rounded-[5px] px-2 py-1"
+                className="w-full min-w-[280px] rounded-[5px] bg-transparent px-2 py-1"
                 placeholder="ex. nizhelp@gmail.com"
                 onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
                   handleEmail(e.target.value)
@@ -290,7 +335,7 @@ export default function Submit() {
           <div className="flex w-full flex-col gap-1 text-left font-medium">
             <h2 className="">아이디어 설명</h2>
             <div className="min-h-[18svh] content-center rounded-md border-[1px] border-blue-001">
-              <div className="rounded-md bg-white-000 p-2">
+              <div className="rounded-md bg-white-000 p-2 dark:bg-transparent">
                 <textarea
                   id="sub-textarea"
                   className="min-h-[18svh] w-full resize-none bg-transparent"
@@ -312,7 +357,7 @@ export default function Submit() {
               id="pay-Btn"
               type="button"
               onClick={() => requestPayment()}
-              className="w-full rounded-xl bg-gray-001 py-3 text-xl font-extrabold text-white-000"
+              className="w-full rounded-xl bg-gray-001 py-3 text-xl font-extrabold text-white-000 dark:bg-gray-003"
             >
               결제하기
             </button>

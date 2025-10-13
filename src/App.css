@@ -10,6 +10,19 @@
   syntax: "<angle>";
 }
 
+@layer utilities {
+  .scrollbar-hide {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    scrollbar-width: none;
+  }
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   background-color: #ffffff;
   color: #232121;

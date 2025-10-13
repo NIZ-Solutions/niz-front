@@ -1,9 +1,11 @@
 export interface UserData {
+  id: string;
+  userid: string;
   name: string;
+  phone: string;
+  createdAt: string;
   accessToken: string;
-  accessTokenExpiresIn: number;
   refreshToken: string;
-  refreshTokenExpiresIn: number;
 }
 export interface UserSliceState {
   data: UserData | null;

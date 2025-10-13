@@ -8,7 +8,7 @@ export default function Mypage() {
   const textMoney = money.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 
   return (
-    <div className="flex min-h-screen w-full flex-col overflow-auto text-black-000">
+    <div className="flex min-h-screen w-full flex-col overflow-auto text-black-000 dark:text-gray-001">
       {/* 내 정보 컨테이너 */}
       {/* <div className="flex min-h-fit w-full min-w-[280px] max-w-screen-lg flex-col justify-center gap-3 self-center px-7 pt-[120px] md:mb-auto md:h-fit md:justify-start md:text-center">
         <h1 className="text-4xl font-extrabold leading-[50px] md:mr-0 md:min-w-[50%]">
@@ -36,10 +36,10 @@ export default function Mypage() {
       </div>  */}
       {/* 신청내역 컨테이너 */}
       <div className="flex min-h-fit w-full min-w-[280px] max-w-screen-lg flex-col justify-center gap-3 self-center px-7 pb-[120px] pt-[120px] md:min-h-screen md:justify-start md:overflow-scroll md:overflow-x-hidden md:text-center">
-        <h1 className="mr-auto text-4xl font-extrabold leading-[50px] md:mr-0 md:min-w-[50%]">
+        <h1 className="mr-auto text-4xl font-extrabold leading-[50px] md:mr-0 md:min-w-[50%] dark:text-white-000">
           신청내역
         </h1>
-        <p className="pb-5 text-sm text-gray-003">
+        <p className="pb-5 text-sm text-gray-003 dark:text-gray-001">
           상담 변경은 고객센터를 통해 부탁드립니다.
         </p>
         {/* 신청내역 리스트*/}
@@ -53,51 +53,7 @@ export default function Mypage() {
               <p className="">주문번호 :&nbsp;</p>
               <p className="">EsTMGzIeLH</p>
             </div>
-            <div className="relative mt-2 flex flex-col gap-2 rounded-lg bg-gray-000 p-5 md:text-left">
-              <p className="">이름 :&nbsp;{name}</p>
-              <p className="">이메일 주소 :&nbsp;pmh3853@naver.com</p>
-              <p className="">연락처 :&nbsp;010-4104-3853</p>
-              <p className="">아이디어 분류 :&nbsp;의료기기</p>
-              <p className="">
-                기타 요청사항 및 전달사항 :&nbsp;
-                <br />뭐 이렇게 해주시고 저렇게해주시고 이런이런 아이디어가
-                있는데 이건 이렇게 ㅐ주실수있는지 궁금하고 이걸
-                이렇게해주십사...
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-col gap-1">
-            <div className="flex flex-row text-lg">
-              <p className="font-medium">상태 :&nbsp;</p>
-              <p className="font-semibold text-blue-001">제작 완료</p>
-            </div>
-            <div className="flex flex-row text-lg font-medium">
-              <p className="">주문번호 :&nbsp;</p>
-              <p className="">EsTMGzIeLH</p>
-            </div>
-            <div className="relative mt-2 flex flex-col gap-2 rounded-lg bg-gray-000 p-5 md:text-left">
-              <p className="">이름 :&nbsp;{name}</p>
-              <p className="">이메일 주소 :&nbsp;pmh3853@naver.com</p>
-              <p className="">연락처 :&nbsp;010-4104-3853</p>
-              <p className="">아이디어 분류 :&nbsp;의료기기</p>
-              <p className="">
-                기타 요청사항 및 전달사항 :&nbsp;
-                <br />뭐 이렇게 해주시고 저렇게해주시고 이런이런 아이디어가
-                있는데 이건 이렇게 ㅐ주실수있는지 궁금하고 이걸
-                이렇게해주십사...
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-col gap-1">
-            <div className="flex flex-row text-lg">
-              <p className="font-medium">상태 :&nbsp;</p>
-              <p className="font-semibold text-blue-001">제작 완료</p>
-            </div>
-            <div className="flex flex-row text-lg font-medium">
-              <p className="">주문번호 :&nbsp;</p>
-              <p className="">EsTMGzIeLH</p>
-            </div>
-            <div className="relative mt-2 flex flex-col gap-2 rounded-lg bg-gray-000 p-5 md:text-left">
+            <div className="dark:bg-gray-005 relative mt-2 flex flex-col gap-2 rounded-lg bg-gray-000 p-5 md:text-left">
               <p className="">이름 :&nbsp;{name}</p>
               <p className="">이메일 주소 :&nbsp;pmh3853@naver.com</p>
               <p className="">연락처 :&nbsp;010-4104-3853</p>

@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../hooks/useDispatch";
+import { login } from "../store/userSlice";
 import useAxios from "../hooks/useAxios";
-import { postSignup, postIdCheck } from "../api/user/userAxios";
+import { postSignup, postLogin } from "../api/user/userAxios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
@@ -9,6 +11,7 @@ import BalloonLogo from "../assets/logo-balloon-padding.png";
 import useModal from "../hooks/useModal";
 
 export default function Signup() {
+  const navigate = useNavigate();
   const [name, setName] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
   const [id, setId] = useState<string>("");
@@ -183,27 +186,43 @@ export default function Signup() {
   }, [name, phone, id, password, passPw, passPwCheck, termsCheck]);
 
   // 계정만들기
-  const resPostIdCheck = useAxios(() => postIdCheck(id), [id], true);
   const resPostSignup = useAxios(
-    () => postSignup(id, password, name, phone),
-    [id, password, name, phone],
+    () =>
+      postSignup(
+        id,
+        password,
+        name,
+        phone.replaceAll("-", ""),
+        termsCheck[0],
+        termsCheck[1],
+        termsCheck[2],
+        // false,
+      ),
+    [
+      id,
+      password,
+      name,
+      phone.replaceAll("-", ""),
+      termsCheck[0],
+      termsCheck[1],
+      termsCheck[2],
+      // false,
+    ],
     true,
   );
-  const handleSignup = (e: any) => {
-    console.log("클릭");
-    e.preventDefault();
-    console.log("회원가입 요청:", { name, phone, id, password });
-    resPostIdCheck.axiosData();
-    // 아이디 중복체크 통과 시 회원가입 요청
-    if (resPostIdCheck.responseData === true) {
-      resPostSignup.axiosData();
-      console.log(resPostSignup.responseData);
-    } else {
-      const ID = document.getElementById("id_Input") as HTMLInputElement;
-      ID.focus();
-      alert("이미 존재하는 아이디입니다 !");
-    }
+
+  const handleSignup = () => {
+    console.log("회원가입요청");
+    resPostSignup.axiosData();
   };
+
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (resPostSignup.status === "Success" && resPostSignup.responseData) {
+      dispatch(login(resPostSignup.responseData.data));
+      navigate("/");
+    }
+  }, [resPostSignup.status, resPostSignup.responseData, dispatch, navigate]);
 
   type TermType = {
     key: number;

@@ -1,14 +1,27 @@
 import axios from "axios";
+const BASE = process.env.REACT_APP_API_BASE_URL as string;
 
-export const postSubscription = async () => {
-  const response = await axios.post(
-    `${process.env.REACT_APP_API_BASE_URL}/subscription`,
-    {},
+export async function postPaymoentsComplete(
+  paymentId: string,
+  name: string,
+  phone: string,
+  email: string,
+  advicedAt: string,
+  otherText: string,
+  userId: string,
+) {
+  const res = await axios.post(
+    `${BASE}/payments/complete`,
     {
-      headers: {
-        "Content-Type": "application/json",
-      },
+      paymentId,
+      name,
+      phone,
+      email,
+      advicedAt,
+      otherText,
+      userId,
     },
+    { headers: { "Content-Type": "application/json" } },
   );
-  return response.data;
-};
+  return res.data;
+}

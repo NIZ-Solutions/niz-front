@@ -5,30 +5,41 @@ import { useAppDispatch } from "../../hooks/useDispatch";
 import { logout } from "../../store/userSlice";
 import useAxios from "../../hooks/useAxios";
 import { postLogout } from "../../api/user/userAxios";
+import { useEffect } from "react";
 
 export default function Nav() {
   const navigate = useNavigate();
   const location = useLocation();
-  const user = useAppSelector((state) => state.user);
+  const user = useAppSelector((state) => state.user).data;
   console.log(user);
-  const loggedIn = user.data !== null ? true : false;
+  const loggedIn = user !== null ? true : false;
   const isLanding = location.pathname.includes("landingpages");
-  const dispatch = useAppDispatch();
 
-  const resPostLogout = useAxios(() => postLogout("token"), [], true);
+  // 로그아웃
+  const resPostLogout = useAxios(
+    () => postLogout(user?.accessToken!, user?.refreshToken!),
+    [user?.refreshToken],
+    true,
+  );
   const handleLogout = () => {
     resPostLogout.axiosData();
-    dispatch(logout());
-    navigate("/");
   };
+
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (resPostLogout.status === "Success" && resPostLogout.responseData) {
+      dispatch(logout());
+      navigate("/");
+    }
+  }, [resPostLogout.status, resPostLogout.responseData, dispatch, navigate]);
 
   return (
     <>
       {isLanding ? (
         <></>
       ) : (
-        <nav className="dark:bg-black-001 fixed left-0 right-0 top-0 z-50 flex min-h-[60px] flex-row justify-center bg-white px-7 shadow-lg">
-          <div className="flex w-full max-w-screen-xl items-center justify-between">
+        <nav className="fixed left-0 right-0 top-0 z-50 flex min-h-[60px] flex-row justify-center bg-white px-7 shadow-lg dark:bg-black-001">
+          <div className="flex w-full max-w-screen-lg items-center justify-between">
             {/* 로고 */}
             <Link to="/" className="flex gap-[10px]">
               <img className="w-[30px]" src={HeaderLogo} alt="logo" />
