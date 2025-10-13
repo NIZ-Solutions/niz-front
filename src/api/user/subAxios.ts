@@ -9,6 +9,7 @@ export async function postPaymoentsComplete(
   advicedAt: string,
   otherText: string,
   userId: string,
+  accessToken: string,
 ) {
   const res = await axios.post(
     `${BASE}/payments/complete`,
@@ -21,7 +22,12 @@ export async function postPaymoentsComplete(
       otherText,
       userId,
     },
-    { headers: { "Content-Type": "application/json" } },
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    },
   );
   return res.data;
 }

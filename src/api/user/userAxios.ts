@@ -70,7 +70,7 @@ export async function postRefresh(refreshToken: string) {
 
 export async function postKakaoLogin(code: string) {
   const res = await axios.post(
-    `${BASE}/auth/kakao`,
+    `${BASE}/auth/kakao/redirect`,
     { code },
     { headers: { "Content-Type": "application/json" } },
   );
