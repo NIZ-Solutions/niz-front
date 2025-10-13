@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../hooks/useDispatch";
+import { login } from "../store/userSlice";
 import useAxios from "../hooks/useAxios";
-import { postSignup } from "../api/user/userAxios";
+import { postSignup, postLogin } from "../api/user/userAxios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
@@ -9,6 +11,7 @@ import BalloonLogo from "../assets/logo-balloon-padding.png";
 import useModal from "../hooks/useModal";
 
 export default function Signup() {
+  const navigate = useNavigate();
   const [name, setName] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
   const [id, setId] = useState<string>("");
@@ -189,21 +192,37 @@ export default function Signup() {
         id,
         password,
         name,
-        phone,
+        phone.replaceAll("-", ""),
         termsCheck[0],
         termsCheck[1],
         termsCheck[2],
+        // false,
       ),
-    [id, password, name, phone, termsCheck[0], termsCheck[1], termsCheck[2]],
+    [
+      id,
+      password,
+      name,
+      phone.replaceAll("-", ""),
+      termsCheck[0],
+      termsCheck[1],
+      termsCheck[2],
+      // false,
+    ],
     true,
   );
-  const handleSignup = (e: any) => {
-    console.log("클릭");
-    e.preventDefault();
-    console.log("회원가입 요청:", { name, phone, id, password });
+
+  const handleSignup = () => {
+    console.log("회원가입요청");
     resPostSignup.axiosData();
-    console.log(resPostSignup.responseData);
   };
+
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (resPostSignup.status === "Success" && resPostSignup.responseData) {
+      dispatch(login(resPostSignup.responseData.data));
+      navigate("/");
+    }
+  }, [resPostSignup.status, resPostSignup.responseData, dispatch, navigate]);
 
   type TermType = {
     key: number;

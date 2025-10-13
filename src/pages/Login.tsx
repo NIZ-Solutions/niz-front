@@ -85,11 +85,7 @@ export default function Login() {
       setId(ID.value);
       setPassword(PW.value);
       resPostLogin.axiosData();
-      console.log(resPostLogin.responseData);
-      if (resPostLogin.responseData.status === 200) {
-        dispatch(login(resPostLogin.responseData.data));
-        navigate("/home");
-      }
+      // console.log(resPostLogin.responseData);
     } else if (id === "") {
       alert("아이디를 입력해주세요");
       ID.focus();
@@ -98,6 +94,12 @@ export default function Login() {
       PW.focus();
     }
   };
+  useEffect(() => {
+    if (resPostLogin.status === "Success" && resPostLogin.responseData) {
+      dispatch(login(resPostLogin.responseData.data));
+      navigate("/");
+    }
+  }, [resPostLogin.status, resPostLogin.responseData, dispatch, navigate]);
 
   // 카카오 로그인 인가코드 받아와 메인페이지로 보내기
   const handleKakaoLogin = (e: any) => {

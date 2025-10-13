@@ -2,27 +2,20 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../hooks/useDispatch";
 import { login } from "../store/userSlice";
 import { useEffect } from "react";
+import useAxios from "../hooks/useAxios";
+import { postKakaoLogin } from "../api/user/userAxios";
 
 export default function Loading() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const code = new URL(window.location.href).searchParams.get("code");
+  const resKakaoLogin = useAxios(() => postKakaoLogin(code!), [code], true);
   useEffect(() => {
-    const code = new URL(window.location.href).searchParams.get("code");
-    console.log(code);
     if (code !== null) {
       // 카카오 인가코드 백엔드로 전송
       console.log(code);
-      const resData = {
-        data: {
-          name: "",
-          accessToken: "",
-          accessTokenExpiresIn: 0,
-          refreshToken: "",
-          refreshTokenExpiresIn: 0,
-        },
-      };
-      dispatch(login(resData.data));
-      // 성공시 main으로 redirect
+      resKakaoLogin.axiosData();
+      dispatch(login(resKakaoLogin.responseData));
       navigate("/");
     }
   }, []);
