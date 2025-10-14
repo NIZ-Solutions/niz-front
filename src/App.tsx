@@ -13,19 +13,19 @@ import Error from "./pages/Error";
 
 function App() {
   return (
-    <ErrorBoundary fallback={<Error />}>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <BrowserRouter>
+    <BrowserRouter>
+      <ErrorBoundary fallback={<Error />}>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
             <Modal />
             <ScrollToTop />
             <Nav />
             <Router />
             <Footer />
-          </BrowserRouter>
-        </PersistGate>
-      </Provider>
-    </ErrorBoundary>
+          </PersistGate>
+        </Provider>
+      </ErrorBoundary>
+    </BrowserRouter>
   );
 }
 

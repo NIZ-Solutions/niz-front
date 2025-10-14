@@ -1,8 +1,9 @@
-// useAxios.ts
 import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
+import { useAppSelector } from "./useSelector";
+import { useAppDispatch } from "./useDispatch";
 
-type Status = "Idle" | "Loading" | "Success" | "Error";
+type Status = "Idle" | "Loading" | "Success" | "Error" | "Refresh";
 interface UseAxiosReturn<T> {
   axiosData: () => Promise<void>;
   responseData: T | null;
@@ -10,7 +11,6 @@ interface UseAxiosReturn<T> {
   error: unknown | null;
 }
 const getErrorMessage = (e: unknown) => {
-  // AxiosError인지 확인하고 서버 메시지 우선 추출
   if (axios.isAxiosError(e)) {
     const srvMsg =
       (e.response?.data as any)?.error?.message ??
@@ -29,7 +29,8 @@ const useAxios = <T>(
   const [responseData, setResponseData] = useState<T | null>(null);
   const [status, setStatus] = useState<Status>("Idle");
   const [error, setError] = useState<unknown | null>(null);
-
+  const user = useAppSelector((state) => state.user).data;
+  const dispatch = useAppDispatch();
   const axiosData = useCallback(async () => {
     setStatus("Loading");
     setError(null);
@@ -37,12 +38,28 @@ const useAxios = <T>(
       const data = await callback();
       setResponseData(data);
       setStatus("Success");
-    } catch (e) {
-      setStatus("Error");
-      setError(e);
-      alert(getErrorMessage(e));
+    } catch (err) {
+      console.error("request failed:", err);
+      const isAuthError =
+        (axios.isAxiosError(err) && err.response?.status === 401) ||
+        getErrorMessage(err) === "인증 실패";
+      if (isAuthError) {
+        try {
+          const res = await axios.post(
+            `${process.env.REACT_APP_API_BASE_URL}/auth/refresh`,
+            { refreshToken: user?.refreshToken },
+            { headers: { "Content-Type": "application/json" } },
+          );
+          dispatch(res.data.data);
+          setStatus("Refresh");
+        } catch (e) {
+          setStatus("Error");
+          setError(e);
+          alert(getErrorMessage(e));
+        }
+      }
     }
-  }, [callback]);
+  }, [callback, dispatch, user?.refreshToken]);
 
   useEffect(() => {
     if (skip) return;

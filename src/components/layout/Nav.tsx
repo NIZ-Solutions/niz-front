@@ -31,6 +31,10 @@ export default function Nav() {
       dispatch(logout());
       navigate("/");
     }
+    if (resPostLogout.status === "Refresh") {
+      handleLogout();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resPostLogout.status, resPostLogout.responseData, dispatch, navigate]);
 
   return (
