@@ -59,15 +59,6 @@ export async function postLoginWithHandledError(
   }
 }
 
-export async function postRefresh(refreshToken: string) {
-  const res = await axios.post(
-    `${BASE}/auth/refresh`,
-    { refreshToken },
-    { headers: { "Content-Type": "application/json" } },
-  );
-  return res.data;
-}
-
 export async function postKakaoLogin(code: string) {
   const res = await axios.post(
     `${BASE}/auth/kakao/redirect`,
@@ -88,5 +79,15 @@ export async function postLogout(accessToken: string, refreshToken: string) {
       },
     },
   );
+  return res.data;
+}
+
+export async function getMypage(accessToken: string) {
+  const res = await axios.get(`${BASE}/mypage`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+  });
   return res.data;
 }
