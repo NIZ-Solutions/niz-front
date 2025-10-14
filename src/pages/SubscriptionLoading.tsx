@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../hooks/useDispatch";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { subscriptionComplete } from "../store/orderSlice";
 import useAxios from "../hooks/useAxios";
 import { postPaymoentsComplete } from "../api/user/subAxios";
@@ -24,7 +24,6 @@ export default function SubscriptionLoading() {
         order?.email!,
         order?.advicedAt!,
         order?.otherText!,
-        user?.userId!,
         user?.accessToken!,
       ),
     [
@@ -34,7 +33,6 @@ export default function SubscriptionLoading() {
       order?.email!,
       order?.advicedAt!,
       order?.otherText!,
-      user?.userId!,
       user?.accessToken!,
     ],
     true,
@@ -47,26 +45,28 @@ export default function SubscriptionLoading() {
     }
   }, [errorMessage, navigate]);
 
+  const isMounted = useRef(false);
   useEffect(() => {
     if (errorMessage) return;
     if (
-      (paymentIdFromUrl || order?.paymentId) &&
+      order?.paymentId &&
       user?.name &&
       user?.phone &&
       order?.email &&
       order?.advicedAt
     ) {
-      resSubComplete.axiosData();
-    } else {
-      navigate("/", { replace: true });
+      setTimeout(() => {
+        console.log("1초지남");
+        resSubComplete.axiosData();
+      }, 1000);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [paymentIdFromUrl, user, order, errorMessage]);
+  }, [user, order, errorMessage]);
 
   useEffect(() => {
     if (resSubComplete.status === "Success" && resSubComplete.responseData) {
-      dispatch(subscriptionComplete());
-      navigate("/subscription/complete", { replace: true });
+      console.log("complete 성공");
+      window.location.replace("/subscription/complete");
+      return;
     } else if (resSubComplete.status === "Error") {
       navigate("/");
     } else if (resSubComplete.status === "Refresh") {

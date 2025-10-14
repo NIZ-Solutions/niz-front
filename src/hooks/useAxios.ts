@@ -2,6 +2,9 @@ import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useAppSelector } from "./useSelector";
 import { useAppDispatch } from "./useDispatch";
+import { login, logout } from "../store/userSlice";
+import { useNavigate } from "react-router-dom";
+import Login from "./../pages/Login";
 
 type Status = "Idle" | "Loading" | "Success" | "Error" | "Refresh";
 interface UseAxiosReturn<T> {
@@ -22,7 +25,7 @@ const getErrorMessage = (e: unknown) => {
 };
 
 const useAxios = <T>(
-  callback: () => Promise<T>,
+  callback: (accessToken?: string) => Promise<T>,
   deps: any[] = [],
   skip = false,
 ): UseAxiosReturn<T> => {
@@ -31,11 +34,13 @@ const useAxios = <T>(
   const [error, setError] = useState<unknown | null>(null);
   const user = useAppSelector((state) => state.user).data;
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const axiosData = useCallback(async () => {
     setStatus("Loading");
     setError(null);
     try {
-      const data = await callback();
+      const curAccess = user?.accessToken;
+      const data = await callback(curAccess);
       setResponseData(data);
       setStatus("Success");
     } catch (err) {
@@ -50,16 +55,34 @@ const useAxios = <T>(
             { refreshToken: user?.refreshToken },
             { headers: { "Content-Type": "application/json" } },
           );
-          dispatch(res.data.data);
+          dispatch(
+            login({
+              refreshToken: res.data.data.refreshToken,
+              accessToken: res.data.data.accessToken,
+              id: user?.id!,
+              userId: user?.userId!,
+              name: user?.name!,
+              phone: user?.phone!,
+              createdAt: user?.createdAt!,
+            }),
+          );
+          console.log(res.data.data?.accessToken, "newAcc");
           setStatus("Refresh");
         } catch (e) {
           setStatus("Error");
           setError(e);
-          alert(getErrorMessage(e));
+          dispatch(logout());
+          navigate("/");
+          alert("재로그인이 필요합니다!");
         }
+      } else {
+        setStatus("Error");
+        setError(err);
+        alert(getErrorMessage(err));
+        navigate("/");
       }
     }
-  }, [callback, dispatch, user?.refreshToken]);
+  }, [callback, dispatch, navigate, user?.refreshToken]);
 
   useEffect(() => {
     if (skip) return;

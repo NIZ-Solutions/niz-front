@@ -89,5 +89,5 @@ export async function getMypage(accessToken: string) {
       "Content-Type": "application/json",
     },
   });
-  return res.data;
+  return res.data.data;
 }

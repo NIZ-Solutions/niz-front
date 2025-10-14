@@ -205,6 +205,7 @@ export default function Submit() {
             paymentId: nanoId,
             advicedAt: advicedAt,
             otherText: textareaInput.value,
+            amount: "2",
           }),
         );
         setPaymentsComplement(true);

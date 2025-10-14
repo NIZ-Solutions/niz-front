@@ -8,7 +8,6 @@ export async function postPaymoentsComplete(
   email: string,
   advicedAt: string,
   otherText: string,
-  userId: string,
   accessToken: string,
 ) {
   const res = await axios.post(
@@ -20,7 +19,6 @@ export async function postPaymoentsComplete(
       email,
       advicedAt,
       otherText,
-      userId,
     },
     {
       headers: {
