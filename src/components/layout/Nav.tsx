@@ -11,7 +11,6 @@ export default function Nav() {
   const navigate = useNavigate();
   const location = useLocation();
   const user = useAppSelector((state) => state.user).data;
-  console.log(user);
   const loggedIn = user !== null ? true : false;
   const isLanding = location.pathname.includes("landingpages");
 
@@ -29,7 +28,9 @@ export default function Nav() {
   useEffect(() => {
     if (resPostLogout.status === "Success" && resPostLogout.responseData) {
       dispatch(logout());
-      navigate("/");
+      setTimeout(() => {
+        window.location.replace("/");
+      }, 500);
     }
     if (resPostLogout.status === "Refresh") {
       handleLogout();

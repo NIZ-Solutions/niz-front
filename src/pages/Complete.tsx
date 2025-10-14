@@ -1,10 +1,19 @@
 import { Link } from "react-router-dom";
+import { useAppSelector } from "../hooks/useSelector";
+import { useEffect } from "react";
+import { subscriptionComplete } from "../store/orderSlice";
+import { useAppDispatch } from "../hooks/useDispatch";
 
 export default function Submit() {
-  const price = "49900";
-  // const orderNum = paymentId;
-  const infoDate = "2025-10-26 , 11 : 00";
-  const textPrice = price.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+  const order = useAppSelector((state) => state.order).data;
+  const textPrice = order?.amount.replace(
+    /\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g,
+    ",",
+  );
+  // const dispatch = useAppDispatch();
+  // useEffect(() => {
+  //   dispatch(subscriptionComplete());
+  // }, []);
 
   return (
     <div className="flex w-full flex-col items-center justify-between pl-4 pr-5 text-black-000 min-[340px]:px-7 md:pb-0">
@@ -14,10 +23,14 @@ export default function Submit() {
             <h1>결제완료</h1>
             <p>금액 : {textPrice}원</p>
           </div>
-          <p className="text-base font-normal text-black-000">주문번호 : {}</p>
+          <p className="text-base font-normal text-black-000">
+            주문번호 : {order?.paymentId}
+          </p>
         </div>
         <div className="flex min-w-full flex-col gap-5 text-xl md:min-w-[40%]">
-          <p className="font-extrabold text-blue-001">{infoDate}</p>
+          <p className="font-extrabold text-blue-001">
+            {order?.advicedAt.replace("T", " ").slice(0, 16)}
+          </p>
           <p>상담을 위해 연락 드리겠습니다</p>
           <div></div>
           <p>감사합니다</p>

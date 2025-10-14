@@ -3,7 +3,7 @@ import type { OrderData, OrderSliceState } from "../types/order";
 const initialState: OrderSliceState = { data: null };
 
 const orderSlice = createSlice({
-  name: "user",
+  name: "order",
   initialState,
   reducers: {
     subscription: (state, action: PayloadAction<OrderData>) => {

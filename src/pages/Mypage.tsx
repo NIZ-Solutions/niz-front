@@ -33,7 +33,7 @@ export default function Mypage() {
       resGetMypage.axiosData();
     }
     if (resGetMypage.status === "Success" && resGetMypage.responseData) {
-      setUserInfo(resGetMypage.responseData.data);
+      setUserInfo(resGetMypage.responseData);
       console.log(userInfo);
     }
     if (resGetMypage.status === "Refresh") {
