@@ -67,6 +67,8 @@ export default function SubscriptionLoading() {
       navigate("/subscription/complete", { replace: true });
     } else if (resSubComplete.status === "Error") {
       navigate("/");
+    } else if (resSubComplete.status === "Refresh") {
+      resSubComplete.axiosData();
     }
   }, [resSubComplete.status, resSubComplete.responseData, dispatch, navigate]);
 

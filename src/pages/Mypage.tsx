@@ -1,11 +1,49 @@
-import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClipboard } from "@fortawesome/free-regular-svg-icons";
+import { useEffect, useState } from "react";
+import useAxios from "../hooks/useAxios";
+import { getMypage } from "../api/user/userAxios";
+import { useAppSelector } from "../hooks/useSelector";
 
 export default function Mypage() {
-  const name = "박미현";
-  const money = "5000";
-  const textMoney = money.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+  const user = useAppSelector((state) => state.user).data;
+  const [userInfo, setUserInfo] = useState([
+    {
+      id: "1",
+      paymentId: "pay_1234567890",
+      userId: "1",
+      amount: 10000,
+      status: "PAID",
+      advicedAt: "2025-10-20T15:00:00.000Z",
+      name: "홍길동",
+      phone: "01012345678",
+      email: "user@example.com",
+      otherText:
+        "추가 요청사항입니다. 추가 요청사항입니다. 추가 요청사항입니다. 추가 요청사항입니다. 추가 요청사항입니다. 추가 요청사항입니다. 추가 요청사항입니다. 추가 요청사항입니다. 추가 요청사항입니다. 추가 요청사항입니다. 추가 요청사항입니다. 추가 요청사항입니다. 추가 요청사항입니다. 추가 요청사항입니다. 추가 요청사항입니다. 추가 요청사항입니다. ",
+      createdAt: "2025-10-07T12:34:56.000Z",
+    },
+  ]);
+  const resGetMypage = useAxios(
+    () => getMypage(user?.accessToken!),
+    [user?.refreshToken],
+    true,
+  );
+
+  useEffect(() => {
+    console.log("resGetMypage.status:", resGetMypage.status);
+    if (resGetMypage.status === "Idle") {
+      resGetMypage.axiosData();
+    }
+    if (resGetMypage.status === "Success" && resGetMypage.responseData) {
+      setUserInfo(resGetMypage.responseData.data);
+      console.log(userInfo);
+    }
+    if (resGetMypage.status === "Refresh") {
+      resGetMypage.axiosData();
+    }
+    if (resGetMypage.status === "Error") {
+      return;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [resGetMypage.status, resGetMypage.responseData]);
 
   return (
     <div className="flex min-h-screen w-full flex-col overflow-auto text-black-000 dark:text-gray-001">
@@ -39,33 +77,56 @@ export default function Mypage() {
         <h1 className="mr-auto text-4xl font-extrabold leading-[50px] md:mr-0 md:min-w-[50%] dark:text-white-000">
           신청내역
         </h1>
-        <p className="pb-5 text-sm text-gray-003 dark:text-gray-001">
+        <p className="pb-10 text-sm text-gray-003 dark:text-gray-001">
           상담 변경은 고객센터를 통해 부탁드립니다.
         </p>
-        {/* 신청내역 리스트*/}
-        <div className="flex flex-col gap-12 md:text-left">
-          <div className="flex flex-col gap-1">
-            <div className="flex flex-row text-lg">
-              <p className="font-medium">상태 :&nbsp;</p>
-              <p className="font-semibold text-blue-001">상담 진행 완료</p>
-            </div>
-            <div className="flex flex-row text-lg font-medium">
-              <p className="">주문번호 :&nbsp;</p>
-              <p className="">EsTMGzIeLH</p>
-            </div>
-            <div className="dark:bg-gray-005 relative mt-2 flex flex-col gap-2 rounded-lg bg-gray-000 p-5 md:text-left">
-              <p className="">이름 :&nbsp;{name}</p>
-              <p className="">이메일 주소 :&nbsp;pmh3853@naver.com</p>
-              <p className="">연락처 :&nbsp;010-4104-3853</p>
-              <p className="">아이디어 분류 :&nbsp;의료기기</p>
-              <p className="">
-                기타 요청사항 및 전달사항 :&nbsp;
-                <br />뭐 이렇게 해주시고 저렇게해주시고 이런이런 아이디어가
-                있는데 이건 이렇게 ㅐ주실수있는지 궁금하고 이걸
-                이렇게해주십사...
-              </p>
-            </div>
-          </div>
+        <div className="flex flex-col gap-16 md:text-left">
+          {userInfo.length === 0 ? (
+            <p className="text-gray-003 dark:text-gray-001">
+              신청 내역이 없습니다.
+            </p>
+          ) : (
+            userInfo.map((info) => (
+              <div key={info.id} className="flex flex-col gap-1">
+                <div className="flex flex-row text-lg">
+                  <p className="font-medium">상태 :&nbsp;</p>
+                  <p className="font-semibold text-blue-001">
+                    {info.status === "PAID" ? "결제 완료" : info.status}
+                  </p>
+                </div>
+                <div className="flex flex-row text-lg font-medium">
+                  <p>주문번호 :&nbsp;</p>
+                  <p>{info.paymentId}</p>
+                </div>
+                <div className="dark:bg-gray-005 relative mt-2 flex flex-col gap-2 rounded-lg bg-gray-000 p-5 md:text-left">
+                  <p>
+                    <p className="inline font-medium">상담시간 :</p>&nbsp;
+                    {info.advicedAt.replace("T", " ").slice(0, 16)}
+                  </p>
+                  <p>
+                    <p className="inline font-medium">이름 :</p>&nbsp;
+                    {info.name}
+                  </p>
+                  <p>
+                    <p className="inline font-medium">이메일 주소 :</p>&nbsp;
+                    {info.email}
+                  </p>
+                  <p>
+                    <p className="inline font-medium">연락처 :</p>&nbsp;
+                    {info.phone}
+                  </p>
+                  {info.otherText && (
+                    <p>
+                      <p className="inline font-medium">
+                        기타 요청사항 및 전달사항 :
+                      </p>
+                      &nbsp;{info.otherText}
+                    </p>
+                  )}
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>
