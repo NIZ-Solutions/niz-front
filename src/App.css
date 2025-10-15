@@ -23,9 +23,19 @@
   display: none;
 }
 
+/* html {
+  overflow: hidden;
+  height: 100%;
+}
+
 body {
-  background-color: #ffffff;
-  color: #232121;
+  overflow: auto;
+  height: 100%
+} */
+
+body {
+  background-color: #232121;
+  color: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {

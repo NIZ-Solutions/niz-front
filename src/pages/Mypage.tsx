@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useAxios from "../hooks/useAxios";
 import { getMypage } from "../api/user/userAxios";
 import { useAppSelector } from "../hooks/useSelector";
+import Footer from "../components/layout/Footer";
 
 export default function Mypage() {
   const user = useAppSelector((state) => state.user).data;
@@ -46,9 +47,10 @@ export default function Mypage() {
   }, [resGetMypage.status, resGetMypage.responseData]);
 
   return (
-    <div className="flex min-h-screen w-full flex-col overflow-auto text-black-000 dark:text-gray-001">
-      {/* 내 정보 컨테이너 */}
-      {/* <div className="flex min-h-fit w-full min-w-[280px] max-w-screen-lg flex-col justify-center gap-3 self-center px-7 pt-[120px] md:mb-auto md:h-fit md:justify-start md:text-center">
+    <>
+      <div className="flex min-h-screen w-full flex-col overflow-auto text-black-000 dark:text-gray-001">
+        {/* 내 정보 컨테이너 */}
+        {/* <div className="flex min-h-fit w-full min-w-[280px] max-w-screen-lg flex-col justify-center gap-3 self-center px-7 pt-[120px] md:mb-auto md:h-fit md:justify-start md:text-center">
         <h1 className="text-4xl font-extrabold leading-[50px] md:mr-0 md:min-w-[50%]">
           내 정보
         </h1>
@@ -58,7 +60,7 @@ export default function Mypage() {
           <p className="inline text-blue-001">&nbsp;원</p>
         </p>
         // {/* 계좌 정보 컨테이너 */}
-      {/* <div className="relative flex flex-col gap-5 rounded-lg bg-gray-000 p-5 text-gray-003 md:text-left">
+        {/* <div className="relative flex flex-col gap-5 rounded-lg bg-gray-000 p-5 text-gray-003 md:text-left">
           <h1 className="">{name}님 충전 가상계좌 안내</h1>
           <p className="text-xl font-medium">
             하나은행 <br />
@@ -72,63 +74,65 @@ export default function Mypage() {
           />
         </div>
       </div>  */}
-      {/* 신청내역 컨테이너 */}
-      <div className="flex min-h-fit w-full min-w-[280px] max-w-screen-lg flex-col justify-center gap-3 self-center px-7 pb-[120px] pt-[120px] md:min-h-screen md:justify-start md:overflow-scroll md:overflow-x-hidden md:text-center">
-        <h1 className="mr-auto text-4xl font-extrabold leading-[50px] md:mr-0 md:min-w-[50%] dark:text-white-000">
-          신청내역
-        </h1>
-        <p className="pb-10 text-sm text-gray-003 dark:text-gray-001">
-          상담 변경은 고객센터를 통해 부탁드립니다.
-        </p>
-        <div className="flex flex-col gap-16 md:text-left">
-          {userInfo.length === 0 ? (
-            <p className="text-gray-003 dark:text-gray-001">
-              신청 내역이 없습니다.
-            </p>
-          ) : (
-            userInfo.map((info) => (
-              <div key={info.id} className="flex flex-col gap-1">
-                <div className="flex flex-row text-lg">
-                  <p className="font-medium">상태 :&nbsp;</p>
-                  <p className="font-semibold text-blue-001">
-                    {info.status === "PAID" ? "결제 완료" : info.status}
-                  </p>
-                </div>
-                <div className="flex flex-row text-lg font-medium">
-                  <p>주문번호 :&nbsp;</p>
-                  <p>{info.paymentId}</p>
-                </div>
-                <div className="dark:bg-gray-005 relative mt-2 flex flex-col gap-2 rounded-lg bg-gray-000 p-5 md:text-left">
-                  <p>
-                    <p className="inline font-medium">상담시간 :</p>&nbsp;
-                    {info.advicedAt.replace("T", " ").slice(0, 16)}
-                  </p>
-                  <p>
-                    <p className="inline font-medium">이름 :</p>&nbsp;
-                    {info.name}
-                  </p>
-                  <p>
-                    <p className="inline font-medium">이메일 주소 :</p>&nbsp;
-                    {info.email}
-                  </p>
-                  <p>
-                    <p className="inline font-medium">연락처 :</p>&nbsp;
-                    {info.phone}
-                  </p>
-                  {info.otherText && (
-                    <p>
-                      <p className="inline font-medium">
-                        기타 요청사항 및 전달사항 :
-                      </p>
-                      &nbsp;{info.otherText}
+        {/* 신청내역 컨테이너 */}
+        <div className="flex min-h-fit w-full min-w-[280px] max-w-screen-lg flex-col justify-center gap-3 self-center px-7 pb-[120px] pt-[120px] md:min-h-screen md:justify-start md:overflow-scroll md:overflow-x-hidden md:text-center">
+          <h1 className="mr-auto text-4xl font-extrabold leading-[50px] md:mr-0 md:min-w-[50%] dark:text-white-000">
+            신청내역
+          </h1>
+          <p className="pb-10 text-sm text-gray-003 dark:text-gray-001">
+            상담 변경은 고객센터를 통해 부탁드립니다.
+          </p>
+          <div className="flex flex-col gap-16 md:text-left">
+            {userInfo.length === 0 ? (
+              <p className="text-gray-003 dark:text-gray-001">
+                신청 내역이 없습니다.
+              </p>
+            ) : (
+              userInfo.map((info) => (
+                <div key={info.id} className="flex flex-col gap-1">
+                  <div className="flex flex-row text-lg">
+                    <p className="font-medium">상태 :&nbsp;</p>
+                    <p className="font-semibold text-blue-001">
+                      {info.status === "PAID" ? "결제 완료" : info.status}
                     </p>
-                  )}
+                  </div>
+                  <div className="flex flex-row text-lg font-medium">
+                    <p>주문번호 :&nbsp;</p>
+                    <p>{info.paymentId}</p>
+                  </div>
+                  <div className="dark:bg-gray-005 relative mt-2 flex flex-col gap-2 rounded-lg bg-gray-000 p-5 md:text-left">
+                    <p>
+                      <p className="inline font-medium">상담시간 :</p>&nbsp;
+                      {info.advicedAt.replace("T", " ").slice(0, 16)}
+                    </p>
+                    <p>
+                      <p className="inline font-medium">이름 :</p>&nbsp;
+                      {info.name}
+                    </p>
+                    <p>
+                      <p className="inline font-medium">이메일 주소 :</p>&nbsp;
+                      {info.email}
+                    </p>
+                    <p>
+                      <p className="inline font-medium">연락처 :</p>&nbsp;
+                      {info.phone}
+                    </p>
+                    {info.otherText && (
+                      <p>
+                        <p className="inline font-medium">
+                          기타 요청사항 및 전달사항 :
+                        </p>
+                        &nbsp;{info.otherText}
+                      </p>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))
-          )}
+              ))
+            )}
+          </div>
         </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }

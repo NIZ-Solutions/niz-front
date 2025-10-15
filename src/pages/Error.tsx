@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Footer from "../components/layout/Footer";
 
 export default function Error() {
   return (
@@ -14,6 +15,7 @@ export default function Error() {
           메인으로
         </Link>
       </div>
+      <Footer />
     </>
   );
 }

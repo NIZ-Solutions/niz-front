@@ -25,34 +25,39 @@ export default function Submit() {
   };
 
   return (
-    <div className="flex min-h-screen w-full max-w-screen-lg snap-center snap-always flex-col items-center justify-center gap-8 px-7 pt-[60px] text-center md:flex-row md:justify-between lg:px-0">
-      <div className="flex flex-col gap-6 md:min-w-[40%]">
+    <div className="flex min-h-[100svh] w-full max-w-screen-lg snap-center snap-always flex-col items-center justify-center gap-8 px-7 pt-[60px] text-center md:flex-row md:justify-between lg:px-0">
+      <div className="flex flex-col gap-6 text-white drop-shadow-lg md:min-w-[40%]">
         <h1 className="text-4xl font-extrabold leading-[50px]">
           감이 아닌,
           <br />
           이제는 확신할 때
         </h1>
-        <h2 className="font-medium">
+        <h2 className="text-base font-medium md:text-lg">
           당신의 아이디어가 현실이 되도록,
           <br />
-          <p className="inline text-blue-001">단 3일</p>
+          <p className="inline font-semibold text-blue-001">단 3일</p>
           만에 시장의 답을 보여드립니다.
         </h2>
       </div>
       <form className="submit flex h-fit w-full min-w-[280px] flex-col gap-6 md:max-w-[50%]">
-        <div className="min-h-[15svh] w-full animate-border content-center rounded-xl border-2 border-transparent [background:linear-gradient(45deg,#F5F5F5)_padding-box,conic-gradient(from_var(--border-angle),#D0D0D0_50%,_#126DD7_86%,_#0F9AFB_90%,_#126DD7_94%,_#D0D0D0_100%)_border-box]">
-          <div className="rounded-[9px] bg-white-000 p-4 dark:bg-black-000">
-            <textarea
-              id="submit-textarea"
-              className="min-h-[15svh] w-full resize-none bg-transparent placeholder:text-sm placeholder:text-gray-001"
-              placeholder="시장 반응을 확인하고 싶은 아이디어가 있다면 입력해주세요. 아이디어에 대해 구체적으로 설명해 주시면 보다 정확하게 제안 받으실 수 있어요."
-            ></textarea>
-          </div>
+        {/* <div className="min-h-[15svh] w-full animate-border content-center rounded-xl border-[3px] border-transparent [background:linear-gradient(45deg,#F5F5F5)_padding-box,conic-gradient(from_var(--border-angle),#D0D0D0_50%,_#126DD7_86%,_#0F9AFB_90%,_#126DD7_94%,_#D0D0D0_100%)_border-box]"> */}
+        {/* <div className="rounded-[9px] bg-white-000 p-4 dark:bg-black-000"> */}
+        <div className="rounded-[9px] border border-white/20 bg-black/30 p-4 shadow-lg ring-1 ring-black/5 backdrop-blur-md backdrop-saturate-150 supports-[backdrop-filter]:backdrop-blur-md">
+          <textarea
+            id="submit-textarea"
+            className="min-h-[15svh] w-full resize-none bg-transparent placeholder:font-light placeholder:text-white placeholder:dark:text-gray-001"
+            placeholder="시장 반응을 확인하고 싶은 아이디어가 있다면 입력해주세요. 아이디어에 대해 구체적으로 설명해 주시면 보다 정확하게 제안 받으실 수 있어요."
+          ></textarea>
         </div>
-        <button
+        {/* <button
           type="button"
           onClick={handleSubscription}
           className="w-full rounded-lg bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#126DD7] to-[#0F9AFB] py-3 text-xl font-extrabold text-white-000"
+        > */}
+        <button
+          type="button"
+          onClick={handleSubscription}
+          className="w-full rounded-lg border border-white/20 bg-black/30 py-3 text-xl font-extrabold text-white-000 shadow-lg ring-1 ring-black/5 backdrop-blur-md backdrop-saturate-150 supports-[backdrop-filter]:backdrop-blur-md"
         >
           신청하기
         </button>

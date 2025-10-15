@@ -9,6 +9,7 @@ import { ReactComponent as KakaoLogo } from "../assets/kakao-logo.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import BalloonLogo from "../assets/logo-balloon-padding.png";
+import Footer from "../components/layout/Footer";
 
 export default function Login() {
   const [id, setId] = useState<string>("");
@@ -190,6 +191,7 @@ export default function Login() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

@@ -9,6 +9,7 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import BalloonLogo from "../assets/logo-balloon-padding.png";
 import useModal from "../hooks/useModal";
+import Footer from "../components/layout/Footer";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -261,176 +262,179 @@ export default function Signup() {
   ];
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center px-7 text-black-000 dark:text-white-000">
-      <div className="flex max-h-fit w-full min-w-[280px] max-w-screen-lg flex-col items-center justify-center gap-12 self-center pb-[100px] pt-[140px] md:flex-row md:items-start md:justify-between md:text-center lg:px-0">
-        {/* 회원가입 타이틀 */}
-        <div className="flex max-h-screen w-fit flex-col items-center justify-start gap-12 md:max-w-[45%] md:items-center">
-          <h1 className="mr-auto text-4xl font-extrabold leading-[50px] md:mr-0 md:hidden">
-            회원가입
-          </h1>
-          <img
-            alt="로고"
-            src={BalloonLogo}
-            className="hidden w-[80%] md:mb-auto md:block"
-          />
-        </div>
-        <div className="flex w-full flex-col items-center gap-4 md:max-w-[45%]">
-          <form className="flex h-fit w-full min-w-[280px] flex-col gap-8">
-            <div className="flex flex-col gap-6">
-              <input
-                id="name_Input"
-                className="bg-transparent sign-input"
-                type="text"
-                onChange={(e) => setName(e.target.value)}
-                placeholder="이름"
-                autoFocus
-              />
-              <input
-                id="phone_Input"
-                className="bg-transparent sign-input"
-                type="text"
-                onChange={(e) => setPhone(e.target.value)}
-                placeholder="연락처"
-                onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  handlePhoneHyphen(e.target.value)
-                }
-              />
-              <input
-                id="id_Input"
-                className="w-full bg-transparent sign-input"
-                type="text"
-                defaultValue={id}
-                onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  handleOnInput(e.target.value, 10, "ID")
-                }
-                onChange={(e) => setId(e.target.value)}
-                placeholder="아이디"
-              />
-              <div>
-                <div
-                  id="password"
-                  className="relative border-b-[1.5px] border-gray-001 py-[6px] text-xl focus-within:border-blue-001 focus:border-blue-001"
-                >
-                  <input
-                    id="pw_Input"
-                    className="w-full bg-transparent"
-                    type={passwordVisible.type}
-                    onChange={(e) => {
-                      setPassword(e.target.value);
-                      isSamePassword(e.target.value);
-                    }}
-                    onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      handleOnInput(e.target.value, 16, "PW")
-                    }
-                    placeholder="패스워드"
-                  />
-                  <span
-                    className="absolute bottom-[6px] right-[10px] text-gray-002"
-                    onClick={handlePasswordVisible}
-                  >
-                    {passwordVisible.visible ? (
-                      <FontAwesomeIcon icon={faEye} />
-                    ) : (
-                      <FontAwesomeIcon icon={faEyeSlash} />
-                    )}
-                  </span>
-                </div>
-                <div
-                  id="inco-Message"
-                  className="hidden pt-2 text-left text-xs text-red-000"
-                >
-                  최소 8자의 영문, 숫자, 특수문자를 입력해주세요.
-                </div>
-              </div>
-              <div>
-                <div
-                  id="check-password"
-                  className="relative border-b-[1.5px] border-gray-001 py-[6px] text-xl focus-within:border-blue-001 focus:border-blue-001"
-                >
-                  <input
-                    id="check-password-Input"
-                    className="w-full bg-transparent"
-                    type={passwordCheckVisible.type}
-                    onChange={(e) => {
-                      setPasswordCheck(e.target.value);
-                      isSamePassword(e.target.value);
-                    }}
-                    placeholder="패스워드 확인"
-                  />
-                  <span
-                    className="absolute bottom-[6px] right-[10px] text-gray-002"
-                    onClick={handlePasswordCheckVisible}
-                  >
-                    {passwordCheckVisible.visible ? (
-                      <FontAwesomeIcon icon={faEye} />
-                    ) : (
-                      <FontAwesomeIcon icon={faEyeSlash} />
-                    )}
-                  </span>
-                </div>
-                <div
-                  id="inco-checkpw-Message"
-                  className="hidden pt-2 text-left text-xs text-red-000"
-                >
-                  비밀번호와 비밀번호 확인이 일치하지 않습니다.
-                </div>
-              </div>
-            </div>
-            {/* 약관 */}
-            <div className="flex flex-col gap-3 text-gray-002">
-              {termArr.map((termObj) => (
+    <>
+      <div className="flex min-h-screen w-full flex-col items-center px-7 text-black-000 dark:text-white-000">
+        <div className="flex max-h-fit w-full min-w-[280px] max-w-screen-lg flex-col items-center justify-center gap-12 self-center pb-[100px] pt-[140px] md:flex-row md:items-start md:justify-between md:text-center lg:px-0">
+          {/* 회원가입 타이틀 */}
+          <div className="flex max-h-screen w-fit flex-col items-center justify-start gap-12 md:max-w-[45%] md:items-center">
+            <h1 className="mr-auto text-4xl font-extrabold leading-[50px] md:mr-0 md:hidden">
+              회원가입
+            </h1>
+            <img
+              alt="로고"
+              src={BalloonLogo}
+              className="hidden w-[80%] md:mb-auto md:block"
+            />
+          </div>
+          <div className="flex w-full flex-col items-center gap-4 md:max-w-[45%]">
+            <form className="flex h-fit w-full min-w-[280px] flex-col gap-8">
+              <div className="flex flex-col gap-6">
+                <input
+                  id="name_Input"
+                  className="bg-transparent sign-input"
+                  type="text"
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="이름"
+                  autoFocus
+                />
+                <input
+                  id="phone_Input"
+                  className="bg-transparent sign-input"
+                  type="text"
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="연락처"
+                  onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    handlePhoneHyphen(e.target.value)
+                  }
+                />
+                <input
+                  id="id_Input"
+                  className="w-full bg-transparent sign-input"
+                  type="text"
+                  defaultValue={id}
+                  onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    handleOnInput(e.target.value, 10, "ID")
+                  }
+                  onChange={(e) => setId(e.target.value)}
+                  placeholder="아이디"
+                />
                 <div>
-                  <button
-                    type="button"
-                    className="flex flex-row items-center gap-2"
-                    onClick={() => handleTermsCheck(Number(termObj.key))}
-                  >
-                    <FontAwesomeIcon
-                      id={`check-${termObj.key}`}
-                      icon={faCheck}
-                      color="#A0A0A0"
-                    />
-                    <p>{termObj.title}</p>
-                  </button>
                   <div
-                    id={`list-${termObj.key}`}
-                    className="hidden pl-7 pt-1 text-left text-xs"
+                    id="password"
+                    className="relative border-b-[1.5px] border-gray-001 py-[6px] text-xl focus-within:border-blue-001 focus:border-blue-001"
                   >
-                    {termObj.subs.map((el, index) => (
-                      <p key={`term-${termObj.key}-${index}`}>{el}</p>
-                    ))}
+                    <input
+                      id="pw_Input"
+                      className="w-full bg-transparent"
+                      type={passwordVisible.type}
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                        isSamePassword(e.target.value);
+                      }}
+                      onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        handleOnInput(e.target.value, 16, "PW")
+                      }
+                      placeholder="패스워드"
+                    />
+                    <span
+                      className="absolute bottom-[6px] right-[10px] text-gray-002"
+                      onClick={handlePasswordVisible}
+                    >
+                      {passwordVisible.visible ? (
+                        <FontAwesomeIcon icon={faEye} />
+                      ) : (
+                        <FontAwesomeIcon icon={faEyeSlash} />
+                      )}
+                    </span>
+                  </div>
+                  <div
+                    id="inco-Message"
+                    className="hidden pt-2 text-left text-xs text-red-000"
+                  >
+                    최소 8자의 영문, 숫자, 특수문자를 입력해주세요.
                   </div>
                 </div>
-              ))}
-              <button
-                type="button"
-                className="text-left text-gray-001 underline"
-                onClick={() => {
-                  console.log("[click] open terms");
-                  openModal({ type: "terms" }); // 커스텀 훅이면 그대로 호출
-                }}
-              >
-                약관 전체보기
-              </button>
-            </div>
-            {/* 계정 만들기  */}
-            <div className="flex flex-col gap-3 pt-4">
-              <button
-                type="button"
-                id="login_Btn"
-                className="w-full rounded-xl bg-gray-001 py-3 text-xl font-extrabold text-white-000 dark:bg-gray-003"
-                onClick={handleSignup}
-              >
-                계정 만들기
-              </button>
-            </div>
-          </form>
-          {/* 로그인 */}
-          <Link to="/login" className="text-gray-002">
-            이미 계정이 있으신가요 ?
-          </Link>
+                <div>
+                  <div
+                    id="check-password"
+                    className="relative border-b-[1.5px] border-gray-001 py-[6px] text-xl focus-within:border-blue-001 focus:border-blue-001"
+                  >
+                    <input
+                      id="check-password-Input"
+                      className="w-full bg-transparent"
+                      type={passwordCheckVisible.type}
+                      onChange={(e) => {
+                        setPasswordCheck(e.target.value);
+                        isSamePassword(e.target.value);
+                      }}
+                      placeholder="패스워드 확인"
+                    />
+                    <span
+                      className="absolute bottom-[6px] right-[10px] text-gray-002"
+                      onClick={handlePasswordCheckVisible}
+                    >
+                      {passwordCheckVisible.visible ? (
+                        <FontAwesomeIcon icon={faEye} />
+                      ) : (
+                        <FontAwesomeIcon icon={faEyeSlash} />
+                      )}
+                    </span>
+                  </div>
+                  <div
+                    id="inco-checkpw-Message"
+                    className="hidden pt-2 text-left text-xs text-red-000"
+                  >
+                    비밀번호와 비밀번호 확인이 일치하지 않습니다.
+                  </div>
+                </div>
+              </div>
+              {/* 약관 */}
+              <div className="flex flex-col gap-3 text-gray-002">
+                {termArr.map((termObj) => (
+                  <div>
+                    <button
+                      type="button"
+                      className="flex flex-row items-center gap-2"
+                      onClick={() => handleTermsCheck(Number(termObj.key))}
+                    >
+                      <FontAwesomeIcon
+                        id={`check-${termObj.key}`}
+                        icon={faCheck}
+                        color="#A0A0A0"
+                      />
+                      <p>{termObj.title}</p>
+                    </button>
+                    <div
+                      id={`list-${termObj.key}`}
+                      className="hidden pl-7 pt-1 text-left text-xs"
+                    >
+                      {termObj.subs.map((el, index) => (
+                        <p key={`term-${termObj.key}-${index}`}>{el}</p>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+                <button
+                  type="button"
+                  className="text-left text-gray-001 underline"
+                  onClick={() => {
+                    console.log("[click] open terms");
+                    openModal({ type: "terms" }); // 커스텀 훅이면 그대로 호출
+                  }}
+                >
+                  약관 전체보기
+                </button>
+              </div>
+              {/* 계정 만들기  */}
+              <div className="flex flex-col gap-3 pt-4">
+                <button
+                  type="button"
+                  id="login_Btn"
+                  className="w-full rounded-xl bg-gray-001 py-3 text-xl font-extrabold text-white-000 dark:bg-gray-003"
+                  onClick={handleSignup}
+                >
+                  계정 만들기
+                </button>
+              </div>
+            </form>
+            {/* 로그인 */}
+            <Link to="/login" className="text-gray-002">
+              이미 계정이 있으신가요 ?
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }

@@ -25,7 +25,7 @@ const GradientLineChart: React.FC<GradientLineChartProps> = ({
   labels = ["", "", "", "", "", ""],
   data = [50, 55, 80, 81, 54, 50],
   label = "Custom Label Name",
-  borderColor = "#126DD7",
+  borderColor = "rgba(77, 139, 210, 0.25)",
   textColor = "#FFFFFF",
   tickColor,
   gridColor = "rgba(255, 255, 255, 0.1)",
@@ -53,8 +53,8 @@ const GradientLineChart: React.FC<GradientLineChartProps> = ({
       canvas.height = Math.floor(width * 0.5 * ratio);
 
       const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-      gradient.addColorStop(0, "rgba(18,109,215,0.5)");
-      gradient.addColorStop(0.5, "rgba(18,109,215,0.25)");
+      gradient.addColorStop(0, "rgba(255, 255, 255, 0.6)");
+      gradient.addColorStop(0.5, "rgba(255, 255, 255, 0.2)");
       gradient.addColorStop(1, "rgba(18,109,215,0)");
 
       chartRef.current?.destroy();
@@ -74,7 +74,7 @@ const GradientLineChart: React.FC<GradientLineChartProps> = ({
               backgroundColor: gradient,
               borderColor,
               borderWidth: 1,
-              pointBackgroundColor: "white",
+              // pointBackgroundColor: "white",
               fill: true,
               tension: 0.4,
             },

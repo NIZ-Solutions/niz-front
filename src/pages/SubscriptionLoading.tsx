@@ -5,6 +5,7 @@ import { subscriptionComplete } from "../store/orderSlice";
 import useAxios from "../hooks/useAxios";
 import { postPaymoentsComplete } from "../api/user/subAxios";
 import { useAppSelector } from "../hooks/useSelector";
+import Footer from "../components/layout/Footer";
 
 export default function SubscriptionLoading() {
   const user = useAppSelector((state) => state.user).data;
@@ -89,6 +90,7 @@ export default function SubscriptionLoading() {
           Processing...
         </button>
       </div>
+      <Footer />
     </>
   );
 }

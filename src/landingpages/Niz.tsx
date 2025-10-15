@@ -1,3 +1,4 @@
+import Footer from "../components/layout/Footer";
 import Intro from "../main/Intro";
 
 export default function Niz() {
@@ -56,6 +57,7 @@ export default function Niz() {
           NIZ 시장검증 시작하기
         </button>
       </div>
+      <Footer />
     </div>
   );
 }
