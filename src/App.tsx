@@ -13,11 +13,11 @@ import Error from "./pages/Error";
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <ErrorBoundary fallback={<Error />}>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
             <Modal />
-            <ScrollToTop />
             <Nav />
             <Router />
           </PersistGate>
