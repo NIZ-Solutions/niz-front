@@ -263,7 +263,7 @@ export default function Signup() {
 
   return (
     <>
-      <div className="flex min-h-screen w-full flex-col items-center px-7 text-black-000 dark:text-white-000">
+      <div className="flex min-h-screen w-full flex-col items-center px-7 text-white-000">
         <div className="flex max-h-fit w-full min-w-[280px] max-w-screen-lg flex-col items-center justify-center gap-12 self-center pb-[100px] pt-[140px] md:flex-row md:items-start md:justify-between md:text-center lg:px-0">
           {/* 회원가입 타이틀 */}
           <div className="flex max-h-screen w-fit flex-col items-center justify-start gap-12 md:max-w-[45%] md:items-center">
@@ -420,7 +420,7 @@ export default function Signup() {
                 <button
                   type="button"
                   id="login_Btn"
-                  className="w-full rounded-xl bg-gray-001 py-3 text-xl font-extrabold text-white-000 dark:bg-gray-003"
+                  className="w-full rounded-xl bg-gray-003 py-3 text-xl font-extrabold text-white-000"
                   onClick={handleSignup}
                 >
                   계정 만들기

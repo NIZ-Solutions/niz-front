@@ -110,7 +110,7 @@ export default function Login() {
 
   return (
     <>
-      <div className="flex w-full flex-col items-center px-7 text-black-000 dark:text-white">
+      <div className="flex w-full flex-col items-center px-7 text-white">
         <div className="flex min-h-screen w-full min-w-[280px] max-w-screen-lg flex-col items-center justify-center gap-12 self-center pb-[100px] pt-[140px] md:flex-row md:items-center md:justify-between md:text-center lg:px-0">
           {/* 로그인 타이틀 */}
           <div className="flex max-h-screen w-fit flex-col items-center justify-start gap-12 md:max-w-[45%] md:items-center">
@@ -168,7 +168,7 @@ export default function Login() {
               <div className="flex flex-col gap-3">
                 <button
                   id="login_Btn"
-                  className="w-full rounded-xl bg-gray-001 py-3 text-xl font-extrabold text-white-000 dark:bg-gray-003"
+                  className="w-full rounded-xl bg-gray-003 py-3 text-xl font-extrabold text-white-000"
                   onClick={handleLogin}
                 >
                   로그인

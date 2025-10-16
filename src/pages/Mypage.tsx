@@ -48,7 +48,7 @@ export default function Mypage() {
 
   return (
     <>
-      <div className="flex min-h-screen w-full flex-col overflow-auto text-black-000 dark:text-gray-001">
+      <div className="flex min-h-screen w-full flex-col overflow-auto text-gray-001">
         {/* 내 정보 컨테이너 */}
         {/* <div className="flex min-h-fit w-full min-w-[280px] max-w-screen-lg flex-col justify-center gap-3 self-center px-7 pt-[120px] md:mb-auto md:h-fit md:justify-start md:text-center">
         <h1 className="text-4xl font-extrabold leading-[50px] md:mr-0 md:min-w-[50%]">
@@ -76,17 +76,15 @@ export default function Mypage() {
       </div>  */}
         {/* 신청내역 컨테이너 */}
         <div className="flex min-h-fit w-full min-w-[280px] max-w-screen-lg flex-col justify-center gap-3 self-center px-7 pb-[120px] pt-[120px] md:min-h-screen md:justify-start md:overflow-scroll md:overflow-x-hidden md:text-center">
-          <h1 className="mr-auto text-4xl font-extrabold leading-[50px] md:mr-0 md:min-w-[50%] dark:text-white-000">
+          <h1 className="mr-auto text-4xl font-extrabold leading-[50px] text-white-000 md:mr-0 md:min-w-[50%]">
             신청내역
           </h1>
-          <p className="pb-10 text-sm text-gray-003 dark:text-gray-001">
+          <p className="pb-10 text-sm text-gray-001">
             상담 변경은 고객센터를 통해 부탁드립니다.
           </p>
           <div className="flex flex-col gap-16 md:text-left">
             {userInfo.length === 0 ? (
-              <p className="text-gray-003 dark:text-gray-001">
-                신청 내역이 없습니다.
-              </p>
+              <p className="text-gray-001">신청 내역이 없습니다.</p>
             ) : (
               userInfo.map((info) => (
                 <div key={info.id} className="flex flex-col gap-1">
@@ -100,7 +98,7 @@ export default function Mypage() {
                     <p>주문번호 :&nbsp;</p>
                     <p>{info.paymentId}</p>
                   </div>
-                  <div className="dark:bg-gray-005 relative mt-2 flex flex-col gap-2 rounded-lg bg-gray-000 p-5 md:text-left">
+                  <div className="bg-gray-005 relative mt-2 flex flex-col gap-2 rounded-lg p-5 md:text-left">
                     <p>
                       <p className="inline font-medium">상담시간 :</p>&nbsp;
                       {info.advicedAt.replace("T", " ").slice(0, 16)}

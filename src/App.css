@@ -222,3 +222,23 @@ html.snap-y {
   scroll-snap-align: start;
   scroll-snap-stop: always;
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: #000;
+  -webkit-box-shadow: 0 0 0px 1000px #232121 inset;
+  box-shadow: 0 0 0px 1000px #232121 inset;
+  transition: #fff 5000s ease-in-out 0s;
+}
+
+input:autofill,
+input:autofill:hover,
+input:autofill:focus,
+input:autofill:active {
+  -webkit-text-fill-color: #fff;
+  -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+  box-shadow: 0 0 0px 1000px #232121 inset;
+  transition: #fff 5000s ease-in-out 0s;
+}
