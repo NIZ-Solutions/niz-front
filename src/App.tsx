@@ -1,5 +1,4 @@
 import { BrowserRouter, useLocation } from "react-router-dom";
-import Analytics from "./api/ga4/setAnalytics";
 import Router from "./router/router";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -16,11 +15,20 @@ function App() {
     <>
       <svg xmlns="http://www.w3.org/2000/svg" className="hidden">
         <defs>
-          <filter id="goo">
+          <filter
+            id="goo"
+            color-interpolation-filters="sRGB"
+            filterUnits="userSpaceOnUse"
+            x="-2000"
+            y="-2000"
+            width="8000"
+            height="8000"
+          >
             <feGaussianBlur
               in="SourceGraphic"
               stdDeviation="10"
               result="blur"
+              edgeMode="duplicate"
             />
             <feColorMatrix
               in="blur"
