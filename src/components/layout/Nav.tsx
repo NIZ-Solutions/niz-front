@@ -44,8 +44,8 @@ export default function Nav() {
         <></>
       ) : (
         <nav className="fixed inset-x-0 top-0 z-50">
-          <div className="flex w-screen justify-center border border-white/10 bg-black/30 shadow-lg ring-1 ring-black/5 backdrop-blur-md backdrop-saturate-150 supports-[backdrop-filter]:backdrop-blur-md">
-            <div className="flex min-h-[60px] w-full max-w-screen-lg flex-row items-center justify-between px-4">
+          <div className="navbar-container flex w-screen justify-center border border-white/10 bg-black/30 shadow-lg ring-1 ring-black/5 backdrop-blur-md backdrop-saturate-150 supports-[backdrop-filter]:backdrop-blur-md">
+            <div className="navbar flex w-full max-w-screen-lg flex-row items-center justify-between px-4">
               {/* 로고 */}
               <Link to="/" className="flex items-center gap-2">
                 <img className="w-[30px]" src={HeaderLogo} alt="logo" />

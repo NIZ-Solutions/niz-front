@@ -10,9 +10,11 @@ module.exports = {
       },
       keyframes: {
         moveInCircle: {
-          "0%": { transform: "rotate(0deg)" },
-          "50%": { transform: "rotate(180deg)" },
-          "100%": { transform: "rotate(360deg)" },
+          "0%": { transform: "rotate(0deg) translateX(6%) rotate(0deg)" },
+          "50%": { transform: "rotate(180deg) translateX(6%) rotate(-180deg)" },
+          "100%": {
+            transform: "rotate(360deg) translateX(6%) rotate(-360deg)",
+          },
         },
         moveVertical: {
           "0%": { transform: "translateY(-50%)" },
@@ -20,9 +22,9 @@ module.exports = {
           "100%": { transform: "translateY(-50%)" },
         },
         moveHorizontal: {
-          "0%": { transform: "translateX(-50%) translateY(-10%)" },
-          "50%": { transform: "translateX(50%) translateY(10%)" },
-          "100%": { transform: "translateX(-50%) translateY(-10%)" },
+          "0%": { transform: "translateY(-35%)" },
+          "50%": { transform: "translateY(35%)" },
+          "100%": { transform: "translateY(-35%)" },
         },
         border: {
           to: { "--border-angle": "360deg" },
