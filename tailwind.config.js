@@ -17,14 +17,14 @@ module.exports = {
           },
         },
         moveVertical: {
-          "0%": { transform: "translateY(-50%)" },
-          "50%": { transform: "translateY(50%)" },
-          "100%": { transform: "translateY(-50%)" },
+          "00%": { transform: "translateY(-40%)" },
+          "50%": { transform: "translateY(40%)" },
+          "100%": { transform: "translateY(-40%)" },
         },
         moveHorizontal: {
-          "0%": { transform: "translateY(-35%)" },
-          "50%": { transform: "translateY(35%)" },
-          "100%": { transform: "translateY(-35%)" },
+          "0%": { transform: "translateX(35%)" },
+          "65%": { transform: "translateX(-35%)" },
+          "100%": { transform: "translateX(35%)" },
         },
         border: {
           to: { "--border-angle": "360deg" },
@@ -91,6 +91,10 @@ module.exports = {
         },
         ".sign-input": {
           "@apply border-b-[1.5px] border-gray-001 py-[6px] text-xl focus:border-blue-001":
+            "",
+        },
+        ".back-glass": {
+          "@apply glowing-border rounded-lg border-2 bg-black/5 shadow-lg ring-1 ring-black/5 backdrop-blur-md backdrop-saturate-150 supports-[backdrop-filter]:backdrop-blur-md":
             "",
         },
       });

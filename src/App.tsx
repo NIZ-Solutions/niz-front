@@ -9,21 +9,14 @@ import "./App.css";
 import ScrollToTop from "./components/ScrollToTop";
 import { ErrorBoundary } from "react-error-boundary";
 import Error from "./pages/Error";
+import BackgroundPortal from "./components/BackgroundLayerPortal";
 
 function App() {
   return (
     <>
       <svg xmlns="http://www.w3.org/2000/svg" className="hidden">
         <defs>
-          <filter
-            id="goo"
-            color-interpolation-filters="sRGB"
-            filterUnits="userSpaceOnUse"
-            x="-2000"
-            y="-2000"
-            width="8000"
-            height="8000"
-          >
+          <filter id="goo">
             <feGaussianBlur
               in="SourceGraphic"
               stdDeviation="10"
@@ -37,6 +30,8 @@ function App() {
               result="goo"
             />
             <feBlend in="SourceGraphic" in2="goo" />
+            <feGaussianBlur in="gooblend" stdDeviation="40" result="final" />
+            <feBlend in="final" in2="final" />
           </filter>
         </defs>
       </svg>
@@ -47,6 +42,7 @@ function App() {
             <PersistGate loading={null} persistor={persistor}>
               <Modal />
               <Nav />
+              <BackgroundPortal />
               <Router />
             </PersistGate>
           </Provider>

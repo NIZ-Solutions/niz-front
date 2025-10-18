@@ -28,17 +28,8 @@ body,
 #root {
   height: 100%;
   background: transparent;
+  -webkit-overflow-scrolling: touch;
 }
-
-/* html {
-  overflow: hidden;
-  height: 100%;
-}
-
-body {
-  overflow: auto;
-  height: 100%
-} */
 
 body {
   background-color: #232121;
@@ -51,10 +42,6 @@ body {
     color: #ffffff;
   }
 }
-
-/* nav {
-  height: env(safe-area-inset-top);
-} */
 
 .navbar-container {
   padding-top: env(safe-area-inset-top);
@@ -231,26 +218,19 @@ html.snap-y {
 
 /* 스냅 대상(인트로 섹션)에 붙일 클래스 */
 .intro-snap {
-  scroll-snap-align: start;
+  scroll-snap-align: center;
   scroll-snap-stop: always;
 }
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-  -webkit-text-fill-color: #000;
-  -webkit-box-shadow: 0 0 0px 1000px #232121 inset;
-  box-shadow: 0 0 0px 1000px #232121 inset;
-  transition: #fff 5000s ease-in-out 0s;
-}
-
+input:-webkit-autofill:active,
 input:autofill,
 input:autofill:hover,
 input:autofill:focus,
 input:autofill:active {
   -webkit-text-fill-color: #fff;
-  -webkit-box-shadow: 0 0 0px 1000px #fff inset;
-  box-shadow: 0 0 0px 1000px #232121 inset;
-  transition: #fff 5000s ease-in-out 0s;
+  -webkit-transition-delay: 9999s;
+  transition-delay: 9999s;
 }
