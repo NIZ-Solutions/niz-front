@@ -10,19 +10,21 @@ module.exports = {
       },
       keyframes: {
         moveInCircle: {
-          "0%": { transform: "rotate(0deg)" },
-          "50%": { transform: "rotate(180deg)" },
-          "100%": { transform: "rotate(360deg)" },
+          "0%": { transform: "rotate(0deg) translateX(6%) rotate(0deg)" },
+          "50%": { transform: "rotate(180deg) translateX(6%) rotate(-180deg)" },
+          "100%": {
+            transform: "rotate(360deg) translateX(6%) rotate(-360deg)",
+          },
         },
         moveVertical: {
-          "0%": { transform: "translateY(-50%)" },
-          "50%": { transform: "translateY(50%)" },
-          "100%": { transform: "translateY(-50%)" },
+          "00%": { transform: "translateY(-40%)" },
+          "50%": { transform: "translateY(40%)" },
+          "100%": { transform: "translateY(-40%)" },
         },
         moveHorizontal: {
-          "0%": { transform: "translateX(-50%) translateY(-10%)" },
-          "50%": { transform: "translateX(50%) translateY(10%)" },
-          "100%": { transform: "translateX(-50%) translateY(-10%)" },
+          "0%": { transform: "translateX(35%)" },
+          "65%": { transform: "translateX(-35%)" },
+          "100%": { transform: "translateX(35%)" },
         },
         border: {
           to: { "--border-angle": "360deg" },
@@ -89,6 +91,10 @@ module.exports = {
         },
         ".sign-input": {
           "@apply border-b-[1.5px] border-gray-001 py-[6px] text-xl focus:border-blue-001":
+            "",
+        },
+        ".back-glass": {
+          "@apply glowing-border rounded-lg border-2 bg-black/5 shadow-lg ring-1 ring-black/5 backdrop-blur-md backdrop-saturate-150 supports-[backdrop-filter]:backdrop-blur-md":
             "",
         },
       });

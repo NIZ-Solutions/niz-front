@@ -110,84 +110,81 @@ export default function Login() {
 
   return (
     <>
-      <div className="flex w-full flex-col items-center px-7 text-white">
-        <div className="flex min-h-screen w-full min-w-[280px] max-w-screen-lg flex-col items-center justify-center gap-12 self-center pb-[100px] pt-[140px] md:flex-row md:items-center md:justify-between md:text-center lg:px-0">
-          {/* 로그인 타이틀 */}
-          <div className="flex max-h-screen w-fit flex-col items-center justify-start gap-12 md:max-w-[45%] md:items-center">
-            <h1 className="mr-auto text-4xl font-extrabold leading-[50px] md:mr-0 md:hidden">
-              로그인
-            </h1>
-            <img
-              alt="로고"
-              src={BalloonLogo}
-              className="hidden w-[80%] md:mb-auto md:block"
-            />
-          </div>
-          {/* 로그인 & 회원가입 컨테이너 */}
-          <div className="flex w-full flex-col items-center gap-12 md:max-w-[45%]">
-            {/* 로그인 컨테이너 */}
-            <form className="flex h-fit w-full min-w-[280px] flex-col gap-12">
-              <div className="flex flex-col gap-6">
-                <input
-                  autoFocus
-                  id="id_Input"
-                  className="first border-b-[1.5px] border-gray-001 bg-transparent py-[6px] text-xl focus:border-blue-001"
-                  type="text"
-                  defaultValue={id}
-                  onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    handleOnInput(e.target.value, 10)
-                  }
-                  placeholder="아이디"
-                />
-                <div
-                  className="first relative border-b-[1.5px] border-gray-001 bg-transparent py-[6px] text-xl focus-within:border-blue-001 focus:border-blue-001"
-                  id="pw_Div"
-                >
+      <div className="flex min-h-screen w-full flex-col items-center justify-center px-7 pt-[60px] text-white">
+        <div className="md:back-glass flex w-full max-w-screen-md flex-col">
+          <div className="flex w-full min-w-[280px] flex-col items-center justify-center gap-12 self-center px-5 md:py-24">
+            {/* 로그인 타이틀 */}
+            <div className="flex max-h-screen w-fit flex-col items-center justify-start gap-12">
+              <h1 className="mr-auto text-4xl font-extrabold leading-[50px]">
+                로그인
+              </h1>
+            </div>
+            {/* 로그인 & 회원가입 컨테이너 */}
+            <div className="flex w-full flex-col items-center gap-12 md:max-w-[80%]">
+              {/* 로그인 컨테이너 */}
+              <form className="flex h-fit w-full min-w-[280px] flex-col gap-12">
+                <div className="flex flex-col gap-6">
                   <input
-                    id="pw_Input"
-                    className="w-full bg-transparent"
-                    type={passwordVisible.type}
-                    placeholder="패스워드"
+                    autoFocus
+                    id="id_Input"
+                    className="first border-b-[1.5px] border-gray-001 bg-transparent py-[6px] text-xl focus:border-blue-001"
+                    type="text"
+                    defaultValue={id}
                     onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      handleOnInput(e.target.value, 13)
+                      handleOnInput(e.target.value, 10)
                     }
+                    placeholder="아이디"
                   />
-                  <span
-                    className="absolute bottom-[6px] right-[10px] text-gray-002"
-                    onClick={handlePasswordVisible}
+                  <div
+                    className="first relative border-b-[1.5px] border-gray-001 bg-transparent py-[6px] text-xl focus-within:border-blue-001 focus:border-blue-001"
+                    id="pw_Div"
                   >
-                    {passwordVisible.visible ? (
-                      <FontAwesomeIcon icon={faEye} />
-                    ) : (
-                      <FontAwesomeIcon icon={faEyeSlash} />
-                    )}
-                  </span>
+                    <input
+                      id="pw_Input"
+                      className="w-full bg-transparent"
+                      type={passwordVisible.type}
+                      placeholder="패스워드"
+                      onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        handleOnInput(e.target.value, 13)
+                      }
+                    />
+                    <span
+                      className="absolute bottom-[6px] right-[10px] text-gray-002"
+                      onClick={handlePasswordVisible}
+                    >
+                      {passwordVisible.visible ? (
+                        <FontAwesomeIcon icon={faEye} />
+                      ) : (
+                        <FontAwesomeIcon icon={faEyeSlash} />
+                      )}
+                    </span>
+                  </div>
                 </div>
-              </div>
-              {/* 버튼 컨테이너 - 로그인, 카카오로그인 */}
-              <div className="flex flex-col gap-3">
-                <button
-                  id="login_Btn"
-                  className="w-full rounded-xl bg-gray-003 py-3 text-xl font-extrabold text-white-000"
-                  onClick={handleLogin}
-                >
-                  로그인
-                </button>
-                <button
-                  className="flex flex-row items-center justify-center gap-2 rounded-xl bg-kakao-yellow"
-                  onClick={handleKakaoLogin}
-                >
-                  <KakaoLogo height={20} width={20} />
-                  <p className="py-3 text-xl text-black text-opacity-85">
-                    카카오 로그인
-                  </p>
-                </button>
-              </div>
-            </form>
-            {/* 회원가입 */}
-            <Link to="/signup" className="text-gray-002">
-              회원가입
-            </Link>
+                {/* 버튼 컨테이너 - 로그인, 카카오로그인 */}
+                <div className="flex flex-col gap-3">
+                  <button
+                    id="login_Btn"
+                    className="w-full rounded-xl bg-gray-003 py-3 text-xl font-extrabold text-white-000"
+                    onClick={handleLogin}
+                  >
+                    로그인
+                  </button>
+                  <button
+                    className="flex flex-row items-center justify-center gap-2 rounded-xl bg-kakao-yellow"
+                    onClick={handleKakaoLogin}
+                  >
+                    <KakaoLogo height={20} width={20} />
+                    <p className="py-3 text-xl text-black text-opacity-85">
+                      카카오 로그인
+                    </p>
+                  </button>
+                </div>
+              </form>
+              {/* 회원가입 */}
+              <Link to="/signup" className="text-gray-002 md:text-lg">
+                회원가입
+              </Link>
+            </div>
           </div>
         </div>
       </div>

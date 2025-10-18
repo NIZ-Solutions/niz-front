@@ -23,7 +23,6 @@ export default function Submit() {
       }
     }
   };
-
   return (
     <div className="intro-snap flex min-h-[100svh] w-full max-w-screen-lg snap-center snap-always flex-col items-center justify-center gap-8 px-7 pt-[60px] text-center md:flex-row md:justify-between lg:px-0">
       <div className="flex flex-col gap-6 text-white drop-shadow-lg md:min-w-[40%]">
@@ -45,7 +44,7 @@ export default function Submit() {
         <div className="bg-black/3 glowing-border border-2 p-5 shadow-lg ring-1 ring-black/5 backdrop-blur-md backdrop-saturate-150 supports-[backdrop-filter]:backdrop-blur-md">
           <textarea
             id="submit-textarea"
-            className="min-h-[15svh] w-full resize-none rounded-[15px] bg-transparent p-1 placeholder:font-light placeholder:text-white placeholder:dark:text-gray-001"
+            className="min-h-[20svh] w-full resize-none rounded-[15px] bg-transparent p-1 placeholder:font-light placeholder:text-white placeholder:dark:text-gray-001"
             placeholder="시장 반응을 확인하고 싶은 아이디어가 있다면 입력해주세요. 아이디어에 대해 구체적으로 설명해 주시면 보다 정확하게 제안 받으실 수 있어요."
           ></textarea>
         </div>

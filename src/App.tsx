@@ -1,5 +1,4 @@
 import { BrowserRouter, useLocation } from "react-router-dom";
-import Analytics from "./api/ga4/setAnalytics";
 import Router from "./router/router";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -10,6 +9,7 @@ import "./App.css";
 import ScrollToTop from "./components/ScrollToTop";
 import { ErrorBoundary } from "react-error-boundary";
 import Error from "./pages/Error";
+import BackgroundPortal from "./components/BackgroundLayerPortal";
 
 function App() {
   return (
@@ -21,6 +21,7 @@ function App() {
               in="SourceGraphic"
               stdDeviation="10"
               result="blur"
+              edgeMode="duplicate"
             />
             <feColorMatrix
               in="blur"
@@ -29,6 +30,8 @@ function App() {
               result="goo"
             />
             <feBlend in="SourceGraphic" in2="goo" />
+            <feGaussianBlur in="gooblend" stdDeviation="40" result="final" />
+            <feBlend in="final" in2="final" />
           </filter>
         </defs>
       </svg>
@@ -39,6 +42,7 @@ function App() {
             <PersistGate loading={null} persistor={persistor}>
               <Modal />
               <Nav />
+              <BackgroundPortal />
               <Router />
             </PersistGate>
           </Provider>
