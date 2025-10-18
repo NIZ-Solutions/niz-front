@@ -23,9 +23,26 @@
   display: none;
 }
 
+html,
+body,
+#root {
+  height: 100%;
+  background: transparent;
+}
+
+/* html {
+  overflow: hidden;
+  height: 100%;
+}
+
 body {
-  background-color: #ffffff;
-  color: #232121;
+  overflow: auto;
+  height: 100%
+} */
+
+body {
+  background-color: #232121;
+  color: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -178,4 +195,50 @@ input[type="number"] {
   40% {
     transform: scale(1);
   }
+}
+
+.glowing-border {
+  border: 1px solid transparent;
+  border-radius: 30px;
+  background-image:
+    linear-gradient(#00000090, #00000090),
+    linear-gradient(
+      to bottom right,
+      #ffffff66 0.5%,
+      #ffffff33 10% 90%,
+      #ffffff66 99.5%
+    );
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+/* 스냅을 켤 때 html에 붙일 클래스 */
+html.snap-y {
+  scroll-snap-type: y mandatory;
+}
+
+/* 스냅 대상(인트로 섹션)에 붙일 클래스 */
+.intro-snap {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: #000;
+  -webkit-box-shadow: 0 0 0px 1000px #232121 inset;
+  box-shadow: 0 0 0px 1000px #232121 inset;
+  transition: #fff 5000s ease-in-out 0s;
+}
+
+input:autofill,
+input:autofill:hover,
+input:autofill:focus,
+input:autofill:active {
+  -webkit-text-fill-color: #fff;
+  -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+  box-shadow: 0 0 0px 1000px #232121 inset;
+  transition: #fff 5000s ease-in-out 0s;
 }

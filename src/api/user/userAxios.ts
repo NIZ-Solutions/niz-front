@@ -61,7 +61,7 @@ export async function postLoginWithHandledError(
 
 export async function postKakaoLogin(code: string) {
   const res = await axios.post(
-    `${BASE}/auth/kakao/redirect`,
+    `${BASE}/auth/kakao`,
     { code },
     { headers: { "Content-Type": "application/json" } },
   );

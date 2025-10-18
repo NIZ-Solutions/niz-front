@@ -43,26 +43,44 @@ export default function Nav() {
       {isLanding ? (
         <></>
       ) : (
-        <nav className="fixed left-0 right-0 top-0 z-50 flex min-h-[60px] flex-row justify-center bg-white px-7 shadow-lg dark:bg-black-001">
-          <div className="flex w-full max-w-screen-lg items-center justify-between">
-            {/* 로고 */}
-            <Link to="/" className="flex gap-[10px]">
-              <img className="w-[30px]" src={HeaderLogo} alt="logo" />
-              <div className="text-blue-001 text-logo">NIZ</div>
-            </Link>
-            {/* 로그인 or 마이 페이지 or 로그아웃 텍스트 */}
-            <div className="text-base font-semibold text-blue-001">
-              {loggedIn ? (
-                location.pathname.includes("/mypage") ? (
-                  <button onClick={handleLogout}> 로그아웃 </button>
+        <nav className="fixed inset-x-0 top-0 z-50">
+          <div className="flex w-screen justify-center border border-white/10 bg-black/30 shadow-lg ring-1 ring-black/5 backdrop-blur-md backdrop-saturate-150 supports-[backdrop-filter]:backdrop-blur-md">
+            <div className="flex min-h-[60px] w-full max-w-screen-lg flex-row items-center justify-between px-4">
+              {/* 로고 */}
+              <Link to="/" className="flex items-center gap-2">
+                <img className="w-[30px]" src={HeaderLogo} alt="logo" />
+                <div className="text-blue-001 text-logo">NIZ</div>
+              </Link>
+
+              {/* 로그인 / 마이페이지 / 로그아웃 */}
+              <div className="text-base font-semibold text-blue-001">
+                {loggedIn ? (
+                  location.pathname.includes("/mypage") ? (
+                    <button
+                      onClick={handleLogout}
+                      className="transition-opacity hover:opacity-80"
+                    >
+                      로그아웃
+                    </button>
+                  ) : (
+                    <Link
+                      to="/mypage"
+                      className="transition-opacity hover:opacity-80"
+                    >
+                      마이페이지
+                    </Link>
+                  )
+                ) : location.pathname.includes("/login") ? (
+                  <></>
                 ) : (
-                  <Link to="/mypage"> 마이페이지 </Link>
-                )
-              ) : location.pathname.includes("/login") ? (
-                <></>
-              ) : (
-                <Link to="/login"> 로그인 </Link>
-              )}
+                  <Link
+                    to="/login"
+                    className="transition-opacity hover:opacity-80"
+                  >
+                    로그인
+                  </Link>
+                )}
+              </div>
             </div>
           </div>
         </nav>
