@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import ReactFullpage, { fullpageOptions } from "@fullpage/react-fullpage";
 import Footer from "../components/layout/Footer";
 import Intro from "./Intro";
 import Plan from "./Plan";
@@ -8,24 +6,6 @@ import Submit from "./Submit";
 export default function Main() {
   return (
     <div className="relative">
-      <svg xmlns="http://www.w3.org/2000/svg" className="hidden">
-        <defs>
-          <filter id="goo">
-            <feGaussianBlur
-              in="SourceGraphic"
-              stdDeviation="10"
-              result="blur"
-            />
-            <feColorMatrix
-              in="blur"
-              mode="matrix"
-              values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -6"
-              result="goo"
-            />
-            <feBlend in="SourceGraphic" in2="goo" />
-          </filter>
-        </defs>
-      </svg>
       <div className="pointer-events-none fixed inset-[-20%] bottom-[-100px] -z-10 overflow-x-hidden bg-[linear-gradient(40deg,#0f99fb10,#232121)]">
         <div className="inset-0 h-full w-full [filter:url(#goo)_blur(50px)]">
           <div className="absolute left-[0%] top-[5%] h-full w-full md:left-[-20%] md:top-[-0%]">
