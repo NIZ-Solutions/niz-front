@@ -12,14 +12,17 @@ export default function Loading() {
   const code = new URL(window.location.href).searchParams.get("code");
   const resKakaoLogin = useAxios(() => postKakaoLogin(code!), [code], true);
   useEffect(() => {
-    if (code !== null) {
-      // 카카오 인가코드 백엔드로 전송
-      console.log(code);
-      resKakaoLogin.axiosData();
-      dispatch(login(resKakaoLogin.responseData));
-      navigate("/");
-    }
-  }, []);
+    if (!code) return;
+    resKakaoLogin.axiosData();
+  }, [code]);
+
+  useEffect(() => {
+    if (resKakaoLogin.status !== "Success" || !resKakaoLogin.responseData)
+      return;
+
+    dispatch(login(resKakaoLogin.responseData.data));
+    navigate("/", { replace: true });
+  }, [resKakaoLogin.status, resKakaoLogin.responseData, dispatch, navigate]);
 
   return (
     <>
