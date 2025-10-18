@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Error from "../pages/Error";
 import Main from "../main/Main";
 import Login from "../pages/Login";
@@ -9,8 +9,13 @@ import Complete from "../pages/Complete";
 import Niz from "../landingpages/Niz";
 import Loading from "../pages/Loading";
 import SubscriptionLoading from "../pages/SubscriptionLoading";
+import Analytics from "../api/ga4/setAnalytics";
 
 export default function router() {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const location = useLocation();
+  Analytics(location.pathname);
+
   return (
     <Routes>
       <Route path="*" element={<Error />} />

@@ -4,6 +4,7 @@ import { login } from "../store/userSlice";
 import { useEffect } from "react";
 import useAxios from "../hooks/useAxios";
 import { postKakaoLogin } from "../api/user/userAxios";
+import Footer from "../components/layout/Footer";
 
 export default function Loading() {
   const navigate = useNavigate();
@@ -35,6 +36,7 @@ export default function Loading() {
           Processing...
         </button>
       </div>
+      <Footer />
     </>
   );
 }
