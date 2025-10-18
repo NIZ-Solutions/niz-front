@@ -43,7 +43,7 @@ export default function Nav() {
       {isLanding ? (
         <></>
       ) : (
-        <nav className="fixed inset-x-0 top-0 z-50">
+        <nav className="fixed inset-x-0 z-50">
           <div className="navbar-container flex w-screen justify-center border border-white/10 bg-black/30 shadow-lg ring-1 ring-black/5 backdrop-blur-md backdrop-saturate-150 supports-[backdrop-filter]:backdrop-blur-md">
             <div className="navbar flex w-full max-w-screen-lg flex-row items-center justify-between px-4">
               {/* 로고 */}
@@ -53,7 +53,7 @@ export default function Nav() {
               </Link>
 
               {/* 로그인 / 마이페이지 / 로그아웃 */}
-              <div className="text-base font-semibold text-blue-001">
+              <div className="font-semibold text-blue-001 md:text-lg">
                 {loggedIn ? (
                   location.pathname.includes("/mypage") ? (
                     <button

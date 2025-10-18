@@ -93,6 +93,10 @@ module.exports = {
           "@apply border-b-[1.5px] border-gray-001 py-[6px] text-xl focus:border-blue-001":
             "",
         },
+        ".back-glass": {
+          "@apply glowing-border rounded-lg border-2 bg-black/5 shadow-lg ring-1 ring-black/5 backdrop-blur-md backdrop-saturate-150 supports-[backdrop-filter]:backdrop-blur-md":
+            "",
+        },
       });
     },
   ],

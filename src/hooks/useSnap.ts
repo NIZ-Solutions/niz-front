@@ -17,7 +17,7 @@ export default function useSnap<T extends HTMLElement>(
             if (entry.isIntersecting) root.classList.add("snap-y");
             else root.classList.remove("snap-y");
           },
-          { root: null, threshold: 0.15 },
+          { root: null, threshold: 0.1 },
         );
         io.observe(target);
 

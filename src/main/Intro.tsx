@@ -7,11 +7,14 @@ export default function Intro() {
   useSnap(wrapRef);
 
   return (
-    <div ref={wrapRef} className="w-full scroll-smooth text-center">
+    <div
+      ref={wrapRef}
+      className="w-full scroll-smooth text-center text-lg md:text-2xl"
+    >
       {/* 섹션 1 */}
       <section className="intro-snap flex min-h-[100svh] flex-col items-center justify-center gap-20 px-8 pt-[60px] supports-[height:100dvh]:min-h-[100dvh]">
-        <h2 className="text-3xl font-bold">Step1. 아이디어 작성</h2>
-        <div className="flex flex-col items-center justify-center">
+        <h2 className="text-3xl font-bold md:text-4xl">Step1. 아이디어 작성</h2>
+        <div className="flex flex-col items-center justify-center py-12">
           <p className="w-fit overflow-hidden whitespace-nowrap pb-4 text-5xl font-bold text-white">
             WRITE YOUR
           </p>
@@ -27,8 +30,8 @@ export default function Intro() {
 
       {/* 섹션 2 */}
       <section className="intro-snap flex min-h-[100svh] flex-col items-center justify-center gap-20 px-8 pt-[60px] supports-[height:100dvh]:min-h-[100dvh]">
-        <h2 className="text-3xl font-bold">Step2. 제작</h2>
-        <div className="relative py-20">
+        <h2 className="text-3xl font-bold md:text-4xl">Step2. 제작</h2>
+        <div className="relative py-16">
           <div className="loading text-5xl font-bold before:text-black-000 before:content-['MAKING...'] after:absolute after:left-0 after:top-0 after:z-20 after:w-0 after:animate-loading after:overflow-hidden after:text-white-000 after:opacity-100 after:content-['MAKING...']" />
         </div>
         <p>
@@ -40,7 +43,9 @@ export default function Intro() {
 
       {/* 섹션 3 */}
       <section className="intro-snap flex min-h-[100svh] flex-col items-center justify-center gap-20 px-8 pt-[60px] supports-[height:100dvh]:min-h-[100dvh]">
-        <h2 className="text-3xl font-bold">Step3. 고객 데이터 수집</h2>
+        <h2 className="text-3xl font-bold md:text-4xl">
+          Step3. 고객 데이터 수집
+        </h2>
         <div className="relative py-28">
           <div className="spinner-box">
             <div className="blue-orbit leo" />
