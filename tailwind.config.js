@@ -17,14 +17,14 @@ module.exports = {
           },
         },
         moveVertical: {
-          "0%": { transform: "translateY(-50%)" },
-          "50%": { transform: "translateY(50%)" },
-          "100%": { transform: "translateY(-50%)" },
+          "00%": { transform: "translateY(-40%)" },
+          "50%": { transform: "translateY(40%)" },
+          "100%": { transform: "translateY(-40%)" },
         },
         moveHorizontal: {
-          "0%": { transform: "translateY(-35%)" },
-          "50%": { transform: "translateY(35%)" },
-          "100%": { transform: "translateY(-35%)" },
+          "0%": { transform: "translateX(35%)" },
+          "65%": { transform: "translateX(-35%)" },
+          "100%": { transform: "translateX(35%)" },
         },
         border: {
           to: { "--border-angle": "360deg" },

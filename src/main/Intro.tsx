@@ -9,7 +9,7 @@ export default function Intro() {
   return (
     <div ref={wrapRef} className="w-full scroll-smooth text-center">
       {/* 섹션 1 */}
-      <section className="intro-snap flex min-h-[100svh] flex-col items-center justify-center gap-20 px-8 supports-[height:100dvh]:min-h-[100dvh]">
+      <section className="intro-snap flex min-h-[100svh] flex-col items-center justify-center gap-20 px-8 pt-[60px] supports-[height:100dvh]:min-h-[100dvh]">
         <h2 className="text-3xl font-bold">Step1. 아이디어 작성</h2>
         <div className="flex flex-col items-center justify-center">
           <p className="w-fit overflow-hidden whitespace-nowrap pb-4 text-5xl font-bold text-white">
@@ -26,10 +26,10 @@ export default function Intro() {
       </section>
 
       {/* 섹션 2 */}
-      <section className="intro-snap flex min-h-[100svh] flex-col items-center justify-center gap-20 px-8 supports-[height:100dvh]:min-h-[100dvh]">
+      <section className="intro-snap flex min-h-[100svh] flex-col items-center justify-center gap-20 px-8 pt-[60px] supports-[height:100dvh]:min-h-[100dvh]">
         <h2 className="text-3xl font-bold">Step2. 제작</h2>
         <div className="relative py-20">
-          <div className="loading text-5xl font-bold before:text-blue-000 before:content-['MAKING...'] after:absolute after:left-0 after:top-0 after:z-20 after:w-0 after:animate-loading after:overflow-hidden after:text-white-000 after:opacity-100 after:content-['MAKING...']" />
+          <div className="loading text-5xl font-bold before:text-black-000 before:content-['MAKING...'] after:absolute after:left-0 after:top-0 after:z-20 after:w-0 after:animate-loading after:overflow-hidden after:text-white-000 after:opacity-100 after:content-['MAKING...']" />
         </div>
         <p>
           아이디어를 바탕으로
@@ -39,7 +39,7 @@ export default function Intro() {
       </section>
 
       {/* 섹션 3 */}
-      <section className="intro-snap flex min-h-[100svh] flex-col items-center justify-center gap-20 px-8 supports-[height:100dvh]:min-h-[100dvh]">
+      <section className="intro-snap flex min-h-[100svh] flex-col items-center justify-center gap-20 px-8 pt-[60px] supports-[height:100dvh]:min-h-[100dvh]">
         <h2 className="text-3xl font-bold">Step3. 고객 데이터 수집</h2>
         <div className="relative py-28">
           <div className="spinner-box">
@@ -60,7 +60,7 @@ export default function Intro() {
       </section>
 
       {/* 섹션 4 */}
-      <section className="intro-snap flex min-h-[100svh] flex-col items-center justify-center gap-14 px-8 supports-[height:100dvh]:min-h-[100dvh]">
+      <section className="intro-snap flex min-h-[100svh] flex-col items-center justify-center gap-14 px-8 pt-[60px] supports-[height:100dvh]:min-h-[100dvh]">
         <h2 className="pb-10 text-4xl font-extrabold leading-[50px]">
           단 3일 후<br />
           시장의 진짜 반응을

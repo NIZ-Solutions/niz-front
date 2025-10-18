@@ -15,15 +15,7 @@ function App() {
     <>
       <svg xmlns="http://www.w3.org/2000/svg" className="hidden">
         <defs>
-          <filter
-            id="goo"
-            color-interpolation-filters="sRGB"
-            filterUnits="userSpaceOnUse"
-            x="-2000"
-            y="-2000"
-            width="8000"
-            height="8000"
-          >
+          <filter id="goo">
             <feGaussianBlur
               in="SourceGraphic"
               stdDeviation="10"
