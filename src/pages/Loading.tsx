@@ -21,25 +21,20 @@ export default function Loading() {
       return;
 
     dispatch(login(resKakaoLogin.responseData.data));
+    console.log(resKakaoLogin.responseData.data);
     navigate("/", { replace: true });
   }, [resKakaoLogin.status, resKakaoLogin.responseData, dispatch, navigate]);
 
   return (
     <>
-      <div className="flex min-h-screen flex-col items-center justify-center gap-20 rounded-xl bg-white p-8 shadow-lg dark:bg-black-001">
-        <h2 className="text-lg font-semibold text-black-000 dark:text-gray-000">
-          잠시만 기다려주세요
-        </h2>
+      <div className="flex min-h-screen flex-col items-center justify-center gap-28 p-8 shadow-lg">
+        <h2 className="text-3xl font-semibold text-gray-001">로딩중</h2>
         <div className="dots-container">
-          <div className="dot main-gradient"></div>
-          <div className="dot main-gradient"></div>
-          <div className="dot main-gradient"></div>
+          <div className="dot bg-gray-001"></div>
+          <div className="dot bg-gray-001"></div>
+          <div className="dot bg-gray-001"></div>
         </div>
-        <button className="rounded-lg px-4 py-2 text-white transition main-gradient dark:text-black-000">
-          Processing...
-        </button>
       </div>
-      <Footer />
     </>
   );
 }

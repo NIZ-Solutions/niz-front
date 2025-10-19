@@ -59,6 +59,7 @@ module.exports = {
         sans: ["Pretendard"],
       },
       colors: {
+        "yellow-001": "#ffec33",
         "blue-000": "#0F9AFB",
         "blue-001": "#126DD7",
         "white-000": "#FFFFFF",
@@ -94,7 +95,23 @@ module.exports = {
             "",
         },
         ".back-glass": {
-          "@apply glowing-border rounded-lg border-2 bg-black/5 shadow-lg ring-1 ring-black/5 backdrop-blur-md backdrop-saturate-150 supports-[backdrop-filter]:backdrop-blur-md":
+          "@apply glowing-border border-2 bg-black/5 shadow-lg ring-1 ring-black/5 backdrop-blur-md backdrop-saturate-150 supports-[backdrop-filter]:backdrop-blur-md":
+            "",
+        },
+        ".back-glass-red": {
+          "@apply glowing-border-red border-2 bg-black/5 shadow-lg ring-1 ring-black/5 backdrop-blur-md backdrop-saturate-150 supports-[backdrop-filter]:backdrop-blur-md":
+            "",
+        },
+        ".btn-glass": {
+          "@apply relative inline-flex w-full items-center justify-center  hover:drop-shadow":
+            "",
+        },
+        ".btn-glass-span": {
+          "@apply glowing-border inline-flex w-full items-center justify-center px-6 py-3 text-white shadow-lg ring-1 ring-black/5 backdrop-blur-sm backdrop-saturate-150 transition-transform duration-300 ease-out active:scale-[0.97] group-hover:scale-[0.985] supports-[backdrop-filter]:backdrop-blur-sm":
+            "",
+        },
+        ".btn-glass-span-active": {
+          "@apply glowing-border-active inline-flex w-full items-center justify-center px-6 py-3 text-white shadow-lg ring-1 ring-black/5 backdrop-blur-sm backdrop-saturate-150 transition-transform duration-300 ease-out active:scale-[0.97] group-hover:scale-[0.985] supports-[backdrop-filter]:backdrop-blur-sm":
             "",
         },
       });

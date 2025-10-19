@@ -54,12 +54,12 @@ export default function Submit() {
 
     if (!phoneReg.test(v)) {
       setPhone(false);
-      phoneDiv.classList.remove("border-blue-001");
-      phoneDiv.classList.add("border-red-000");
+      phoneDiv.classList.remove("back-glass");
+      phoneDiv.classList.add("back-glass-red");
       setPhone(false);
     } else {
-      phoneDiv.classList.add("border-blue-001");
-      phoneDiv.classList.remove("border-red-000");
+      phoneDiv.classList.add("back-glass");
+      phoneDiv.classList.remove("back-glass-red");
       setPhone(true);
     }
   };
@@ -73,12 +73,12 @@ export default function Submit() {
 
     if (!emailReg.test(v)) {
       setEmail(false);
-      emailDiv.classList.remove("border-blue-001");
-      emailDiv.classList.add("border-red-000");
+      emailDiv.classList.remove("back-glass");
+      emailDiv.classList.add("back-glass-red");
       setEmail(false);
     } else {
-      emailDiv.classList.add("border-blue-001");
-      emailDiv.classList.remove("border-red-000");
+      emailDiv.classList.add("back-glass");
+      emailDiv.classList.remove("back-glass-red");
       setEmail(true);
     }
   };
@@ -136,12 +136,14 @@ export default function Submit() {
   const [name, setName] = useState<string>("");
   useEffect(() => {
     const payBtn = document.getElementById("pay-Btn") as HTMLButtonElement;
+    const payBtnText = document.getElementById("sub-btn-text") as HTMLElement;
     if (name !== "" && passPhone && passEmail) {
-      payBtn.classList.add("main-gradient");
+      payBtnText.classList.remove("btn-glass-span");
+      payBtnText.classList.add("btn-glass-span-active");
       payBtn.disabled = false;
     } else {
-      payBtn.classList.remove("main-gradient");
-      payBtn.classList.add("bg-gray-001");
+      payBtnText.classList.remove("btn-glass-span-active");
+      payBtnText.classList.add("btn-glass-span");
       payBtn.disabled = true;
     }
   }, [name, passPhone, passEmail]);
@@ -171,7 +173,7 @@ export default function Submit() {
         storeId: process.env.REACT_APP_KG_STORE_ID as string,
         channelKey: process.env.REACT_APP_KG_CHANNEL_KEY,
         paymentId: nanoId,
-        orderName: `${nameInput.value} 랜딩페이지 제작`,
+        orderName: `NIZ ${nameInput.value} 랜딩페이지`,
         totalAmount: 2,
         currency: "CURRENCY_KRW",
         windowType: {
@@ -207,6 +209,8 @@ export default function Submit() {
             advicedAt: advicedAt,
             otherText: textareaInput.value,
             amount: "2",
+            phone: phoneInput.value,
+            name: nameInput.value,
           }),
         );
         setPaymentsComplement(true);
@@ -225,13 +229,13 @@ export default function Submit() {
 
   return (
     <>
-      <div className="flex w-full flex-col items-center justify-between pb-[120px] pl-4 pr-5 text-black-000 min-[340px]:px-7 md:pb-0 dark:text-gray-000">
+      <div className="flex w-full flex-col items-center justify-between pb-[120px] pl-4 pr-5 text-gray-000 min-[340px]:px-7 md:pb-0">
         <div className="flex min-h-screen w-full min-w-[280px] max-w-screen-lg flex-col items-center justify-center gap-8 pt-[120px] text-center md:flex-row md:justify-between md:pb-[120px] lg:px-0">
           <div className="flex flex-col gap-8 md:min-w-[50%]">
-            <p className="text-xl font-medium text-blue-001">
+            <p className="text-yellow-001 text-lg font-medium md:text-xl">
               금액 : {textPrice}원
             </p>
-            <h1 className="text-xl font-bold">
+            <h1 className="text-xl font-bold md:text-2xl">
               아이디어에 맞는 시장조사를 위해,
               <br />
               전문가의 상담을 받아보세요.
@@ -241,7 +245,7 @@ export default function Submit() {
             {/* 상담 희망일 */}
             <div className="relative flex w-full flex-col gap-1 text-left font-medium">
               <h2 className="">상담 희망일</h2>
-              <div className="relative rounded-md border-[1px] border-blue-001">
+              <div className="back-glass relative rounded-md">
                 <input
                   className="w-full min-w-[280px] rounded-[5px] bg-transparent px-2 py-1"
                   value={`${date.year}년 ${date.month}월 ${date.day}일`}
@@ -252,7 +256,7 @@ export default function Submit() {
                   id="image-parent"
                   onClick={() => setVisibleDatePicker(!visibleDatePicker)}
                 >
-                  <FontAwesomeIcon icon={faCalendarDays} color="#126DD7" />
+                  <FontAwesomeIcon icon={faCalendarDays} color="#ffffffd0" />
                 </span>
               </div>
               <div
@@ -265,7 +269,7 @@ export default function Submit() {
             {/* 상담 희망 시간 */}
             <div className="relative flex w-full flex-col gap-1 text-left font-medium">
               <h2 className="">상담 희망 시간</h2>
-              <div className="relative rounded-md border-[1px] border-blue-001">
+              <div className="back-glass relative rounded-md">
                 <input
                   className="w-full min-w-[280px] rounded-[5px] bg-transparent px-2 py-1"
                   value={promiseTime}
@@ -275,7 +279,7 @@ export default function Submit() {
                   className="dropdown absolute bottom-[4px] right-[10px] text-gray-002"
                   onClick={() => setVisibleTimePicker(!visibleTimePicker)}
                 >
-                  <FontAwesomeIcon icon={faAngleDown} color="#126DD7" />
+                  <FontAwesomeIcon icon={faAngleDown} color="#ffffffd0" />
                 </span>
               </div>
               <div
@@ -288,7 +292,7 @@ export default function Submit() {
             {/* 이름 */}
             <div className="flex w-full flex-col gap-1 text-left font-medium">
               <h2 className="">이름</h2>
-              <div className="relative rounded-md border-[1px] border-blue-001">
+              <div className="back-glass relative rounded-md">
                 <input
                   id="name-input"
                   className="w-full min-w-[280px] rounded-[5px] bg-transparent px-2 py-1"
@@ -303,10 +307,7 @@ export default function Submit() {
             {/* 전화번호 */}
             <div className="flex w-full flex-col gap-1 text-left font-medium">
               <h2 className="">전화번호</h2>
-              <div
-                id="phone-div"
-                className="relative rounded-md border-[1px] border-blue-001"
-              >
+              <div id="phone-div" className="back-glass relative rounded-md">
                 <input
                   id="phone-input"
                   className="w-full min-w-[280px] rounded-[5px] bg-transparent px-2 py-1"
@@ -320,10 +321,7 @@ export default function Submit() {
             {/* 이메일 */}
             <div className="flex w-full flex-col gap-1 text-left font-medium">
               <h2 className="">이메일</h2>
-              <div
-                id="email-div"
-                className="relative rounded-md border-[1px] border-blue-001"
-              >
+              <div id="email-div" className="back-glass relative rounded-md">
                 <input
                   id="email-input"
                   className="w-full min-w-[280px] rounded-[5px] bg-transparent px-2 py-1"
@@ -337,8 +335,8 @@ export default function Submit() {
             {/* 아이디어 설명 */}
             <div className="flex w-full flex-col gap-1 text-left font-medium">
               <h2 className="">아이디어 설명</h2>
-              <div className="min-h-[18svh] content-center rounded-md border-[1px] border-blue-001">
-                <div className="rounded-md bg-white-000 p-2 dark:bg-transparent">
+              <div className="back-glass min-h-[18svh] content-center rounded-md">
+                <div className="rounded-md p-2">
                   <textarea
                     id="sub-textarea"
                     className="min-h-[18svh] w-full resize-none bg-transparent"
@@ -360,9 +358,14 @@ export default function Submit() {
                 id="pay-Btn"
                 type="button"
                 onClick={() => requestPayment()}
-                className="w-full rounded-xl bg-gray-001 py-3 text-xl font-extrabold text-white-000 dark:bg-gray-003"
+                className="btn-glass w-full"
               >
-                결제하기
+                <span
+                  id="sub-btn-text"
+                  className="btn-glass-span rounded-xl text-xl"
+                >
+                  결제하기
+                </span>
               </button>
             </div>
           </div>

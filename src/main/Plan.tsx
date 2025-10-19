@@ -23,7 +23,7 @@ export default function Plan() {
         이용요금 안내
       </h1>
       <ul className="flex w-full max-w-screen-lg flex-col gap-6 text-[15px] text-gray-002">
-        <li className="glowing-border relative flex flex-col gap-3 rounded-lg border-2 bg-black/20 p-5 pt-[20px] text-left shadow-lg ring-1 ring-black/5 backdrop-blur-md backdrop-saturate-150 supports-[backdrop-filter]:backdrop-blur-md">
+        <li className="back-glass flex flex-col gap-3 rounded-lg p-[20px] text-left">
           <h2 className="text-xl font-extrabold text-blue-001">
             기존 디자인&nbsp;
             <p className="inline font-normal text-gray-001">사용</p>
@@ -47,12 +47,12 @@ export default function Plan() {
             onClick={() => handleSubscription("PLAN1")}
             className="group absolute bottom-[25px] right-[25px] inline-flex h-fit w-full max-w-fit items-center justify-center p-[2px] hover:drop-shadow"
           >
-            <span className="glowing-border inline-flex w-full items-center justify-center px-6 py-2 text-lg font-extrabold text-white shadow-lg ring-1 ring-black/5 backdrop-blur-sm backdrop-saturate-150 transition-transform duration-300 ease-out active:scale-[0.97] group-hover:scale-[0.985] supports-[backdrop-filter]:backdrop-blur-sm">
+            <span className="btn-glass-span rounded-full text-lg font-extrabold text-white">
               선택
             </span>
           </button>
         </li>
-        <li className="glowing-border relative flex flex-col gap-3 rounded-lg border-2 bg-black/20 p-5 pt-[20px] text-left shadow-lg ring-1 ring-black/5 backdrop-blur-md backdrop-saturate-150 supports-[backdrop-filter]:backdrop-blur-md">
+        <li className="back-glass relative flex flex-col gap-3 rounded-lg p-[20px] text-left">
           <h2 className="text-xl font-bold text-blue-001">
             맞춤형 디자인&nbsp;
             <p className="inline font-normal text-gray-001">사용</p>
@@ -78,7 +78,7 @@ export default function Plan() {
             onClick={() => handleSubscription("PLAN2")}
             className="group absolute bottom-[25px] right-[25px] inline-flex h-fit w-full max-w-fit items-center justify-center p-[2px] hover:drop-shadow"
           >
-            <span className="glowing-border inline-flex w-full items-center justify-center px-6 py-2 text-lg font-extrabold text-white shadow-lg ring-1 ring-black/5 backdrop-blur-sm backdrop-saturate-150 transition-transform duration-300 ease-out active:scale-[0.97] group-hover:scale-[0.985] supports-[backdrop-filter]:backdrop-blur-sm">
+            <span className="btn-glass-span rounded-full text-lg font-extrabold text-white">
               선택
             </span>
           </button>
