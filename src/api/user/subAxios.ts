@@ -25,6 +25,7 @@ export async function postPaymoentsComplete(
         Authorization: `Bearer ${accessToken}`,
         "Content-Type": "application/json",
       },
+      withCredentials: true,
     },
   );
   return res.data;

@@ -20,8 +20,8 @@ export default function SubscriptionLoading() {
     () =>
       postPaymoentsComplete(
         order?.paymentId!,
-        user?.name!,
-        user?.phone!,
+        order?.name!,
+        order?.phone!,
         order?.email!,
         order?.advicedAt!,
         order?.otherText!,
@@ -29,8 +29,8 @@ export default function SubscriptionLoading() {
       ),
     [
       order?.paymentId!,
-      user?.name!,
-      user?.phone!,
+      order?.name!,
+      order?.phone!,
       order?.email!,
       order?.advicedAt!,
       order?.otherText!,
@@ -46,19 +46,22 @@ export default function SubscriptionLoading() {
     }
   }, [errorMessage, navigate]);
 
-  const isMounted = useRef(false);
   useEffect(() => {
     if (errorMessage) return;
+    console.log(user);
+    console.log(order);
     if (
       order?.paymentId &&
-      user?.name &&
-      user?.phone &&
+      order?.name &&
+      order?.phone &&
       order?.email &&
       order?.advicedAt
     ) {
+      console.log("setTimeout 시작");
       setTimeout(() => {
         console.log("1초지남");
         resSubComplete.axiosData();
+        console.log(resSubComplete);
       }, 1000);
     }
   }, [user, order, errorMessage]);
@@ -77,20 +80,14 @@ export default function SubscriptionLoading() {
 
   return (
     <>
-      <div className="flex min-h-screen flex-col items-center justify-center gap-20 rounded-xl bg-white p-8 shadow-lg dark:bg-black-001">
-        <h2 className="text-lg font-semibold text-black-000 dark:text-gray-000">
-          잠시만 기다려주세요
-        </h2>
+      <div className="flex min-h-screen flex-col items-center justify-center gap-28 p-8 shadow-lg">
+        <h2 className="text-3xl font-semibold text-gray-001">로딩중</h2>
         <div className="dots-container">
-          <div className="dot main-gradient"></div>
-          <div className="dot main-gradient"></div>
-          <div className="dot main-gradient"></div>
+          <div className="dot bg-gray-001"></div>
+          <div className="dot bg-gray-001"></div>
+          <div className="dot bg-gray-001"></div>
         </div>
-        <button className="rounded-lg px-4 py-2 text-white transition main-gradient dark:text-black-000">
-          Processing...
-        </button>
       </div>
-      <Footer />
     </>
   );
 }

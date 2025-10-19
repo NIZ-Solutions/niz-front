@@ -18,20 +18,21 @@ export default function Submit() {
 
   return (
     <>
-      <div className="flex w-full flex-col items-center justify-between pl-4 pr-5 text-black-000 min-[340px]:px-7 md:pb-0">
+      <div className="flex w-full flex-col items-center justify-between pl-4 pr-5 min-[340px]:px-7 md:pb-0">
         <div className="flex min-h-screen w-full min-w-[280px] max-w-screen-lg flex-col items-center justify-center gap-20 pb-[180px] pt-[180px] text-center lg:px-0">
-          <div className="flex flex-col gap-8 text-3xl font-bold text-blue-001 md:min-w-[50%]">
+          <div className="text-yellow-001 flex flex-col gap-8 text-3xl font-bold md:min-w-[50%] md:text-4xl">
             <div className="flex flex-col gap-2">
               <h1>결제완료</h1>
-              <p>금액 : {textPrice}원</p>
+              <p>금액 : {textPrice ?? "00,000"}원</p>
             </div>
-            <p className="text-base font-normal text-black-000">
-              주문번호 : {order?.paymentId}
+            <p className="text-base font-normal text-white-000 md:text-lg">
+              주문번호 : {order?.paymentId ?? "AbcDefg"}
             </p>
           </div>
           <div className="flex min-w-full flex-col gap-5 text-xl md:min-w-[40%]">
-            <p className="font-extrabold text-blue-001">
-              {order?.advicedAt.replace("T", " ").slice(0, 16)}
+            <p className="text-yellow-001 text-2xl font-extrabold">
+              {order?.advicedAt.replace("T", " ").slice(0, 16) ??
+                "2025-10-26 10:25"}
             </p>
             <p>상담을 위해 연락 드리겠습니다</p>
             <div></div>
@@ -41,10 +42,12 @@ export default function Submit() {
               <div className="flex flex-col gap-3 pt-9">
                 <Link
                   to="/mypage"
-                  className="w-full rounded-xl bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#126DD7] to-[#0F9AFB] py-3 text-xl font-extrabold text-white-000"
+                  className="group h-fit w-full items-center justify-center p-[2px] hover:drop-shadow"
                   type="submit"
                 >
-                  마이페이지
+                  <span className="glowing-border inline-flex w-full items-center justify-center px-6 py-2 text-lg font-extrabold text-white shadow-lg ring-1 ring-black/5 backdrop-blur-sm backdrop-saturate-150 transition-transform duration-300 ease-out active:scale-[0.97] group-hover:scale-[0.985] supports-[backdrop-filter]:backdrop-blur-sm">
+                    마이페이지
+                  </span>
                 </Link>
               </div>
             </div>

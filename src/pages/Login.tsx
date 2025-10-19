@@ -50,16 +50,20 @@ export default function Login() {
   useEffect(() => {
     const ID = document.getElementById("id_Input") as HTMLInputElement;
     const PW = document.getElementById("pw_Div") as HTMLElement;
-
     const loginBtn = document.getElementById("login_Btn") as HTMLElement;
+    const loginBtnText = document.getElementById(
+      "login-btn-text",
+    ) as HTMLElement;
     if (id !== "") ID.classList.remove("border-red-000");
     if (password !== "") PW.classList.remove("border-red-000");
     if (id !== "" && password !== "") {
-      loginBtn.classList.add("main-gradient");
+      loginBtnText.classList.remove("btn-glass-span");
+      loginBtnText.classList.add("btn-glass-span-active");
     }
-    if (id === "" && password === "") {
-      loginBtn.classList.remove("main-gradient");
-      loginBtn.classList.add("bg-gray-000");
+    if (id === "" || password === "") {
+      loginBtnText.classList.remove("btn-glass-span-active");
+      loginBtn.classList.add("btn-glass");
+      loginBtnText.classList.add("btn-glass-span");
     }
     if (id === "" && !ID.classList.contains("first")) {
       ID.classList.add("border-red-000");
@@ -164,10 +168,15 @@ export default function Login() {
                 <div className="flex flex-col gap-3">
                   <button
                     id="login_Btn"
-                    className="w-full rounded-xl bg-gray-003 py-3 text-xl font-extrabold text-white-000"
+                    className="btn-glass w-full"
                     onClick={handleLogin}
                   >
-                    로그인
+                    <span
+                      id="login-btn-text"
+                      className="btn-glass-span rounded-xl text-xl"
+                    >
+                      로그인
+                    </span>
                   </button>
                   <button
                     className="flex flex-row items-center justify-center gap-2 rounded-xl bg-kakao-yellow"
@@ -181,7 +190,7 @@ export default function Login() {
                 </div>
               </form>
               {/* 회원가입 */}
-              <Link to="/signup" className="text-gray-002 md:text-lg">
+              <Link to="/signup" className="text-lg text-gray-000 md:text-xl">
                 회원가입
               </Link>
             </div>
