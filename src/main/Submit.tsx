@@ -41,7 +41,7 @@ export default function Submit() {
       <form className="submit flex h-fit w-full min-w-[280px] flex-col gap-6 md:max-w-[50%]">
         {/* <div className="min-h-[15svh] w-full animate-border content-center rounded-xl border-[3px] border-transparent [background:linear-gradient(45deg,#F5F5F5)_padding-box,conic-gradient(from_var(--border-angle),#D0D0D0_50%,_#126DD7_86%,_#0F9AFB_90%,_#126DD7_94%,_#D0D0D0_100%)_border-box]"> */}
         {/* <div className="rounded-[9px] bg-white-000 p-4 dark:bg-black-000"> */}
-        <div className="bg-black/3 glowing-border border-2 p-5 shadow-lg ring-1 ring-black/5 backdrop-blur-md backdrop-saturate-150 supports-[backdrop-filter]:backdrop-blur-md">
+        <div className="back-glass rounded-[15px] p-5 shadow-lg">
           <textarea
             id="submit-textarea"
             className="min-h-[20svh] w-full resize-none rounded-[15px] bg-transparent p-1 placeholder:font-light placeholder:text-white placeholder:dark:text-gray-001"
@@ -63,9 +63,9 @@ export default function Submit() {
         <button
           type="button"
           onClick={handleSubscription}
-          className="group relative inline-flex w-full items-center justify-center p-[2px] hover:drop-shadow"
+          className="btn-glass"
         >
-          <span className="glowing-border inline-flex w-full items-center justify-center px-6 py-3 text-xl font-extrabold text-white shadow-lg ring-1 ring-black/5 backdrop-blur-sm backdrop-saturate-150 transition-transform duration-300 ease-out active:scale-[0.97] group-hover:scale-[0.985] supports-[backdrop-filter]:backdrop-blur-sm">
+          <span className="btn-glass-span rounded-[15px] font-extrabold">
             신청하기
           </span>
         </button>
