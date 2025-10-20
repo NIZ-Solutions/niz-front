@@ -34,14 +34,14 @@ export default function Submit() {
         <h2 className="text-base font-medium md:text-lg">
           당신의 아이디어가 현실이 되도록,
           <br />
-          <p className="inline font-semibold text-blue-001">단 3일</p>
+          <p className="inline font-semibold text-blue-000">단 3일</p>
           만에 시장의 답을 보여드립니다.
         </h2>
       </div>
       <form className="submit flex h-fit w-full min-w-[280px] flex-col gap-6 md:max-w-[50%]">
         {/* <div className="min-h-[15svh] w-full animate-border content-center rounded-xl border-[3px] border-transparent [background:linear-gradient(45deg,#F5F5F5)_padding-box,conic-gradient(from_var(--border-angle),#D0D0D0_50%,_#126DD7_86%,_#0F9AFB_90%,_#126DD7_94%,_#D0D0D0_100%)_border-box]"> */}
         {/* <div className="rounded-[9px] bg-white-000 p-4 dark:bg-black-000"> */}
-        <div className="back-glass rounded-[15px] p-5 shadow-lg">
+        <div className="rounded-[15px] p-5 shadow-lg back-glass">
           <textarea
             id="submit-textarea"
             className="min-h-[20svh] w-full resize-none rounded-[15px] bg-transparent p-1 placeholder:font-light placeholder:text-white placeholder:dark:text-gray-001"
@@ -65,7 +65,7 @@ export default function Submit() {
           onClick={handleSubscription}
           className="btn-glass"
         >
-          <span className="btn-glass-span rounded-[15px] font-extrabold">
+          <span className="rounded-[15px] font-extrabold btn-glass-span">
             신청하기
           </span>
         </button>

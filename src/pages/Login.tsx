@@ -115,7 +115,7 @@ export default function Login() {
   return (
     <>
       <div className="flex min-h-screen w-full flex-col items-center justify-center px-7 pt-[60px] text-white">
-        <div className="md:back-glass flex w-full max-w-screen-md flex-col">
+        <div className="md:back-glass md:rounded-xl flex w-full max-w-screen-md flex-col">
           <div className="flex w-full min-w-[280px] flex-col items-center justify-center gap-12 self-center px-5 md:py-24">
             {/* 로그인 타이틀 */}
             <div className="flex max-h-screen w-fit flex-col items-center justify-start gap-12">
