@@ -17,7 +17,7 @@ export default function Submit() {
   const explanationText = location.state?.explanationText;
   const nanoId = nanoid();
 
-  const price = "49900";
+  const price = "80000";
   const textPrice = price.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 
   const [visibleDatePicker, setVisibleDatePicker] = useState<Boolean>(false);
@@ -191,17 +191,17 @@ export default function Submit() {
         bypass: {
           inicis_v2: {
             logo_url: "",
-            logo_2nd: "",
+            logo_2nd:
+              "https://s3.us-east-2.amazonaws.com/nizkr.com/NIZ-PG-2ND.png",
             Ini_SSGPAY_MDN: `${phoneInput.value}`,
-            acceptmethod: ["SKIN(#126DD7)", "below1000", "paypopup"],
-            P_CARD_OPTION: "selcode=14",
-            P_MNAME: "NIZ",
-            P_RESERVED: ["below1000=Y"],
+            acceptmethod: ["SKIN(#126DD7)", "below1000"],
+            P_MNAME: "니즈 NIZ",
+            P_RESERVED: ["below1000=Y", "apprun_check=Y"],
           },
         },
         redirectUrl: `${process.env.REACT_APP_BASE}/subscription/loading`,
       });
-      if (res?.paymentId) {
+      if (res?.code === undefined) {
         dispatch(
           subscription({
             email: emailInput.value,
@@ -214,6 +214,8 @@ export default function Submit() {
           }),
         );
         setPaymentsComplement(true);
+      } else {
+        setPaymentsComplement(false);
       }
     } catch (e) {
       console.error(e);
@@ -232,7 +234,7 @@ export default function Submit() {
       <div className="flex w-full flex-col items-center justify-between pb-[120px] pl-4 pr-5 text-gray-000 min-[340px]:px-7 md:pb-0">
         <div className="flex min-h-screen w-full min-w-[280px] max-w-screen-lg flex-col items-center justify-center gap-8 pt-[120px] text-center md:flex-row md:justify-between md:pb-[120px] lg:px-0">
           <div className="flex flex-col gap-8 md:min-w-[50%]">
-            <p className="text-yellow-001 text-lg font-medium md:text-xl">
+            <p className="text-lg font-semibold text-blue-000 md:text-xl">
               금액 : {textPrice}원
             </p>
             <h1 className="text-xl font-bold md:text-2xl">
@@ -245,7 +247,7 @@ export default function Submit() {
             {/* 상담 희망일 */}
             <div className="relative flex w-full flex-col gap-1 text-left font-medium">
               <h2 className="">상담 희망일</h2>
-              <div className="back-glass relative rounded-md">
+              <div className="relative rounded-md back-glass">
                 <input
                   className="w-full min-w-[280px] rounded-[5px] bg-transparent px-2 py-1"
                   value={`${date.year}년 ${date.month}월 ${date.day}일`}
@@ -269,7 +271,7 @@ export default function Submit() {
             {/* 상담 희망 시간 */}
             <div className="relative flex w-full flex-col gap-1 text-left font-medium">
               <h2 className="">상담 희망 시간</h2>
-              <div className="back-glass relative rounded-md">
+              <div className="relative rounded-md back-glass">
                 <input
                   className="w-full min-w-[280px] rounded-[5px] bg-transparent px-2 py-1"
                   value={promiseTime}
@@ -292,7 +294,7 @@ export default function Submit() {
             {/* 이름 */}
             <div className="flex w-full flex-col gap-1 text-left font-medium">
               <h2 className="">이름</h2>
-              <div className="back-glass relative rounded-md">
+              <div className="relative rounded-md back-glass">
                 <input
                   id="name-input"
                   className="w-full min-w-[280px] rounded-[5px] bg-transparent px-2 py-1"
@@ -307,7 +309,7 @@ export default function Submit() {
             {/* 전화번호 */}
             <div className="flex w-full flex-col gap-1 text-left font-medium">
               <h2 className="">전화번호</h2>
-              <div id="phone-div" className="back-glass relative rounded-md">
+              <div id="phone-div" className="relative rounded-md back-glass">
                 <input
                   id="phone-input"
                   className="w-full min-w-[280px] rounded-[5px] bg-transparent px-2 py-1"
@@ -321,7 +323,7 @@ export default function Submit() {
             {/* 이메일 */}
             <div className="flex w-full flex-col gap-1 text-left font-medium">
               <h2 className="">이메일</h2>
-              <div id="email-div" className="back-glass relative rounded-md">
+              <div id="email-div" className="relative rounded-md back-glass">
                 <input
                   id="email-input"
                   className="w-full min-w-[280px] rounded-[5px] bg-transparent px-2 py-1"
@@ -335,7 +337,7 @@ export default function Submit() {
             {/* 아이디어 설명 */}
             <div className="flex w-full flex-col gap-1 text-left font-medium">
               <h2 className="">아이디어 설명</h2>
-              <div className="back-glass min-h-[18svh] content-center rounded-md">
+              <div className="min-h-[18svh] content-center rounded-md back-glass">
                 <div className="rounded-md p-2">
                   <textarea
                     id="sub-textarea"
@@ -358,11 +360,11 @@ export default function Submit() {
                 id="pay-Btn"
                 type="button"
                 onClick={() => requestPayment()}
-                className="btn-glass w-full"
+                className="w-full btn-glass"
               >
                 <span
                   id="sub-btn-text"
-                  className="btn-glass-span rounded-xl text-xl"
+                  className="rounded-xl text-xl btn-glass-span"
                 >
                   결제하기
                 </span>

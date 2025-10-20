@@ -48,8 +48,6 @@ export default function SubscriptionLoading() {
 
   useEffect(() => {
     if (errorMessage) return;
-    console.log(user);
-    console.log(order);
     if (
       order?.paymentId &&
       order?.name &&

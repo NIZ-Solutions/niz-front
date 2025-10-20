@@ -100,10 +100,10 @@ export default function Niz() {
               <br />
               이제는 확신할 때
             </h1>
-            <h2 className="font-medium">
+            <h2 className="text-lg font-medium md:text-xl">
               당신의 아이디어가 현실이 되도록,
               <br />
-              <p className="text-yellow-001 inline">단 3일</p>
+              <p className="inline text-lg text-blue-000 md:text-xl">단 3일</p>
               만에 시장의 답을 보여드립니다.
             </h2>
           </div>
