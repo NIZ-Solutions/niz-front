@@ -40,8 +40,8 @@ function App() {
         <ErrorBoundary fallback={<Error />}>
           <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>
-              <Modal />
               <Nav />
+              <Modal />
               <BackgroundPortal />
               <Router />
             </PersistGate>

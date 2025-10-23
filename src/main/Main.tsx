@@ -1,4 +1,3 @@
-import BackgroundPortal from "../components/BackgroundLayerPortal";
 import Footer from "../components/layout/Footer";
 import Intro from "./Intro";
 import Plan from "./Plan";

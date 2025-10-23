@@ -23,21 +23,32 @@ export default function DateDropdown(handleClickTime: TimeDropdownProps) {
     "17:00",
     "17:30",
   ];
+  const scrollStyle = {
+    WebkitOverflowScrolling: "auto" as const, // iOS 안정성 ↑ (필요시 'touch'로)
+    touchAction: "pan-y" as const,
+    overscrollBehavior: "contain" as const,
+  };
 
   return (
     <>
-      <ul className="back-glass flex w-full flex-col justify-start overflow-y-scroll rounded-md py-2 drop-shadow-lg">
-        {timeArr.map((el) => (
-          <li
-            key={`${el}-time`}
-            id={`${el}-time`}
-            onClick={() => handleClickTime?.handleClickTime(el)}
-            className="py-1 hover:bg-white/10"
-          >
-            {el}
-          </li>
-        ))}
-      </ul>
+      <div className="relative h-full min-h-0 overflow-hidden rounded-3xl">
+        <div className="pointer-events-none absolute inset-0 rounded-3xl back-glass" />
+        <ul
+          style={scrollStyle}
+          className="relative h-full min-h-0 w-full space-y-1 overflow-y-auto py-2"
+        >
+          {timeArr.map((el) => (
+            <li
+              key={`${el}-time`}
+              id={`${el}-time`}
+              onClick={() => handleClickTime?.handleClickTime(el)}
+              className="dropdown w-full py-1.5 pl-4 text-left hover:bg-white/10"
+            >
+              {el}
+            </li>
+          ))}
+        </ul>
+      </div>
     </>
   );
 }
