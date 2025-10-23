@@ -3,6 +3,11 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      screens: {
+        bh: {
+          raw: "(min-height: 600px)",
+        },
+      },
       animation: {
         border: "border 4s linear infinite",
         loading: "loading 5s infinite",
@@ -106,15 +111,27 @@ module.exports = {
           "@apply relative items-center justify-center hover:drop-shadow": "",
         },
         ".btn-glass-span": {
-          "@apply bg-black/5 glowing-border inline-flex w-full items-center justify-center px-6 py-3 text-white shadow-lg ring-1 ring-black/5 backdrop-blur-sm backdrop-saturate-150 transition-transform duration-300 ease-out active:scale-[0.97] group-hover:scale-[0.985] supports-[backdrop-filter]:backdrop-blur-sm":
+          "@apply bg-black/5 glowing-border inline-flex w-full items-center justify-center px-6 py-[11px] text-white shadow-lg ring-1 ring-black/5 backdrop-blur-sm backdrop-saturate-150 transition-transform duration-300 ease-out active:scale-[0.97] group-hover:scale-[0.985] supports-[backdrop-filter]:backdrop-blur-sm":
             "",
         },
         ".btn-glass-span-slim": {
           "@apply glowing-border inline-flex w-full items-center justify-center px-6 py-1.5 text-white shadow-lg ring-1 ring-black/5 backdrop-blur-sm backdrop-saturate-150 transition-transform duration-300 ease-out active:scale-[0.97] group-hover:scale-[0.985] supports-[backdrop-filter]:backdrop-blur-sm":
             "",
         },
+        ".btn-glass-span-modal": {
+          "@apply bg-black/5 glowing-border inline-flex w-full items-center justify-center px-6 py-[8px] text-white shadow-lg ring-1 ring-black/5 backdrop-blur-sm backdrop-saturate-150 transition-transform duration-300 ease-out active:scale-[0.97] group-hover:scale-[0.985] supports-[backdrop-filter]:backdrop-blur-sm":
+            "",
+        },
         ".btn-glass-span-active": {
           "@apply glowing-border-active inline-flex w-full items-center justify-center px-6 py-3 text-white shadow-lg ring-1 ring-black/5 backdrop-blur-sm backdrop-saturate-150 transition-transform duration-300 ease-out active:scale-[0.97] group-hover:scale-[0.985] supports-[backdrop-filter]:backdrop-blur-sm":
+            "",
+        },
+        ".btn-glass-span-slim-active": {
+          "@apply glowing-border-active inline-flex w-full items-center justify-center px-6 py-1.5 text-white shadow-lg ring-1 ring-black/5 backdrop-blur-sm backdrop-saturate-150 transition-transform duration-300 ease-out active:scale-[0.97] group-hover:scale-[0.985] supports-[backdrop-filter]:backdrop-blur-sm":
+            "",
+        },
+        ".btn-glass-span-modal-active": {
+          "@apply glowing-border-active inline-flex w-full items-center justify-center px-6 py-[8px] text-white shadow-lg ring-1 ring-black/5 backdrop-blur-sm backdrop-saturate-150 transition-transform duration-300 ease-out active:scale-[0.97] group-hover:scale-[0.985] supports-[backdrop-filter]:backdrop-blur-sm":
             "",
         },
       });
