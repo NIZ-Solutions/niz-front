@@ -35,6 +35,7 @@ function App() {
           </filter>
         </defs>
       </svg>
+
       <BrowserRouter>
         <ScrollToTop />
         <ErrorBoundary fallback={<Error />}>

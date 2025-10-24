@@ -28,8 +28,6 @@ body,
 #root {
   height: 100%;
   background: transparent;
-  -webkit-overflow-scrolling: auto;
-  overscroll-behavior: none;
 }
 
 body {
