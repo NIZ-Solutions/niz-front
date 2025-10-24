@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useState } from "react";
+import { useEffect, useCallback, useState, useRef } from "react";
 import WhiteLogo from "../../assets/logo_white.png";
 import { useAppDispatch } from "../../hooks/useDispatch";
 import { closeModal } from "../../store/modalSlice";
@@ -9,15 +9,19 @@ import { postLogin } from "../../api/user/userAxios";
 import { ReactComponent as KakaoLogo } from "../../assets/kakao-logo.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import useScrollLock from "../../hooks/useScrollLock";
 
 export default function LoginModal() {
   const dispatch = useAppDispatch();
+  const tempRef = useRef<HTMLDivElement>(null);
+  const { lock, unlock } = useScrollLock(() => null);
 
   // ESC로 닫기
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         document.body.classList.remove("touch-none");
+        unlock();
         dispatch(closeModal());
       }
     };
@@ -26,6 +30,7 @@ export default function LoginModal() {
   }, [dispatch]);
 
   // 뒤쪽 스크롤 방지
+  lock();
   useEffect(() => {
     const { body } = document;
     const prevOverflow = body.style.overflow;
@@ -53,6 +58,7 @@ export default function LoginModal() {
     (e: React.MouseEvent<HTMLDivElement>) => {
       if (e.target === e.currentTarget) {
         document.body.classList.remove("touch-none");
+        unlock();
         dispatch(closeModal());
       }
     },
@@ -149,6 +155,7 @@ export default function LoginModal() {
     if (resPostLogin.status === "Success" && resPostLogin.responseData) {
       dispatch(login(resPostLogin.responseData.data));
       document.body.classList.remove("touch-none");
+      unlock();
       dispatch(closeModal());
     }
   }, [resPostLogin.status, resPostLogin.responseData, dispatch, navigate]);
@@ -157,6 +164,7 @@ export default function LoginModal() {
   const handleKakaoLogin = (e: any) => {
     e.preventDefault();
     document.body.classList.remove("touch-none");
+    unlock();
     dispatch(closeModal());
     window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URL}&response_type=code`;
   };
@@ -166,9 +174,10 @@ export default function LoginModal() {
       aria-modal="true"
       aria-label="경고"
       onClick={handleBackdropClick}
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70"
+      className="fixed inset-0 z-[9999] flex min-h-[110svh] items-center justify-center bg-black/70"
     >
       <div
+        ref={tempRef}
         className="relative flex h-[min(70vh,600px)] w-[min(80vw,400px)] flex-col justify-end overflow-auto rounded-xl px-6 font-light text-gray-000 shadow-xl back-glass"
         // 내부 클릭은 닫히지 않게
         onClick={(e) => e.stopPropagation()}
