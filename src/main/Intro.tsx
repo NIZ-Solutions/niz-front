@@ -29,8 +29,22 @@ export default function Intro() {
         ref={section1}
         className="intro-snap flex min-h-screen flex-col items-center justify-center gap-20 px-8 pt-[60px] supports-[height:100dvh]:min-h-[100dvh]"
       >
-        <h2 className="text-3xl font-bold md:text-4xl">Step1. 아이디어 작성</h2>
-        <div className="flex flex-col items-center justify-center py-12">
+        <h2
+          className={
+            isInViewport.activeIndex === 0
+              ? "slide-down text-3xl font-bold md:text-4xl"
+              : "hidden"
+          }
+        >
+          Step1. 아이디어 작성
+        </h2>
+        <div
+          className={
+            isInViewport.activeIndex === 0
+              ? "animate-fadein flex flex-col items-center justify-center py-12"
+              : "hidden"
+          }
+        >
           <p className="w-fit overflow-hidden whitespace-nowrap pb-4 text-5xl font-bold text-white">
             WRITE YOUR
           </p>
@@ -48,8 +62,22 @@ export default function Intro() {
         ref={section2}
         className="intro-snap flex min-h-screen flex-col items-center justify-center gap-20 px-8 pt-[60px] supports-[height:100dvh]:min-h-[100dvh]"
       >
-        <h2 className="text-3xl font-bold md:text-4xl">Step2. 제작</h2>
-        <div className="relative py-16">
+        <h2
+          className={
+            isInViewport.activeIndex === 1
+              ? "slide-down text-3xl font-bold md:text-4xl"
+              : "hidden"
+          }
+        >
+          Step2. 제작
+        </h2>
+        <div
+          className={
+            isInViewport.activeIndex === 1
+              ? "animate-fadein relative py-16"
+              : "hidden"
+          }
+        >
           <div className="loading text-5xl font-bold before:text-black-000 before:content-['MAKING...'] after:absolute after:left-0 after:top-0 after:z-20 after:w-0 after:animate-loading after:overflow-hidden after:text-white-000 after:opacity-100 after:content-['MAKING...']" />
         </div>
         <p className={isInViewport.activeIndex === 1 ? "slide-top" : "hidden"}>
@@ -64,10 +92,22 @@ export default function Intro() {
         ref={section3}
         className="intro-snap flex min-h-screen flex-col items-center justify-center gap-20 px-8 pt-[60px] supports-[height:100dvh]:min-h-[100dvh]"
       >
-        <h2 className="text-3xl font-bold md:text-4xl">
+        <h2
+          className={
+            isInViewport.activeIndex === 2
+              ? "slide-down text-3xl font-bold md:text-4xl"
+              : "hidden"
+          }
+        >
           Step3. 고객 데이터 수집
         </h2>
-        <div className="relative py-28">
+        <div
+          className={
+            isInViewport.activeIndex === 2
+              ? "animate-fadein relative py-28"
+              : "hidden"
+          }
+        >
           <div className="spinner-box">
             <div className="blue-orbit leo" />
             <div className="green-orbit leo" />
@@ -90,7 +130,13 @@ export default function Intro() {
         ref={section4}
         className="intro-snap flex min-h-screen flex-col items-center justify-center gap-14 px-8 pt-[60px] supports-[height:100dvh]:min-h-[100dvh]"
       >
-        <h2 className="pb-3 text-3xl font-bold leading-[40px] md:text-4xl md:leading-[50px]">
+        <h2
+          className={
+            isInViewport.activeIndex === 3
+              ? "slide-down pb-3 text-3xl font-bold leading-[40px] md:text-4xl md:leading-[50px]"
+              : "hidden"
+          }
+        >
           단 3일 후<br />
           시장의 진짜 반응을
           <br />

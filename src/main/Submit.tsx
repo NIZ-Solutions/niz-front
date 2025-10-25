@@ -1,6 +1,8 @@
 import useModal from "../hooks/useModal";
+import { useLayoutEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../hooks/useSelector";
+import * as THREE from "three";
 
 export default function Submit() {
   const navigate = useNavigate();
@@ -23,8 +25,11 @@ export default function Submit() {
       }
     }
   };
+
+  const [value, setValue] = useState("");
+
   return (
-    <div className="submit intro-snap flex min-h-screen w-full max-w-screen-lg snap-center snap-always flex-col items-center justify-center gap-8 px-7 text-center md:flex-row lg:px-0">
+    <div className="submit intro-snap flex min-h-screen w-full max-w-screen-lg snap-center snap-always flex-col items-center justify-center gap-8 px-7 pt-[60px] text-center md:flex-row lg:px-0">
       <div className="flex flex-col gap-6 text-white drop-shadow-lg md:min-w-[40%]">
         <h1 className="text-4xl font-extrabold leading-[50px]">
           감이 아닌,
@@ -38,37 +43,35 @@ export default function Submit() {
           만에 시장의 답을 보여드립니다.
         </h2>
       </div>
-      <form className="submit flex h-fit w-full min-w-[280px] flex-col gap-6 md:max-w-[50%]">
-        {/* <div className="min-h-[15svh] w-full animate-border content-center rounded-xl border-[3px] border-transparent [background:linear-gradient(45deg,#F5F5F5)_padding-box,conic-gradient(from_var(--border-angle),#D0D0D0_50%,_#126DD7_86%,_#0F9AFB_90%,_#126DD7_94%,_#D0D0D0_100%)_border-box]"> */}
-        {/* <div className="rounded-[9px] bg-white-000 p-4 dark:bg-black-000"> */}
-        <div className="rounded-[15px] p-5 shadow-lg back-glass">
+      <form className="submit flex h-fit w-full min-w-[280px] flex-col gap-12 md:max-w-[50%]">
+        <div className="relative min-h-[30svh] overflow-hidden rounded-[50px] shadow-lg">
+          <div className="back-glass-v2" />
           <textarea
             id="submit-textarea"
-            className="min-h-[20svh] w-full resize-none rounded-[15px] bg-transparent p-1 placeholder:font-light placeholder:text-white placeholder:dark:text-gray-001"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            maxLength={1500}
+            className="back-glass-inner absolute left-0 z-10 min-h-[30svh] w-full resize-none rounded-[50px] bg-black/5 p-8 text-white outline-none placeholder:font-light placeholder:text-white"
             placeholder="시장 반응을 확인하고 싶은 아이디어가 있다면 입력해주세요. 아이디어에 대해 구체적으로 설명해 주시면 보다 정확하게 제안 받으실 수 있어요."
-          ></textarea>
+          />
+          <div className="absolute bottom-5 right-6 z-10 text-xs text-gray-300">
+            {value.length}/1500
+          </div>
         </div>
-        {/* <button
-          type="button"
-          onClick={handleSubscription}
-          className="w-full rounded-lg bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#126DD7] to-[#0F9AFB] py-3 text-xl font-extrabold text-white-000"
-        > */}
-        {/* <button
-          type="button"
-          onClick={handleSubscription}
-          className="glowing-border w-full py-3 text-xl font-extrabold text-white-000 shadow-lg ring-1 ring-black/5 backdrop-blur-md backdrop-saturate-150 supports-[backdrop-filter]:backdrop-blur-md"
-        >
-          신청하기
-        </button> */}
-        <button
-          type="button"
-          onClick={handleSubscription}
-          className="btn-glass"
-        >
-          <span className="rounded-[15px] font-extrabold btn-glass-span">
-            신청하기
-          </span>
-        </button>
+        <div className="relative min-w-[40%] self-center overflow-hidden rounded-full md:w-full">
+          <div
+            className="back-glass-v2 pointer-events-none absolute inset-0 left-0 -z-10 w-full"
+            aria-hidden="true"
+          />
+
+          <button
+            type="button"
+            onClick={handleSubscription}
+            className="back-glass-inner relative z-10 w-full self-center rounded-full bg-black/5 p-3 text-white outline-none"
+          >
+            <span className="rounded-full font-extrabold">신청하기</span>
+          </button>
+        </div>
       </form>
     </div>
   );

@@ -5,7 +5,6 @@ export type GradientLineChartProps = {
   labels?: string[];
   data?: number[];
   label?: string;
-  /** CSS color for the line stroke */
   borderColor?: string;
   /** 전체 텍스트 컬러(legend, tooltip 기본, ticks 기본) */
   textColor?: string;
@@ -86,7 +85,7 @@ const GradientLineChart: React.FC<GradientLineChartProps> = ({
           maintainAspectRatio: true,
           animation: prefersReduced
             ? false
-            : { duration: 520, easing: "easeInOutQuad" as const },
+            : { duration: 1000, easing: "easeInOutQuad" as const },
           plugins: {
             legend: {
               display: false,
@@ -129,39 +128,6 @@ const GradientLineChart: React.FC<GradientLineChartProps> = ({
       chartRef.current?.destroy();
       chartRef.current = null;
     };
-
-    // if (animateOnView) {
-    //   const target = containerRef.current;
-    //   if (!target) {
-    //     createChart();
-    //     return () => destroyChart();
-    //   }
-    //   const io = new IntersectionObserver(
-    //     (entries) => {
-    //       entries.forEach((entry) => {
-    //         if (entry.isIntersecting) {
-    //           visibleRef.current = true;
-    //           if (!chartRef.current) createChart();
-    //         } else {
-    //           console.log(entry);
-    //           visibleRef.current = false;
-    //           if (replayOnScroll) destroyChart();
-    //         }
-    //       });
-    //     },
-    //     { threshold: viewThreshold },
-    //   );
-    //   io.observe(target);
-
-    //   const onResize = () => chartRef.current?.resize();
-    //   window.addEventListener("resize", onResize);
-
-    //   return () => {
-    //     io.disconnect();
-    //     window.removeEventListener("resize", onResize);
-    //     destroyChart();
-    //   };
-    // }
 
     if (animateOnView) {
       const target = containerRef.current;

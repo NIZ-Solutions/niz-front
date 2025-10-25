@@ -81,7 +81,7 @@ export default function LoginModal() {
     if (maxlength !== 10) PWDIV.classList.remove("first");
 
     if (v.length > maxlength) {
-      alert(`최대 ${maxlength}자리까지 입력 가능합니다 !`);
+      // alert(`최대 ${maxlength}자리까지 입력 가능합니다 !`);
       if (maxlength === 10) ID.value = v.slice(0, maxlength);
       else PW.value = v.slice(0, maxlength);
     }

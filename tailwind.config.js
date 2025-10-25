@@ -12,8 +12,17 @@ module.exports = {
         border: "border 4s linear infinite",
         loading: "loading 5s infinite",
         typing: "typing 3s steps(20) infinite alternate, blink .7s infinite",
+        fadein: "fadein 2s",
       },
       keyframes: {
+        fadein: {
+          "0%": {
+            opacity: "0",
+          },
+          "100%": {
+            opacity: "1",
+          },
+        },
         moveInCircle: {
           "0%": { transform: "rotate(0deg) translateX(6%) rotate(0deg)" },
           "50%": { transform: "rotate(180deg) translateX(6%) rotate(-180deg)" },
