@@ -19,6 +19,7 @@ export type GradientLineChartProps = {
   animateOnView?: boolean; // 뷰포트 진입 시에만 렌더/애니메이션
   viewThreshold?: number; // 교차 임계값(0~1)
   replayOnScroll?: boolean;
+  isIntersecting?: boolean;
 };
 
 const GradientLineChart: React.FC<GradientLineChartProps> = ({
@@ -34,6 +35,7 @@ const GradientLineChart: React.FC<GradientLineChartProps> = ({
   animateOnView = true,
   viewThreshold = 0.2,
   replayOnScroll = false,
+  isIntersecting = false,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const chartRef = useRef<Chart | null>(null);
@@ -74,7 +76,6 @@ const GradientLineChart: React.FC<GradientLineChartProps> = ({
               backgroundColor: gradient,
               borderColor,
               borderWidth: 1,
-              // pointBackgroundColor: "white",
               fill: true,
               tension: 0.4,
             },
@@ -129,6 +130,39 @@ const GradientLineChart: React.FC<GradientLineChartProps> = ({
       chartRef.current = null;
     };
 
+    // if (animateOnView) {
+    //   const target = containerRef.current;
+    //   if (!target) {
+    //     createChart();
+    //     return () => destroyChart();
+    //   }
+    //   const io = new IntersectionObserver(
+    //     (entries) => {
+    //       entries.forEach((entry) => {
+    //         if (entry.isIntersecting) {
+    //           visibleRef.current = true;
+    //           if (!chartRef.current) createChart();
+    //         } else {
+    //           console.log(entry);
+    //           visibleRef.current = false;
+    //           if (replayOnScroll) destroyChart();
+    //         }
+    //       });
+    //     },
+    //     { threshold: viewThreshold },
+    //   );
+    //   io.observe(target);
+
+    //   const onResize = () => chartRef.current?.resize();
+    //   window.addEventListener("resize", onResize);
+
+    //   return () => {
+    //     io.disconnect();
+    //     window.removeEventListener("resize", onResize);
+    //     destroyChart();
+    //   };
+    // }
+
     if (animateOnView) {
       const target = containerRef.current;
       if (!target) {
@@ -136,39 +170,22 @@ const GradientLineChart: React.FC<GradientLineChartProps> = ({
         return () => destroyChart();
       }
 
-      const io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              visibleRef.current = true;
-              if (!chartRef.current) createChart();
-            } else {
-              visibleRef.current = false;
-              if (replayOnScroll) destroyChart();
-            }
-          });
-        },
-        { threshold: viewThreshold },
-      );
-      io.observe(target);
-
-      const onResize = () => chartRef.current?.resize();
-      window.addEventListener("resize", onResize);
-
-      return () => {
-        io.disconnect();
-        window.removeEventListener("resize", onResize);
-        destroyChart();
-      };
+      if (isIntersecting) {
+        visibleRef.current = true;
+        if (!chartRef.current) createChart();
+      } else {
+        visibleRef.current = false;
+        if (replayOnScroll) destroyChart();
+      }
     }
 
-    createChart();
-    const onResize = () => chartRef.current?.resize();
-    window.addEventListener("resize", onResize);
-    return () => {
-      window.removeEventListener("resize", onResize);
-      destroyChart();
-    };
+    // createChart();
+    // const onResize = () => chartRef.current?.resize();
+    // window.addEventListener("resize", onResize);
+    // return () => {
+    //   window.removeEventListener("resize", onResize);
+    //   destroyChart();
+    // };
   }, [
     labels,
     data,
@@ -182,6 +199,7 @@ const GradientLineChart: React.FC<GradientLineChartProps> = ({
     animateOnView,
     viewThreshold,
     replayOnScroll,
+    isIntersecting,
   ]);
 
   return (

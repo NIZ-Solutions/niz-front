@@ -1,18 +1,34 @@
 import { useRef } from "react";
 import useSnap from "../hooks/useSnap";
 import GradientLineChart from "../components/GradientLineChart";
+import useIntersectionObsever from "../hooks/useIntersectionObserver";
 
 export default function Intro() {
   const wrapRef = useRef<HTMLDivElement>(null);
   useSnap(wrapRef);
+
+  const section1 = useRef<HTMLDivElement | null>(null);
+  const section2 = useRef<HTMLDivElement | null>(null);
+  const section3 = useRef<HTMLDivElement | null>(null);
+  const section4 = useRef<HTMLDivElement | null>(null);
+  const isInViewport = useIntersectionObsever(
+    [section1, section2, section3, section4],
+    {
+      threshold: 1,
+      rootMargin: "0px 0px -20% 0px",
+      once: false,
+    },
+  );
 
   return (
     <div
       ref={wrapRef}
       className="w-full scroll-smooth text-center text-lg md:text-2xl"
     >
-      {/* 섹션 1 */}
-      <section className="intro-snap flex min-h-[100svh] flex-col items-center justify-center gap-20 px-8 pt-[60px] supports-[height:100dvh]:min-h-[100dvh]">
+      <section
+        ref={section1}
+        className="intro-snap flex min-h-screen flex-col items-center justify-center gap-20 px-8 pt-[60px] supports-[height:100dvh]:min-h-[100dvh]"
+      >
         <h2 className="text-3xl font-bold md:text-4xl">Step1. 아이디어 작성</h2>
         <div className="flex flex-col items-center justify-center py-12">
           <p className="w-fit overflow-hidden whitespace-nowrap pb-4 text-5xl font-bold text-white">
@@ -22,19 +38,21 @@ export default function Intro() {
             OWN IDEAS !
           </h1>
         </div>
-        <p>
+        <p className={isInViewport.activeIndex === 0 ? "slide-top" : "hidden"}>
           여러분의 아이디어를 <br />
           이해할 수 있도록 설명해주세요
         </p>
       </section>
 
-      {/* 섹션 2 */}
-      <section className="intro-snap flex min-h-[100svh] flex-col items-center justify-center gap-20 px-8 pt-[60px] supports-[height:100dvh]:min-h-[100dvh]">
+      <section
+        ref={section2}
+        className="intro-snap flex min-h-screen flex-col items-center justify-center gap-20 px-8 pt-[60px] supports-[height:100dvh]:min-h-[100dvh]"
+      >
         <h2 className="text-3xl font-bold md:text-4xl">Step2. 제작</h2>
         <div className="relative py-16">
           <div className="loading text-5xl font-bold before:text-black-000 before:content-['MAKING...'] after:absolute after:left-0 after:top-0 after:z-20 after:w-0 after:animate-loading after:overflow-hidden after:text-white-000 after:opacity-100 after:content-['MAKING...']" />
         </div>
-        <p>
+        <p className={isInViewport.activeIndex === 1 ? "slide-top" : "hidden"}>
           아이디어를 바탕으로
           <br />
           랜딩페이지와 설문문항을 만듭니다
@@ -42,7 +60,10 @@ export default function Intro() {
       </section>
 
       {/* 섹션 3 */}
-      <section className="intro-snap flex min-h-[100svh] flex-col items-center justify-center gap-20 px-8 pt-[60px] supports-[height:100dvh]:min-h-[100dvh]">
+      <section
+        ref={section3}
+        className="intro-snap flex min-h-screen flex-col items-center justify-center gap-20 px-8 pt-[60px] supports-[height:100dvh]:min-h-[100dvh]"
+      >
         <h2 className="text-3xl font-bold md:text-4xl">
           Step3. 고객 데이터 수집
         </h2>
@@ -56,7 +77,7 @@ export default function Intro() {
             <div className="white-orbit w3 leo" />
           </div>
         </div>
-        <p>
+        <p className={isInViewport.activeIndex === 2 ? "slide-top" : "hidden"}>
           아이디어에 적합한 방식으로 <br />
           홍보를 진행하며
           <br />
@@ -65,15 +86,23 @@ export default function Intro() {
       </section>
 
       {/* 섹션 4 */}
-      <section className="intro-snap flex min-h-[100svh] flex-col items-center justify-center gap-14 px-8 pt-[60px] supports-[height:100dvh]:min-h-[100dvh]">
+      <section
+        ref={section4}
+        className="intro-snap flex min-h-screen flex-col items-center justify-center gap-14 px-8 pt-[60px] supports-[height:100dvh]:min-h-[100dvh]"
+      >
         <h2 className="pb-3 text-3xl font-bold leading-[40px] md:text-4xl md:leading-[50px]">
           단 3일 후<br />
           시장의 진짜 반응을
           <br />
           리포트로 확인하세요.
         </h2>
-        <GradientLineChart animateOnView replayOnScroll viewThreshold={0.2} />
-        <p>
+        <GradientLineChart
+          animateOnView
+          replayOnScroll
+          viewThreshold={0.9}
+          isIntersecting={isInViewport.activeIndex === 3 ? true : false}
+        />
+        <p className={isInViewport.activeIndex === 3 ? "slide-top" : "hidden"}>
           버튼 클릭률, 관심 포인트 <br />
           설문조사 결과를 제공합니다
         </p>

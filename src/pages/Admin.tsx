@@ -1,14 +1,10 @@
 import { useState, useEffect } from "react";
 import { useAppDispatch } from "../hooks/useDispatch";
-import { login } from "../store/userSlice";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import useAxios from "../hooks/useAxios";
 import { postLogin } from "../api/user/userAxios";
-import { ReactComponent as KakaoLogo } from "../assets/kakao-logo.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import Footer from "../components/layout/Footer";
 
 export default function Admin() {
   const [id, setId] = useState<string>("");
