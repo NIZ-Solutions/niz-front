@@ -124,6 +124,7 @@ export default function useScrollLock(getAllowElement: GetAllow) {
     (html.style as any).touchAction = "";
     (body.style as any).touchAction = "";
     body.classList.remove("touch-none");
+    primeScrollable(body);
   }, []);
 
   return { lock, unlock };

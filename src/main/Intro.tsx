@@ -99,7 +99,7 @@ export default function Intro() {
         <GradientLineChart
           animateOnView
           replayOnScroll
-          viewThreshold={0.9}
+          viewThreshold={0.4}
           isIntersecting={isInViewport.activeIndex === 3 ? true : false}
         />
         <p className={isInViewport.activeIndex === 3 ? "slide-top" : "hidden"}>

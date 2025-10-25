@@ -175,7 +175,7 @@ const GradientLineChart: React.FC<GradientLineChartProps> = ({
         if (!chartRef.current) createChart();
       } else {
         visibleRef.current = false;
-        if (replayOnScroll) destroyChart();
+        destroyChart();
       }
     }
 
