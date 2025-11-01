@@ -5,7 +5,7 @@ import { useAppDispatch } from "../../hooks/useDispatch";
 import { logout } from "../../store/userSlice";
 import useAxios from "../../hooks/useAxios";
 import { postLogout } from "../../api/user/userAxios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Nav() {
   const navigate = useNavigate();
@@ -13,6 +13,7 @@ export default function Nav() {
   const user = useAppSelector((state) => state.user).data;
   const loggedIn = user !== null ? true : false;
   const isLanding = location.pathname.includes("landingpages");
+  const isAdmin = location.pathname.includes("admin");
 
   // 로그아웃
   const resPostLogout = useAxios(
@@ -40,10 +41,10 @@ export default function Nav() {
 
   return (
     <>
-      {isLanding ? (
+      {isLanding || isAdmin ? (
         <></>
       ) : (
-        <nav className="fixed inset-x-0 z-50">
+        <nav id="nav" className="fixed top-0 z-50">
           <div className="navbar-container flex w-screen justify-center border border-white/10 bg-black/30 shadow-lg ring-1 ring-black/5 backdrop-blur-md backdrop-saturate-150 supports-[backdrop-filter]:backdrop-blur-md">
             <div className="navbar flex w-full max-w-screen-lg flex-row items-center justify-between px-4">
               {/* 로고 */}

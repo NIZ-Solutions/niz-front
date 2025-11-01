@@ -66,7 +66,7 @@ export default function Intro() {
 
       {/* 섹션 4 */}
       <section className="intro-snap flex min-h-[100svh] flex-col items-center justify-center gap-14 px-8 pt-[60px] supports-[height:100dvh]:min-h-[100dvh]">
-        <h2 className="pb-10 text-4xl font-extrabold leading-[50px]">
+        <h2 className="pb-3 text-3xl font-bold leading-[40px] md:text-4xl md:leading-[50px]">
           단 3일 후<br />
           시장의 진짜 반응을
           <br />

@@ -35,13 +35,17 @@ export default function TermModal() {
     return () => {
       body.style.overflow = prevOverflow;
       body.style.paddingRight = prevPaddingRight;
+      body.classList.add("touch-none");
     };
   }, []);
 
   // 배경 클릭시 닫기
   const handleBackdropClick = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
-      if (e.target === e.currentTarget) dispatch(closeModal());
+      if (e.target === e.currentTarget) {
+        document.body.classList.remove("touch-none");
+        dispatch(closeModal());
+      }
     },
     [dispatch],
   );
@@ -52,32 +56,32 @@ export default function TermModal() {
       aria-modal="true"
       aria-label="약관"
       onClick={handleBackdropClick}
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/40"
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50"
     >
       {/* 모달 내용 */}
       <div
-        className="max-h-[80vh] w-[min(80vw,800px)] overflow-auto rounded-xl bg-white p-8 text-black-000 shadow-xl"
+        className="max-h-[70vh] w-[min(80vw,800px)] overflow-auto rounded-xl p-6 font-light text-gray-001 shadow-xl back-glass md:w-[min(60vw,800px)] md:p-10"
         // 내부 클릭은 닫히지 않게
         onClick={(e) => e.stopPropagation()}
       >
         <header className="mb-8 flex flex-row items-start justify-between">
-          <h2 className="text-2xl font-bold">이용약관 전문</h2>
-          <button
+          <h2 className="text-xl font-bold md:text-2xl">이용약관 전문</h2>
+          {/* <button
             type="button"
             className="text-xl"
             onClick={() => dispatch(closeModal())}
             aria-label="닫기"
           >
             <FontAwesomeIcon icon={faXmark} color="#A0A0A0" />
-          </button>
+          </button> */}
         </header>
 
         {/* 약관 본문 */}
         <section className="prose flex max-w-none flex-col gap-10">
           {/* ...약관 내용*/}
-          <div className="flex flex-col gap-2">
-            <h3 className="text-lg font-semibold">1. 이용약관</h3>
+          <div className="flex flex-col gap-3">
             <div>
+              <h3 className="pb-3 text-lg font-bold">1. 이용약관</h3>
               <p className="font-semibold">제1조 (목적)</p>
               <p>
                 본 약관은 NIZ(이하 “회사”)가 제공하는 서비스의 이용과 관련하여
@@ -143,10 +147,10 @@ export default function TermModal() {
             </div>
           </div>
           <div className="flex flex-col gap-2">
-            <h3 className="text-lg font-semibold">
-              2. 개인정보 수집 및 이용 약관
-            </h3>
             <div>
+              <h3 className="pb-3 text-lg font-bold">
+                2. 개인정보 수집 및 이용 약관
+              </h3>
               <p className="font-semibold">제1조 (수집 항목)</p>
               <p>
                 - 필수 항목: 이름, 이메일, 연락처 <br />- 선택 항목: 웹로그
@@ -189,8 +193,8 @@ export default function TermModal() {
             </div>
           </div>
           <div className="flex flex-col gap-2">
-            <h3 className="text-lg font-semibold">3. 결제 및 환불 약관</h3>
             <div>
+              <h3 className="pb-3 text-lg font-bold">3. 결제 및 환불 약관</h3>
               <p className="font-semibold">제1조 (결제)</p>
               <p>
                 1. 결제는 신용카드, 계좌이체, 간편결제 등 회사가 지정한 방식으로
@@ -233,7 +237,7 @@ export default function TermModal() {
               </p>
             </div>
           </div>
-          <div className="flex flex-col gap-2">
+          {/* <div className="flex flex-col gap-2">
             <h3 className="text-lg font-semibold">4. 마케팅 정보 수신 동의</h3>
             <div>
               <p className="font-semibold">제1조 (수집 항목)</p>
@@ -254,15 +258,17 @@ export default function TermModal() {
                 통해 동의를 철회할 수 있습니다.
               </p>
             </div>
-          </div>
+          </div> */}
         </section>
         <button
           type="button"
-          className="mt-10 w-full rounded-xl py-3 text-xl font-extrabold text-white-000 main-gradient"
           onClick={() => dispatch(closeModal())}
           aria-label="닫기"
+          className="mt-8 w-full btn-glass"
         >
-          닫기
+          <span className="rounded-xl text-[16px] text-xs font-normal btn-glass-span md:text-base md:font-semibold">
+            닫기
+          </span>
         </button>
       </div>
     </div>

@@ -10,6 +10,7 @@ import Niz from "../landingpages/Niz";
 import Loading from "../pages/Loading";
 import SubscriptionLoading from "../pages/SubscriptionLoading";
 import Analytics from "../api/ga4/setAnalytics";
+import Admin from "../pages/Admin";
 
 export default function router() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -28,6 +29,7 @@ export default function router() {
       <Route path="/subscription/loading" element={<SubscriptionLoading />} />
       <Route path="/subscription/complete" element={<Complete />} />
       <Route path="/landingpages/niz" element={<Niz />} />
+      <Route path="/admin" element={<Admin />} />
     </Routes>
   );
 }

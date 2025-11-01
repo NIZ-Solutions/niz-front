@@ -1,28 +1,36 @@
-import { useEffect, useCallback, useState } from "react";
+import { useEffect, useCallback, useState, useRef } from "react";
 import WhiteLogo from "../../assets/logo_white.png";
 import { useAppDispatch } from "../../hooks/useDispatch";
 import { closeModal } from "../../store/modalSlice";
 import { login } from "../../store/userSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAxios from "../../hooks/useAxios";
 import { postLogin } from "../../api/user/userAxios";
 import { ReactComponent as KakaoLogo } from "../../assets/kakao-logo.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import useScrollLock from "../../hooks/useScrollLock";
 
-export default function TermModal() {
+export default function LoginModal() {
   const dispatch = useAppDispatch();
+  const tempRef = useRef<HTMLDivElement>(null);
+  const { lock, unlock } = useScrollLock(() => null);
 
   // ESC로 닫기
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") dispatch(closeModal());
+      if (e.key === "Escape") {
+        document.body.classList.remove("touch-none");
+        unlock();
+        dispatch(closeModal());
+      }
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [dispatch]);
 
   // 뒤쪽 스크롤 방지
+  lock();
   useEffect(() => {
     const { body } = document;
     const prevOverflow = body.style.overflow;
@@ -41,13 +49,18 @@ export default function TermModal() {
     return () => {
       body.style.overflow = prevOverflow;
       body.style.paddingRight = prevPaddingRight;
+      body.classList.add("touch-none");
     };
   }, []);
 
   // 배경 클릭시 닫기
   const handleBackdropClick = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
-      if (e.target === e.currentTarget) dispatch(closeModal());
+      if (e.target === e.currentTarget) {
+        document.body.classList.remove("touch-none");
+        unlock();
+        dispatch(closeModal());
+      }
     },
     [dispatch],
   );
@@ -90,16 +103,20 @@ export default function TermModal() {
   useEffect(() => {
     const ID = document.getElementById("id_Input") as HTMLInputElement;
     const PW = document.getElementById("pw_Div") as HTMLElement;
-
-    const loginBtn = document.getElementById("login_Btn") as HTMLButtonElement;
+    const loginBtn = document.getElementById("login_Btn") as HTMLElement;
+    const loginBtnText = document.getElementById(
+      "login-btn-text",
+    ) as HTMLElement;
     if (id !== "") ID.classList.remove("border-red-000");
     if (password !== "") PW.classList.remove("border-red-000");
     if (id !== "" && password !== "") {
-      loginBtn.classList.add("main-gradient");
+      loginBtnText.classList.remove("btn-glass-span-modal");
+      loginBtnText.classList.add("btn-glass-span-modal-active");
     }
-    if (id === "" && password === "") {
-      loginBtn.classList.remove("main-gradient");
-      loginBtn.classList.add("bg-gray-000");
+    if (id === "" || password === "") {
+      loginBtnText.classList.remove("btn-glass-span-modal-active");
+      loginBtn.classList.add("btn-glass");
+      loginBtnText.classList.add("btn-glass-span-modal");
     }
     if (id === "" && !ID.classList.contains("first")) {
       ID.classList.add("border-red-000");
@@ -137,6 +154,8 @@ export default function TermModal() {
   useEffect(() => {
     if (resPostLogin.status === "Success" && resPostLogin.responseData) {
       dispatch(login(resPostLogin.responseData.data));
+      document.body.classList.remove("touch-none");
+      unlock();
       dispatch(closeModal());
     }
   }, [resPostLogin.status, resPostLogin.responseData, dispatch, navigate]);
@@ -144,6 +163,8 @@ export default function TermModal() {
   // 카카오 로그인 인가코드 받아와 메인페이지로 보내기
   const handleKakaoLogin = (e: any) => {
     e.preventDefault();
+    document.body.classList.remove("touch-none");
+    unlock();
     dispatch(closeModal());
     window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URL}&response_type=code`;
   };
@@ -153,82 +174,97 @@ export default function TermModal() {
       aria-modal="true"
       aria-label="경고"
       onClick={handleBackdropClick}
-      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/40"
+      className="fixed inset-0 z-[9999] flex min-h-[110svh] items-center justify-center bg-black/70"
     >
       <div
-        className="relative flex h-[min(80vh,800px)] w-[min(80vw,400px)] flex-col justify-end rounded-xl bg-white text-black-000 shadow-xl"
+        ref={tempRef}
+        className="relative flex h-[min(70vh,600px)] w-[min(80vw,400px)] flex-col justify-end overflow-auto rounded-xl px-6 font-light text-gray-000 shadow-xl back-glass"
         // 내부 클릭은 닫히지 않게
         onClick={(e) => e.stopPropagation()}
       >
-        <header className="absolute top-0 flex h-[min(35vh,350px)] w-full flex-col items-center justify-center gap-3 overflow-auto rounded-t-xl text-white-000 main-gradient">
-          <img alt="로고" src={WhiteLogo} className="w-fit" />
-          <div className="text-center text-3xl font-black">NIZ</div>
-          <div className="text-center text-xl font-medium">
+        <header className="flex h-full w-full flex-col items-center justify-center gap-4 overflow-auto rounded-t-xl text-white-000">
+          <img
+            alt="로고"
+            src={WhiteLogo}
+            className="bh:block hidden w-fit max-w-[50px]"
+          />
+          <div className="bh:block hidden pb-3 text-center text-xl font-medium">
             당신의 아이디어를 <br />단 3일만에, 현실로
           </div>
-        </header>
-        <div className="absolute bottom-0 flex h-[min(45vh,450px)] w-full flex-col items-center justify-between overflow-auto rounded-t-xl py-5">
-          <div className="flex h-full w-full max-w-[90%] flex-col justify-center">
-            <form className="flex h-fit flex-col gap-10">
-              <div className="flex flex-col gap-6">
-                <input
-                  autoFocus
-                  id="id_Input"
-                  className="first border-b-[1.5px] border-gray-001 py-[6px] text-lg focus:border-blue-001"
-                  type="text"
-                  defaultValue={id}
-                  onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    handleOnInput(e.target.value, 10)
-                  }
-                  placeholder="아이디"
-                />
-                <div
-                  className="first relative border-b-[1.5px] border-gray-001 py-[6px] text-lg focus-within:border-blue-001 focus:border-blue-001"
-                  id="pw_Div"
-                >
+          <div className="w-full flex-col items-center justify-between overflow-auto rounded-t-xl text-base md:text-lg">
+            <div className="flex h-full w-full flex-col items-center justify-center">
+              <form className="flex h-fit w-[90%] flex-col gap-6">
+                <div className="flex flex-col gap-3">
                   <input
-                    id="pw_Input"
-                    className="w-full"
-                    type={passwordVisible.type}
-                    placeholder="패스워드"
+                    autoFocus
+                    id="id_Input"
+                    className="first border-b-[1.5px] border-gray-001 bg-transparent py-[6px] focus:border-blue-001"
+                    type="text"
+                    defaultValue={id}
                     onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      handleOnInput(e.target.value, 13)
+                      handleOnInput(e.target.value, 10)
                     }
+                    placeholder="아이디"
                   />
-                  <span
-                    className="absolute bottom-[6px] right-[10px] text-gray-002"
-                    onClick={handlePasswordVisible}
+                  <div
+                    className="first relative border-b-[1.5px] border-gray-001 bg-transparent py-[6px] focus-within:border-blue-001 focus:border-blue-001"
+                    id="pw_Div"
                   >
-                    {passwordVisible.visible ? (
-                      <FontAwesomeIcon icon={faEye} />
-                    ) : (
-                      <FontAwesomeIcon icon={faEyeSlash} />
-                    )}
-                  </span>
+                    <input
+                      id="pw_Input"
+                      className="w-full bg-transparent"
+                      type={passwordVisible.type}
+                      placeholder="패스워드"
+                      onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        handleOnInput(e.target.value, 13)
+                      }
+                    />
+                    <span
+                      className="absolute bottom-[6px] right-[10px]"
+                      onClick={handlePasswordVisible}
+                    >
+                      {passwordVisible.visible ? (
+                        <FontAwesomeIcon icon={faEye} />
+                      ) : (
+                        <FontAwesomeIcon icon={faEyeSlash} />
+                      )}
+                    </span>
+                  </div>
                 </div>
-              </div>
-              {/* 버튼 컨테이너 - 로그인, 카카오로그인 */}
-              <div className="flex flex-col gap-3">
-                <button
-                  id="login_Btn"
-                  className="w-full rounded-xl bg-gray-001 py-3 text-lg font-extrabold text-white-000"
-                  onClick={handleLogin}
-                >
-                  로그인
-                </button>
-                <button
-                  className="flex flex-row items-center justify-center gap-2 rounded-xl bg-kakao-yellow"
-                  onClick={handleKakaoLogin}
-                >
-                  <KakaoLogo height={20} width={20} />
-                  <p className="py-3 text-lg text-black text-opacity-85">
-                    카카오 로그인
-                  </p>
-                </button>
-              </div>
-            </form>
+                {/* 버튼 컨테이너 - 로그인, 카카오로그인 */}
+                <div className="bh:flex-col flex flex-row gap-3">
+                  <button
+                    id="login_Btn"
+                    className="bh:w-full w-[50%] btn-glass"
+                    onClick={handleLogin}
+                  >
+                    <span
+                      id="login-btn-text"
+                      className="btn-glass-span-modal rounded-xl"
+                    >
+                      로그인
+                    </span>
+                  </button>
+                  <button
+                    className="bh:w-full flex w-[50%] flex-row items-center justify-center gap-2 rounded-xl bg-kakao-yellow"
+                    onClick={handleKakaoLogin}
+                  >
+                    <KakaoLogo height={20} width={20} />
+                    <p className="py-[9px] text-black text-opacity-85">
+                      카카오 로그인
+                    </p>
+                  </button>
+                </div>
+              </form>
+              <Link
+                to="/signup"
+                className="pt-5 text-sm text-gray-000 md:text-base"
+              >
+                회원가입
+              </Link>
+            </div>
           </div>
-        </div>
+        </header>
       </div>
     </div>
   );

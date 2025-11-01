@@ -8,10 +8,9 @@ import { postLogin } from "../api/user/userAxios";
 import { ReactComponent as KakaoLogo } from "../assets/kakao-logo.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import BalloonLogo from "../assets/logo-balloon-padding.png";
 import Footer from "../components/layout/Footer";
 
-export default function Login() {
+export default function Admin() {
   const [id, setId] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [passwordVisible, setPasswordVisible] = useState({
@@ -101,16 +100,10 @@ export default function Login() {
   };
   useEffect(() => {
     if (resPostLogin.status === "Success" && resPostLogin.responseData) {
-      dispatch(login(resPostLogin.responseData.data));
-      navigate("/");
+      // dispatch(login(resPostLogin.responseData.data));
+      // navigate("/");
     }
   }, [resPostLogin.status, resPostLogin.responseData, dispatch, navigate]);
-
-  // 카카오 로그인 인가코드 받아와 메인페이지로 보내기
-  const handleKakaoLogin = (e: any) => {
-    e.preventDefault();
-    window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URL}&response_type=code`;
-  };
 
   return (
     <>
@@ -178,26 +171,12 @@ export default function Login() {
                       로그인
                     </span>
                   </button>
-                  <button
-                    className="flex flex-row items-center justify-center gap-2 rounded-xl bg-kakao-yellow"
-                    onClick={handleKakaoLogin}
-                  >
-                    <KakaoLogo height={20} width={20} />
-                    <p className="py-3 text-xl text-black text-opacity-85">
-                      카카오 로그인
-                    </p>
-                  </button>
                 </div>
               </form>
-              {/* 회원가입 */}
-              <Link to="/signup" className="text-lg text-gray-000 md:text-xl">
-                회원가입
-              </Link>
             </div>
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 }

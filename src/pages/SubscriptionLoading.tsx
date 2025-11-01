@@ -48,8 +48,6 @@ export default function SubscriptionLoading() {
 
   useEffect(() => {
     if (errorMessage) return;
-    console.log(user);
-    console.log(order);
     if (
       order?.paymentId &&
       order?.name &&
@@ -64,7 +62,7 @@ export default function SubscriptionLoading() {
         console.log(resSubComplete);
       }, 1000);
     }
-  }, [user, order, errorMessage]);
+  }, [user, order, errorMessage, resSubComplete]);
 
   useEffect(() => {
     if (resSubComplete.status === "Success" && resSubComplete.responseData) {
@@ -76,7 +74,13 @@ export default function SubscriptionLoading() {
     } else if (resSubComplete.status === "Refresh") {
       resSubComplete.axiosData();
     }
-  }, [resSubComplete.status, resSubComplete.responseData, dispatch, navigate]);
+  }, [
+    resSubComplete.status,
+    resSubComplete.responseData,
+    dispatch,
+    navigate,
+    resSubComplete,
+  ]);
 
   return (
     <>

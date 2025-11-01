@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { useAppSelector } from "../../hooks/useSelector";
 import TermModal from "./TermModal";
-import WarningModal from "./WarningModal";
+import LoginModal from "./LoginModal";
 
 export default function ModalContainer() {
   const modal = useAppSelector((s) => s.modal);
@@ -21,7 +21,7 @@ export default function ModalContainer() {
     case "terms":
       return createPortal(<TermModal />, mount);
     case "LOGIN":
-      return createPortal(<WarningModal />, mount);
+      return createPortal(<LoginModal />, mount);
     default:
       return null;
   }

@@ -141,10 +141,10 @@ export default function Signup() {
   // 약관 확인
   const handleTermsCheck = (number: number) => {
     const checkDocument = document.getElementById(`check-${number}`);
-    const listDocument = document.getElementById(`list-${number}`);
+    // const listDocument = document.getElementById(`list-${number}`);
     if (checkDocument?.getAttribute("color") === "#A0A0A0") {
-      checkDocument?.setAttribute("color", "#126DD7");
-      listDocument?.classList.remove("hidden");
+      checkDocument?.setAttribute("color", "#0F9AFB");
+      // listDocument?.classList.remove("hidden");
       if (number === 4) {
         // setAdCheck(!adCheck);
       } else {
@@ -154,7 +154,7 @@ export default function Signup() {
       }
     } else {
       checkDocument?.setAttribute("color", "#A0A0A0");
-      listDocument?.classList.add("hidden");
+      // listDocument?.classList.add("hidden");
       if (number === 4) {
         // setAdCheck(!adCheck);
       } else {
@@ -167,7 +167,12 @@ export default function Signup() {
 
   // 모든 input 정상 입력 확인
   useEffect(() => {
-    const loginBtn = document.getElementById("login_Btn") as HTMLButtonElement;
+    const signupBtn = document.getElementById(
+      "signup-btn",
+    ) as HTMLButtonElement;
+    const signupBtnText = document.getElementById(
+      "signup-btn-text",
+    ) as HTMLElement;
     const terms = termsCheck.filter((el) => el === false).length;
     if (
       name !== "" &&
@@ -177,12 +182,14 @@ export default function Signup() {
       passPwCheck &&
       terms === 0
     ) {
-      loginBtn.classList.add("main-gradient");
-      loginBtn.disabled = false;
+      signupBtnText.classList.remove("btn-glass-span");
+      signupBtnText.classList.add("btn-glass-span-active");
+      signupBtn.disabled = false;
     } else {
-      loginBtn.classList.remove("main-gradient");
-      loginBtn.classList.add("bg-gray-001");
-      loginBtn.disabled = true;
+      signupBtnText.classList.remove("btn-glass-span-active");
+      signupBtn.classList.add("btn-glass");
+      signupBtnText.classList.add("btn-glass-span");
+      signupBtn.disabled = true;
     }
   }, [name, phone, id, password, passPw, passPwCheck, termsCheck]);
 
@@ -263,22 +270,17 @@ export default function Signup() {
 
   return (
     <>
-      <div className="flex min-h-screen w-full flex-col items-center px-7 text-white-000">
-        <div className="flex max-h-fit w-full min-w-[280px] max-w-screen-lg flex-col items-center justify-center gap-12 self-center pb-[100px] pt-[140px] md:flex-row md:items-start md:justify-between md:text-center lg:px-0">
+      <div className="flex min-h-screen w-full flex-col items-center justify-center bg-black/30 px-7 text-white-000">
+        <div className="flex max-h-fit w-full min-w-[280px] max-w-screen-md flex-col items-center justify-center gap-12 self-center pb-[100px] pt-[140px]">
           {/* 회원가입 타이틀 */}
-          <div className="flex max-h-screen w-fit flex-col items-center justify-start gap-12 md:max-w-[45%] md:items-center">
-            <h1 className="mr-auto text-4xl font-extrabold leading-[50px] md:mr-0 md:hidden">
+          <div className="flex max-h-screen w-fit flex-col items-center justify-start gap-12">
+            <h1 className="mr-auto text-4xl font-extrabold leading-[50px]">
               회원가입
             </h1>
-            <img
-              alt="로고"
-              src={BalloonLogo}
-              className="hidden w-[80%] md:mb-auto md:block"
-            />
           </div>
-          <div className="flex w-full flex-col items-center gap-4 md:max-w-[45%]">
+          <div className="flex w-full flex-col items-center gap-12 md:max-w-[80%]">
             <form className="flex h-fit w-full min-w-[280px] flex-col gap-8">
-              <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-8">
                 <input
                   id="name_Input"
                   className="bg-transparent sign-input"
@@ -308,7 +310,7 @@ export default function Signup() {
                   onChange={(e) => setId(e.target.value)}
                   placeholder="아이디"
                 />
-                <div>
+                <div className="relative">
                   <div
                     id="password"
                     className="relative border-b-[1.5px] border-gray-001 py-[6px] text-xl focus-within:border-blue-001 focus:border-blue-001"
@@ -339,12 +341,12 @@ export default function Signup() {
                   </div>
                   <div
                     id="inco-Message"
-                    className="hidden pt-2 text-left text-xs text-red-000"
+                    className="absolute top-[110%] hidden text-left text-xs text-red-000 md:text-sm"
                   >
                     최소 8자의 영문, 숫자, 특수문자를 입력해주세요.
                   </div>
                 </div>
-                <div>
+                <div className="relative">
                   <div
                     id="check-password"
                     className="relative border-b-[1.5px] border-gray-001 py-[6px] text-xl focus-within:border-blue-001 focus:border-blue-001"
@@ -372,14 +374,14 @@ export default function Signup() {
                   </div>
                   <div
                     id="inco-checkpw-Message"
-                    className="hidden pt-2 text-left text-xs text-red-000"
+                    className="absolute top-[110%] hidden text-left text-xs text-red-000 md:text-sm"
                   >
                     비밀번호와 비밀번호 확인이 일치하지 않습니다.
                   </div>
                 </div>
               </div>
               {/* 약관 */}
-              <div className="flex flex-col gap-3 text-gray-002">
+              <div className="flex flex-col gap-3 pt-3 text-gray-001">
                 {termArr.map((termObj) => (
                   <div>
                     <button
@@ -406,7 +408,7 @@ export default function Signup() {
                 ))}
                 <button
                   type="button"
-                  className="text-left text-gray-001 underline"
+                  className="text-left text-gray-002 underline"
                   onClick={() => {
                     console.log("[click] open terms");
                     openModal({ type: "terms" }); // 커스텀 훅이면 그대로 호출
@@ -418,17 +420,21 @@ export default function Signup() {
               {/* 계정 만들기  */}
               <div className="flex flex-col gap-3 pt-4">
                 <button
-                  type="button"
-                  id="login_Btn"
-                  className="w-full rounded-xl bg-gray-003 py-3 text-xl font-extrabold text-white-000"
+                  id="signup-btn"
+                  className="w-full btn-glass"
                   onClick={handleSignup}
                 >
-                  계정 만들기
+                  <span
+                    id="signup-btn-text"
+                    className="rounded-xl text-xl btn-glass-span"
+                  >
+                    계정 만들기
+                  </span>
                 </button>
               </div>
             </form>
             {/* 로그인 */}
-            <Link to="/login" className="text-gray-002">
+            <Link to="/login" className="text-gray-000">
               이미 계정이 있으신가요 ?
             </Link>
           </div>
