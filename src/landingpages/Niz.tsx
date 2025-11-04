@@ -91,40 +91,45 @@ export default function Niz() {
 
   return (
     <div className="relative">
-      <div className="scrollbar-hide flex h-screen w-full min-w-[280px] snap-y snap-mandatory flex-col items-center justify-between overflow-y-scroll scroll-smooth">
-        {/* 신청하기 */}
-        <div className="flex min-h-screen w-full max-w-screen-lg snap-center snap-always flex-col items-center justify-center gap-12 px-7 pt-[60px] text-center lg:px-0">
-          <div className="flex flex-col gap-6 md:min-w-[40%]">
-            <h1 className="text-4xl font-extrabold leading-[50px]">
-              감이 아닌,
-              <br />
+      <div className="flex w-full min-w-[280px] flex-col items-center justify-between text-white-000">
+        <div className="submit flex min-h-svh w-full max-w-screen-lg flex-col items-center justify-center gap-8 px-7 pt-[60px] text-center supports-[height:100dvh]:min-h-[100dvh] md:gap-12">
+          <div className="flex flex-col gap-6 text-white drop-shadow-lg md:min-w-[40%] md:gap-10">
+            <h1 className="text-4xl font-extrabold leading-[50px] md:text-6xl">
+              감이 아닌,<p className="hidden md:inline">&nbsp;</p>
+              <br className="md:hidden" />
               이제는 확신할 때
             </h1>
-            <h2 className="text-lg font-medium md:text-xl">
+            <h2 className="text-base font-medium md:text-lg">
               당신의 아이디어가 현실이 되도록,
-              <br />
-              <p className="inline text-lg text-blue-000 md:text-xl">단 3일</p>
+              <br className="md:hidden" />
+              <p className="inline font-semibold text-blue-000"> 단 3일</p>
               만에 시장의 답을 보여드립니다.
             </h2>
           </div>
-          <form className="submit flex h-fit w-full min-w-[280px] flex-col gap-6 md:max-w-[40%]">
-            <button
-              onClick={handleBtn1}
-              type="button"
-              id="btn-sub-main"
-              className="group relative inline-flex w-full items-center justify-center p-[2px] hover:drop-shadow"
-            >
-              <span className="glowing-border inline-flex w-full items-center justify-center rounded-full px-6 py-3 text-xl font-extrabold text-white shadow-lg ring-1 ring-black/5 backdrop-blur-sm backdrop-saturate-150 transition-transform duration-300 ease-out active:scale-[0.97] group-hover:scale-[0.985] supports-[backdrop-filter]:backdrop-blur-sm">
-                신청하기
-              </span>
-            </button>
+
+          <form className="submit flex h-fit w-full min-w-[280px] flex-col gap-6 md:max-w-[70%] md:gap-10">
+            <div className="relative min-w-[40%] self-center overflow-hidden rounded-full md:min-w-[20%]">
+              <div
+                className="back-glass-v2 pointer-events-none absolute inset-0 left-0 -z-10 w-full"
+                aria-hidden="true"
+              />
+              <button
+                type="button"
+                onClick={handleBtn1}
+                className="back-glass-inner relative z-10 w-full self-center rounded-full bg-black/5 p-3 text-white outline-none"
+              >
+                <span className="rounded-full font-extrabold md:text-lg">
+                  신청하기
+                </span>
+              </button>
+            </div>
           </form>
         </div>
 
         {/* 사용방법 소개 */}
         <Intro />
         {/* 신청하기 */}
-        <div className="flex min-h-screen w-full max-w-screen-lg snap-center snap-always flex-col items-center justify-center gap-20 px-7 text-center lg:px-0">
+        <div className="flex min-h-[120svh] w-full max-w-screen-lg snap-center snap-always flex-col items-center justify-center gap-20 px-7 text-center lg:px-0">
           <div className="flex flex-col gap-6 md:min-w-[40%]">
             <h1 className="text-3xl font-extrabold leading-[50px]">
               이제 아이디어를

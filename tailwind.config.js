@@ -12,7 +12,7 @@ module.exports = {
         border: "border 4s linear infinite",
         loading: "loading 5s infinite",
         typing: "typing 3s steps(20) infinite alternate, blink .7s infinite",
-        fadein: "fadein 2s",
+        fadein: "fadein 1.5s",
       },
       keyframes: {
         fadein: {

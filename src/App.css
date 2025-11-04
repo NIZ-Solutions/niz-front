@@ -233,20 +233,6 @@ input[type="number"] {
   background-clip: padding-box, border-box;
 }
 
-/* 스냅을 켤 때 html에 붙일 클래스 */
-html.snap-y {
-  scroll-snap-type: y mandatory;
-  -webkit-overflow-scrolling: touch;
-  touch-action: pan-y;
-  overscroll-behavior-y: contain;
-}
-
-/* 스냅 대상(인트로 섹션)에 붙일 클래스 */
-.intro-snap {
-  scroll-snap-align: center;
-  scroll-snap-stop: always;
-}
-
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,

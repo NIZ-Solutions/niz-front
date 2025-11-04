@@ -139,28 +139,6 @@ function App() {
         </defs>
       </svg>
 
-      {/* <svg xmlns="http://www.w3.org/2000/svg" className="hidden">
-        <defs>
-          <filter id="glass-distortion">
-            <feGaussianBlur stdDeviation="50" />
-            <feComponentTransfer result="dispMap">
-              <feFuncA
-                type="discrete"
-                tableValues="0 1 1 1 1 1 1 1 1"
-              ></feFuncA>
-            </feComponentTransfer>
-            <feDisplacementMap
-              in="SourceGraphic"
-              in2="dispMap"
-              scale="100"
-              xChannelSelector="B"
-              yChannelSelector="B"
-            />
-            <feGaussianBlur stdDeviation="1" />
-          </filter>
-        </defs>
-      </svg> */}
-
       <BrowserRouter>
         <ScrollToTop />
         <ErrorBoundary fallback={<Error />}>

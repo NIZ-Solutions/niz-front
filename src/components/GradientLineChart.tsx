@@ -6,17 +6,13 @@ export type GradientLineChartProps = {
   data?: number[];
   label?: string;
   borderColor?: string;
-  /** 전체 텍스트 컬러(legend, tooltip 기본, ticks 기본) */
   textColor?: string;
-  /** 축 눈금(ticks) 텍스트 컬러(미지정 시 textColor 사용) */
   tickColor?: string;
-  /** 그리드 라인 컬러 */
   gridColor?: string;
-  /** 폰트 패밀리/사이즈 커스터마이즈 */
   fontFamily?: string;
   fontSize?: number;
-  animateOnView?: boolean; // 뷰포트 진입 시에만 렌더/애니메이션
-  viewThreshold?: number; // 교차 임계값(0~1)
+  animateOnView?: boolean;
+  viewThreshold?: number;
   replayOnScroll?: boolean;
   isIntersecting?: boolean;
 };
@@ -144,14 +140,6 @@ const GradientLineChart: React.FC<GradientLineChartProps> = ({
         destroyChart();
       }
     }
-
-    // createChart();
-    // const onResize = () => chartRef.current?.resize();
-    // window.addEventListener("resize", onResize);
-    // return () => {
-    //   window.removeEventListener("resize", onResize);
-    //   destroyChart();
-    // };
   }, [
     labels,
     data,
